@@ -53,6 +53,12 @@ ol.steps > li::before { content: counter(s); width: 32px; height: 32px; border-r
 .cmd button { border: 0; border-radius: 10px; padding: 0 16px; background: var(--accent); color: var(--accent-ink);
   font: inherit; font-weight: 600; cursor: pointer; }
 kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; font: 13px Consolas, monospace; }
+.next { display: grid; gap: 2px; margin-top: 16px; padding: 18px 22px; border-radius: 16px; text-decoration: none;
+  background: var(--soft); border: 1px solid var(--line); color: var(--ink); }
+.next span { color: var(--muted); font-size: 14px; }
+.next b { color: var(--accent); font-size: 20px; }
+.next small { color: var(--muted); font-size: 14px; }
+.next:hover { border-color: var(--accent); }
 footer { margin-top: 28px; color: var(--muted); font-size: 15px; }
 footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
 [hidden] { display: none !important; }
@@ -140,12 +146,13 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
         </svg></div></div></li>
       <li class="step"><div><h3>The first time: the offline AI assistant downloads by itself</h3>
         <p>You can start working right away. The bottom-right corner shows its progress; when it finishes, the assistant also works offline.</p>
-        <div class="shot"><svg viewBox="0 0 440 70" role="img" aria-label="Status bar showing the offline AI assistant download progress">
-          <rect x="10" y="10" width="420" height="50" rx="6" fill="#f1f3f8" stroke="#cfd6e4"/>
-          <text x="22" y="40" font-size="12" fill="#5d6679">Ready</text>
-          <text x="150" y="40" font-size="12" fill="#1c2233">Offline AI assistant: 42% of 4.7 GB</text>
-          <rect x="332" y="29" width="86" height="14" rx="3" fill="#ffffff" stroke="#cfd6e4"/>
-          <rect x="332" y="29" width="36" height="14" rx="3" fill="#2563eb"/>
+        <div class="shot"><svg viewBox="0 0 440 60" role="img" aria-label="Status bar: Offline AI assistant 1/1: 42% of 5.0 GB">
+          <rect x="4" y="8" width="432" height="44" rx="6" fill="#040a18" stroke="#16364f"/>
+          <rect x="10" y="19" width="94" height="22" rx="3" fill="#0a1830" stroke="#1f6fa8"/>
+          <text x="57" y="34" font-size="9.5" fill="#9fe3ff" text-anchor="middle" font-family="Consolas, monospace">Report a problem</text>
+          <text x="112" y="35" font-size="11" fill="#cfe8ff" font-family="Consolas, monospace">Offline AI assistant 1/1: 42% of 5.0 GB</text>
+          <rect x="370" y="22" width="58" height="16" rx="3" fill="#0a1530" stroke="#1f6fa8"/>
+          <rect x="371" y="23" width="24" height="14" rx="2" fill="#34e7ff"/>
         </svg></div></div></li>
     </ol>
   </section>
@@ -185,10 +192,13 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
     </ol>
   </section>
 
+  <a class="next" href="start.html"><span>Installed? Next step</span><b>Quick Start →</b>
+    <small>The buttons, the AI assistant, changing the AI model, a Google API key, Telegram, voice, and your first report.</small></a>
+
   <footer>
     <h2>Something went wrong?</h2>
     Run the installer again — it repairs the installation and keeps your data. Inside sasAI, use
-    <b>Help → Report a problem</b>: it sends the team your log automatically.
+    <b>Help → Report a Problem…</b>: it sends the team your log automatically.
     <h2 style="margin-top:18px">Uninstall</h2>
     Windows: <b>Settings → Apps → sasAI → Uninstall</b>. macOS / Linux: delete the <b>sasAI</b> folder
     (<code>~/Applications/sasAI</code> or <code>~/.local/share/sasAI</code>) and the sasAI icon on your Desktop.
