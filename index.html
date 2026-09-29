@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install sasAI</title>
+<link rel="icon" href="sasai.png">
+<style>
+:root {
+  --bg: #f6f7fb; --card: #ffffff; --ink: #1c2233; --muted: #5d6679; --line: #dfe3ec;
+  --accent: #2563eb; --accent-ink: #ffffff; --soft: #eaf1ff; --ok: #15803d; --warn: #b45309;
+  --shot: #eef1f7; --code-bg: #0f172a; --code-ink: #e2e8f0;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1220; --card: #151c2e; --ink: #e6e9f2; --muted: #9aa3b8; --line: #27304a;
+    --accent: #5b8cff; --accent-ink: #0b1020; --soft: #1b2743; --ok: #4ade80; --warn: #fbbf24;
+    --shot: #1b2236; --code-bg: #0a0f1c; --code-ink: #dbe4f5;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.55 "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+header img { width: 56px; height: 56px; border-radius: 14px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 6px 0 24px; }
+.tabs { display: flex; gap: 6px; margin: 0 0 16px; flex-wrap: wrap; }
+.tabs button { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px;
+  padding: 7px 16px; font: inherit; font-size: 15px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+.big { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-ink);
+  border: 0; border-radius: 12px; padding: 16px 26px; font: inherit; font-size: 19px; font-weight: 600; cursor: pointer; }
+.big:disabled { opacity: .6; cursor: default; }
+.note { margin: 12px 0 0; color: var(--muted); font-size: 15px; }
+.note.ok { color: var(--ok); }
+.note.warn { color: var(--warn); }
+ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 28px 0 0; display: grid; gap: 22px; }
+ol.steps > li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+ol.steps > li::before { content: counter(s); width: 32px; height: 32px; border-radius: 50%; background: var(--soft);
+  color: var(--accent); font-weight: 700; display: grid; place-items: center; }
+.step h3 { margin: 3px 0 4px; font-size: 18px; }
+.step p { margin: 0 0 10px; color: var(--muted); }
+.shot { background: var(--shot); border: 1px solid var(--line); border-radius: 12px; padding: 12px; overflow-x: auto; }
+.shot svg { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; }
+.cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 4px; }
+.cmd code { flex: 1; min-width: 0; background: var(--code-bg); color: var(--code-ink); border-radius: 10px;
+  padding: 12px 14px; font: 13px/1.5 Consolas, "SF Mono", Menlo, monospace; overflow-x: auto; white-space: nowrap; }
+.cmd button { border: 0; border-radius: 10px; padding: 0 16px; background: var(--accent); color: var(--accent-ink);
+  font: inherit; font-weight: 600; cursor: pointer; }
+kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; font: 13px Consolas, monospace; }
+footer { margin-top: 28px; color: var(--muted); font-size: 15px; }
+footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
+[hidden] { display: none !important; }
+@media (max-width: 520px) { h1 { font-size: 25px; } .card { padding: 18px; } .big { width: 100%; justify-content: center; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="sasai.png" alt="">
+    <h1>Install sasAI</h1>
+  </header>
+  <p class="sub">The AI assistant for small-angle scattering (SAXS / SANS). Free beta — about 10 minutes to install.</p>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-os="win">Windows</button>
+    <button role="tab" data-os="mac">macOS</button>
+    <button role="tab" data-os="linux">Linux</button>
+  </div>
+
+  <section class="card" data-panel="win">
+    <button class="big" id="dl">⬇ Download sasAI for Windows</button>
+    <p class="note" id="dl-note"></p>
+    <ol class="steps">
+      <li class="step"><div><h3>Open the file you downloaded</h3>
+        <p>Click it in your browser's download list. If the browser says the file is not commonly downloaded, choose <b>Keep</b>.</p>
+        <div class="shot"><svg viewBox="0 0 440 120" role="img" aria-label="Browser download list with the sasAI setup file">
+          <rect x="10" y="10" width="420" height="100" rx="10" fill="#ffffff" stroke="#cfd6e4"/>
+          <text x="26" y="36" font-size="13" font-weight="600" fill="#1c2233">Downloads</text>
+          <rect x="26" y="50" width="388" height="46" rx="8" fill="#eaf1ff" stroke="#2563eb"/>
+          <rect x="38" y="60" width="26" height="26" rx="6" fill="#2563eb"/><text x="45" y="78" font-size="13" fill="#fff" font-weight="700">↓</text>
+          <text x="74" y="72" font-size="13" fill="#1c2233" font-weight="600">sasAI-Setup.exe</text>
+          <text x="74" y="88" font-size="11" fill="#5d6679">Open file</text>
+          <path d="M382 58 l12 8 l-12 8" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+        </svg></div></div></li>
+      <li class="step"><div><h3>Windows asks first — click “More info”, then “Run anyway”</h3>
+        <p>sasAI is new, so Windows has not seen it before. This is expected for the beta.</p>
+        <div class="shot"><svg viewBox="0 0 440 210" role="img" aria-label="Windows protected your PC: click More info, then Run anyway">
+          <rect x="10" y="10" width="420" height="190" rx="4" fill="#1f5aa6"/>
+          <text x="30" y="46" font-size="19" fill="#ffffff" font-weight="600">Windows protected your PC</text>
+          <text x="30" y="74" font-size="12" fill="#dbe7f8">Microsoft Defender SmartScreen prevented an</text>
+          <text x="30" y="90" font-size="12" fill="#dbe7f8">unrecognized app from starting.</text>
+          <text x="30" y="118" font-size="13" fill="#ffffff" text-decoration="underline" font-weight="600">More info</text>
+          <rect x="22" y="100" width="82" height="26" rx="5" fill="none" stroke="#fbbf24" stroke-width="3"/>
+          <text x="114" y="118" font-size="12" fill="#fbbf24" font-weight="700">① click</text>
+          <rect x="202" y="152" width="100" height="32" fill="#ffffff" stroke="#fbbf24" stroke-width="3"/>
+          <text x="216" y="173" font-size="13" fill="#1c2233" font-weight="600">Run anyway</text>
+          <rect x="312" y="152" width="100" height="32" fill="#e6e6e6"/>
+          <text x="340" y="173" font-size="13" fill="#1c2233">Don't run</text>
+          <text x="208" y="146" font-size="12" fill="#fbbf24" font-weight="700">② then click</text>
+        </svg></div></div></li>
+      <li class="step"><div><h3>Click “Next”, then “Install”</h3>
+        <p>Your install code is already filled in. You can keep the suggested folder.</p>
+        <div class="shot"><svg viewBox="0 0 440 210" role="img" aria-label="sasAI setup wizard: click Next">
+          <rect x="10" y="10" width="420" height="190" rx="6" fill="#ffffff" stroke="#cfd6e4"/>
+          <rect x="10" y="10" width="420" height="28" rx="6" fill="#f1f3f8"/>
+          <text x="22" y="29" font-size="12" fill="#1c2233">Setup - sasAI</text>
+          <text x="30" y="66" font-size="16" fill="#1c2233" font-weight="600">Welcome to the sasAI Setup Wizard</text>
+          <text x="30" y="90" font-size="12" fill="#5d6679">This installs sasAI, the AI assistant for</text>
+          <text x="30" y="106" font-size="12" fill="#5d6679">small-angle scattering data.</text>
+          <rect x="30" y="122" width="200" height="22" rx="4" fill="#ecfdf3" stroke="#15803d"/>
+          <text x="40" y="137" font-size="11" fill="#15803d" font-weight="600">✓ Install code filled in</text>
+          <rect x="250" y="160" width="80" height="28" rx="4" fill="#2563eb" stroke="#fbbf24" stroke-width="3"/>
+          <text x="268" y="179" font-size="13" fill="#ffffff" font-weight="600">Next &gt;</text>
+          <rect x="340" y="160" width="76" height="28" rx="4" fill="#ffffff" stroke="#cfd6e4"/>
+          <text x="357" y="179" font-size="13" fill="#1c2233">Cancel</text>
+        </svg></div></div></li>
+      <li class="step"><div><h3>Wait while it sets up (5–15 minutes)</h3>
+        <p>A window shows the progress while Python and the sasAI components download. Keep the computer online.</p>
+        <div class="shot"><svg viewBox="0 0 440 170" role="img" aria-label="Progress window while sasAI is set up">
+          <rect x="10" y="10" width="420" height="150" rx="6" fill="#0f172a"/>
+          <text x="24" y="38" font-size="12" fill="#7dd3fc" font-family="Consolas, monospace">sasAI installer</text>
+          <text x="24" y="62" font-size="12" fill="#e2e8f0" font-family="Consolas, monospace">Checking the install code...</text>
+          <text x="24" y="82" font-size="12" fill="#e2e8f0" font-family="Consolas, monospace">Installing Python 3.12 (private to sasAI)...</text>
+          <text x="24" y="102" font-size="12" fill="#e2e8f0" font-family="Consolas, monospace">Installing sasAI ...</text>
+          <text x="24" y="122" font-size="12" fill="#e2e8f0" font-family="Consolas, monospace">Setting up Python packages ...</text>
+          <text x="24" y="146" font-size="12" fill="#4ade80" font-family="Consolas, monospace">Done. Start sasAI from the icon on your desktop.</text>
+        </svg></div></div></li>
+      <li class="step"><div><h3>Start sasAI from the icon on your desktop</h3>
+        <p>Click <b>Finish</b> to open it now. Next time, double-click the <b>sasAI</b> icon.</p>
+        <div class="shot"><svg viewBox="0 0 440 130" role="img" aria-label="The sasAI icon on the desktop">
+          <rect x="10" y="10" width="420" height="110" rx="10" fill="#3b6fb6"/>
+          <image href="sasai.png" x="190" y="24" width="60" height="60"/>
+          <text x="220" y="104" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="600">sasAI</text>
+        </svg></div></div></li>
+      <li class="step"><div><h3>The first time: the offline AI assistant downloads by itself</h3>
+        <p>You can start working right away. The bottom-right corner shows its progress; when it finishes, the assistant also works offline.</p>
+        <div class="shot"><svg viewBox="0 0 440 70" role="img" aria-label="Status bar showing the offline AI assistant download progress">
+          <rect x="10" y="10" width="420" height="50" rx="6" fill="#f1f3f8" stroke="#cfd6e4"/>
+          <text x="22" y="40" font-size="12" fill="#5d6679">Ready</text>
+          <text x="150" y="40" font-size="12" fill="#1c2233">Offline AI assistant: 42% of 4.7 GB</text>
+          <rect x="332" y="29" width="86" height="14" rx="3" fill="#ffffff" stroke="#cfd6e4"/>
+          <rect x="332" y="29" width="36" height="14" rx="3" fill="#2563eb"/>
+        </svg></div></div></li>
+    </ol>
+  </section>
+
+  <section class="card" data-panel="mac" hidden>
+    <ol class="steps" style="margin-top:0">
+      <li class="step"><div><h3>Copy this line</h3>
+        <div class="cmd"><code class="unix"></code><button class="copy">Copy</button></div>
+        <p class="note code-note"></p></div></li>
+      <li class="step"><div><h3>Open Terminal</h3>
+        <p>Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>, press <kbd>Return</kbd>.</p></div></li>
+      <li class="step"><div><h3>Paste it and press Return</h3>
+        <p>Press <kbd>⌘</kbd> + <kbd>V</kbd>, then <kbd>Return</kbd>. When it asks for the install location, just press <kbd>Return</kbd>.</p>
+        <div class="shot"><svg viewBox="0 0 440 150" role="img" aria-label="Terminal showing the sasAI installer">
+          <rect x="10" y="10" width="420" height="130" rx="10" fill="#1e1e1e"/>
+          <circle cx="28" cy="26" r="5" fill="#ff5f57"/><circle cx="44" cy="26" r="5" fill="#febc2e"/><circle cx="60" cy="26" r="5" fill="#28c840"/>
+          <text x="24" y="58" font-size="12" fill="#e2e8f0" font-family="Menlo, monospace">sasAI installer</text>
+          <text x="24" y="80" font-size="12" fill="#e2e8f0" font-family="Menlo, monospace">Install location [press Enter for ~/Applications/sasAI]:</text>
+          <text x="24" y="102" font-size="12" fill="#e2e8f0" font-family="Menlo, monospace">Installing Python 3.12 (private to sasAI)...</text>
+          <text x="24" y="124" font-size="12" fill="#4ade80" font-family="Menlo, monospace">Done. Start sasAI from the icon on your desktop.</text>
+        </svg></div></div></li>
+      <li class="step"><div><h3>Wait 5–15 minutes, then open sasAI from your Desktop</h3>
+        <p>The offline AI assistant downloads by itself the first time you start sasAI.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="card" data-panel="linux" hidden>
+    <ol class="steps" style="margin-top:0">
+      <li class="step"><div><h3>Copy this line</h3>
+        <div class="cmd"><code class="unix"></code><button class="copy">Copy</button></div>
+        <p class="note code-note"></p></div></li>
+      <li class="step"><div><h3>Open a terminal, paste it, press Enter</h3>
+        <p>Paste with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>. When it asks for the install location, just press <kbd>Enter</kbd>.</p></div></li>
+      <li class="step"><div><h3>Wait 5–15 minutes, then open sasAI from your Desktop</h3>
+        <p>If sasAI does not open, install one system library: <code>sudo apt install libxcb-cursor0</code>
+          (Fedora: <code>sudo dnf install xcb-util-cursor</code>). On GNOME, right-click the desktop icon and choose <b>Allow Launching</b>.</p></div></li>
+    </ol>
+  </section>
+
+  <footer>
+    <h2>Something went wrong?</h2>
+    Run the installer again — it repairs the installation and keeps your data. Inside sasAI, use
+    <b>Help → Report a problem</b>: it sends the team your log automatically.
+  </footer>
+</main>
+<script>
+(function () {
+  var api = "https://api.github.com/repos/carminowu-gen1/sasai-releases/contents";
+  var ua = navigator.userAgent;
+  var os = /Windows/i.test(ua) ? "win" : /Mac/i.test(ua) ? "mac" : /Linux|X11/i.test(ua) ? "linux" : "win";
+  var code = "", line = "";
+  function show(which) {
+    document.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.dataset.panel !== which; });
+    document.querySelectorAll("[data-os]").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.os === which); });
+  }
+  function apply() {
+    code = decodeURIComponent((location.hash || "").slice(1)).trim();
+    line = code ? "curl -fsSL -H 'Authorization: Bearer " + code + "' -H 'Accept: application/vnd.github.raw' " + api
+                  + "/install.sh | SASAI_CODE='" + code + "' sh"
+                : "Ask the sasAI team for your personal install link.";
+    document.querySelectorAll("code.unix").forEach(function (c) { c.textContent = line; });
+    document.querySelectorAll(".code-note").forEach(function (n) {
+      n.textContent = code ? "Your install code is already inside this line." : "This link has no install code.";
+      n.className = "note " + (code ? "ok" : "warn") + " code-note";
+    });
+    document.querySelectorAll(".copy").forEach(function (b) { b.hidden = !code; });
+    var note = document.getElementById("dl-note");
+    note.textContent = code ? "Your install code is already inside the download \u2014 nothing to type."
+                            : "This link has no install code. The installer will ask for the code from the sasAI team.";
+    note.className = "note " + (code ? "ok" : "warn");
+  }
+  function select(b) {
+    var r = document.createRange(); r.selectNodeContents(b.previousElementSibling);
+    var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  document.querySelectorAll("[data-os]").forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.os); }); });
+  document.querySelectorAll(".copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var done = function () { b.textContent = "Copied \u2713"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(line).then(done, function () { select(b); });
+      else select(b);
+    });
+  });
+  var dl = document.getElementById("dl");
+  dl.addEventListener("click", function () {
+    dl.disabled = true; dl.textContent = "Downloading\u2026";
+    fetch("sasAI-Setup.exe").then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.blob();
+    }).then(function (blob) {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = code ? "sasAI-Setup [" + code + "].exe" : "sasAI-Setup.exe";
+      document.body.appendChild(a); a.click(); a.remove();
+      dl.textContent = "\u2713 Downloaded \u2014 open it from your downloads";
+      dl.disabled = false;
+    }).catch(function () {
+      location.href = "sasAI-Setup.exe";
+      dl.textContent = "\u2b07 Download sasAI for Windows"; dl.disabled = false;
+    });
+  });
+  window.addEventListener("hashchange", apply);
+  show(os);
+  apply();
+})();
+</script>
+</body>
+</html>
