@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>sasAI Quick Start</title>
-<meta name="sasai-build" content="2026-09-30c-v0.1">
+<meta name="sasai-build" content="2026-09-30d-v0.1">
 <link rel="icon" href="sasai.png">
 <script>document.documentElement.className+=" js"</script>
 <script>(function(){var l=null;try{l=localStorage.getItem("sasai-lang")}catch(e){}if(l!=="en"&&l!=="zh-Hant")l=/^zh(-hant)?-tw$/i.test(navigator.language||"")?"zh-Hant":"en";document.documentElement.lang=l})();</script>
@@ -147,6 +147,13 @@ html.js nav.toc { display: none; }
   .drawer > summary { display: block; }
   .wrap main { padding-top: 16px; }
 }
+#totop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 50; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--card); color: var(--accent); font: 700 20px/1 system-ui, sans-serif; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .22); opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity .2s, transform .2s; }
+#totop.show { opacity: 1; pointer-events: auto; transform: none; }
+#totop:hover, #totop:focus-visible { background: var(--soft); outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { #totop { transition: none; } }
 [hidden] { display: none !important; }
 @media (max-width: 520px) {
   h1 { font-size: 25px; } .card { padding: 18px; } h2 { font-size: 20px; }
@@ -999,23 +1006,23 @@ html.js nav.toc { display: none; }
   <!-- ─────────────────────────── 11. 3D shape (preview) ─────────────────────────── -->
   <section class="card" id="shape3d">
     <h2><span class="n">11</span><span lang="en">3D shape modelling</span><span lang="zh-Hant">3D 形狀建模</span><span class="badge" lang="en">Preview</span><span class="badge" lang="zh-Hant">預覽</span></h2>
-    <p class="lead" lang="en">sasAI can build a low-resolution 3D bead model of a particle from its scattering curve, the same kind of model that DAMMIF and DAMMIN make in the ATSAS package. It is switched off in this beta until it passes its own accuracy test. This chapter shows what it will do and how to read it.</p><p class="lead" lang="zh-Hant">sasAI 可以從散射曲線建出粒子的低解析度 3D 珠子模型，和 ATSAS 套件裡 DAMMIF、DAMMIN 做的是同一類模型。它在這個封測版裡是關閉的，要先通過自己的準確度測試才會開放。這一章說明它會做什麼、要怎麼看。</p>
+    <p class="lead" lang="en">3D shape modelling is one of sasAI's features. It builds a low-resolution 3D bead model of a particle from its scattering curve, the same kind of model that DAMMIF and DAMMIN make in the ATSAS package, so that sasAI covers more of what SAS data processing needs. It is switched off in this beta until it passes its own accuracy test. This chapter shows what it will do and how to read it.</p><p class="lead" lang="zh-Hant">3D 形狀建模是 sasAI 的功能之一。它從散射曲線建出粒子的低解析度 3D 珠子模型，和 ATSAS 套件裡 DAMMIF、DAMMIN 做的是同一類模型，讓 sasAI 更貼近 SAS 數據處理的需求。它在這個封測版裡是關閉的，要先通過自己的準確度測試才會開放。這一章說明它會做什麼、要怎麼看。</p>
 
     <h3 class="part" lang="en">The bar it has to clear</h3><h3 class="part" lang="zh-Hant">它要先通過的關卡</h3>
-    <p class="lead" lang="en">The <b class="ui">3D Shape</b> button appears in your copy only after the model has been tested against the industry's own published models on every one of our reference cases from the SASBDB database. The test runs on the same path your copy uses, not on a research script. On every case it must be no worse on all three counts:</p><p class="lead" lang="zh-Hant"><b class="ui">3D Shape</b> 按鈕，要等模型通過測試才會出現在你的程式裡：對我們從 SASBDB 資料庫選出的每一個參考案例，拿業界自己發表的模型來比。測試是在你的程式實際使用的那條路徑上做的，不是用研究用的腳本。每個案例，這三項都不能比業界差：</p>
+    <p class="lead" lang="en">The <b class="ui">3D Shape</b> button appears in your copy only after the model passes an accuracy test on every one of our reference cases from the SASBDB database, where a published reference model exists to compare with. The test runs on the same path your copy uses, not on a research script. On every case all three counts must be met:</p><p class="lead" lang="zh-Hant"><b class="ui">3D Shape</b> 按鈕，要等模型通過測試才會出現在你的程式裡：對我們從 SASBDB 資料庫選出的每一個參考案例，拿已發表的參考模型來比。測試是在你的程式實際使用的那條路徑上做的，不是用研究用的腳本。每個案例，這三項都要達到：</p>
     <table class="keys">
-      <tr><td class="k" lang="en">Fit to the data (χ²)</td><td class="k" lang="zh-Hant">貼合數據（χ²）</td><td lang="en">within <b data-fact="features._CHI2_TOL" data-scale="100">3</b> % of the industry model's</td><td lang="zh-Hant">在業界模型的 <b data-fact="features._CHI2_TOL" data-scale="100">3</b> % 以內</td></tr>
+      <tr><td class="k" lang="en">Fit to the data (χ²)</td><td class="k" lang="zh-Hant">貼合數據（χ²）</td><td lang="en">within <b data-fact="features._CHI2_TOL" data-scale="100">3</b> % of the reference model's</td><td lang="zh-Hant">在參考模型的 <b data-fact="features._CHI2_TOL" data-scale="100">3</b> % 以內</td></tr>
       <tr><td class="k" lang="en">Shape (NSD to the known structure)</td><td class="k" lang="zh-Hant">形狀（和已知結構的 NSD）</td><td lang="en">not more than <b data-fact="features._NSD_TOL">0.1</b> worse</td><td lang="zh-Hant">差距不超過 <b data-fact="features._NSD_TOL">0.1</b></td></tr>
-      <tr><td class="k" lang="en">Largest size (Dmax)</td><td class="k" lang="zh-Hant">最大尺寸（Dmax）</td><td lang="en">within <b data-fact="features._DMAX_TOL" data-scale="100">10</b> % of the industry model's</td><td lang="zh-Hant">在業界模型的 <b data-fact="features._DMAX_TOL" data-scale="100">10</b> % 以內</td></tr>
+      <tr><td class="k" lang="en">Largest size (Dmax)</td><td class="k" lang="zh-Hant">最大尺寸（Dmax）</td><td lang="en">within <b data-fact="features._DMAX_TOL" data-scale="100">10</b> % of the reference model's</td><td lang="zh-Hant">在參考模型的 <b data-fact="features._DMAX_TOL" data-scale="100">10</b> % 以內</td></tr>
     </table>
-    <p class="lead" lang="en">Today it has not passed on the path your copy uses, so it stays closed. Our aim is to match the industry on every reference case first, then to go further where it can be measured: an honest reliability score from your own repeated runs, a time-left estimate from the algorithm's own stopping rule, and a refusal to run when your curve cannot support a shape. We report only what the test measures.</p><p class="lead" lang="zh-Hant">目前它還沒有在你的程式實際使用的路徑上通過，所以維持關閉。我們的目標是先在每個參考案例都追平業界，再往量得出來的地方更進一步：用你自己多次重建的結果給誠實的可靠度分數、用演算法自己的停止規則估計剩餘時間，以及曲線撐不起一個形狀時拒絕執行。我們只宣稱測試量得到的東西。</p>
+    <p class="lead" lang="en">Today it has not passed on the path your copy uses, so it stays closed. When it opens it will also give an honest reliability score from your own repeated runs, a time-left estimate from the algorithm's own stopping rule, and it will refuse to run when your curve cannot support a shape. We report only what the test measures.</p><p class="lead" lang="zh-Hant">目前它還沒有在你的程式實際使用的路徑上通過，所以維持關閉。開放之後，它會用你自己多次重建的結果給誠實的可靠度分數、用演算法自己的停止規則估計剩餘時間，並在曲線撐不起一個形狀時拒絕執行。我們只宣稱測試量得到的東西。</p>
 
     <h3 class="part" lang="en">How to use it when it opens</h3><h3 class="part" lang="zh-Hant">開放之後怎麼用</h3>
     <ol class="steps">
       <li class="step"><div><h4 lang="en">Load a clean curve of one kind of particle</h4><h4 lang="zh-Hant">載入一條乾淨的單一種粒子的曲線</h4>
         <p lang="en">A dilute, uniform sample, for example a protein in solution. A scattering curve cannot tell a shape from its mirror image, so the model may be the mirror image of the real particle.</p><p lang="zh-Hant">稀薄、均勻的樣品，例如溶液中的蛋白質。散射曲線分不出一個形狀和它的鏡像，所以建出來的模型可能是真實粒子的鏡像。</p></div></li>
       <li class="step"><div><h4 lang="en">Click 3D Shape</h4><h4 lang="zh-Hant">按 3D Shape</h4>
-        <p lang="en">First sasAI checks that your curve can support a shape. It needs a Guinier Rg with its uncertainty and at least <b data-fact="grounding._MIN_CLEAN_POINTS">20</b> points in the usable q range, which ends at the smaller of <b data-fact="shape3d._QRG_MAX">8</b>/Rg and <b data-fact="shape3d._Q_BEAD_MAX">0.3</b> 1/Å (the industry's own guidance). If it cannot, the window says why instead of guessing.</p><p lang="zh-Hant">sasAI 會先確認你的曲線撐得起一個形狀。它需要有不確定度的 Guinier Rg，以及可用 q 範圍內至少 <b data-fact="grounding._MIN_CLEAN_POINTS">20</b> 個點；這個範圍到 <b data-fact="shape3d._QRG_MAX">8</b>/Rg 和 <b data-fact="shape3d._Q_BEAD_MAX">0.3</b> 1/Å 之中比較小的那個為止（業界自己的建議）。做不到的話，視窗會告訴你原因，不會亂猜。</p></div></li>
+        <p lang="en">First sasAI checks that your curve can support a shape. It needs a Guinier Rg with its uncertainty and at least <b data-fact="grounding._MIN_CLEAN_POINTS">20</b> points in the usable q range, which ends at the smaller of <b data-fact="shape3d._QRG_MAX">8</b>/Rg and <b data-fact="shape3d._Q_BEAD_MAX">0.3</b> 1/Å (the usual guidance in the field). If it cannot, the window says why instead of guessing.</p><p lang="zh-Hant">sasAI 會先確認你的曲線撐得起一個形狀。它需要有不確定度的 Guinier Rg，以及可用 q 範圍內至少 <b data-fact="grounding._MIN_CLEAN_POINTS">20</b> 個點；這個範圍到 <b data-fact="shape3d._QRG_MAX">8</b>/Rg 和 <b data-fact="shape3d._Q_BEAD_MAX">0.3</b> 1/Å 之中比較小的那個為止（這個領域通用的建議）。做不到的話，視窗會告訴你原因，不會亂猜。</p></div></li>
       <li class="step"><div><h4 lang="en">Choose the runs and click Start</h4><h4 lang="zh-Hant">選次數，按 Start</h4>
         <p lang="en"><b class="ui">Runs:</b> is the number of independent reconstructions: <b data-fact="shape3d.RUNS_DEFAULT">3</b> for a quick look, up to <b data-fact="shape3d.RUNS_MAX">15</b> for a publication. Then click <b class="ui">Start</b>. <b class="ui">Stop</b> cancels.</p><p lang="zh-Hant"><b class="ui">Runs:</b> 是獨立重建的次數：快速看一下用 <b data-fact="shape3d.RUNS_DEFAULT">3</b> 次，要發表最多 <b data-fact="shape3d.RUNS_MAX">15</b> 次。然後按 <b class="ui">Start</b>。<b class="ui">Stop</b> 可以取消。</p></div></li>
       <li class="step"><div><h4 lang="en">Watch the two bars</h4><h4 lang="zh-Hant">看兩條進度條</h4>
@@ -1296,5 +1303,20 @@ html.js nav.toc { display: none; }
                        chapters: function () { return chapters.map(function (c) { return {id: c.id, kids: c.kids.length}; }); }};
 })();
 </script>
+<button type="button" id="totop"><span aria-hidden="true">↑</span><span class="sr" lang="en">Back to top</span><span class="sr" lang="zh-Hant">回到最上面</span></button>
+<script>(function () {
+  var b = document.getElementById("totop"), root = document.documentElement;
+  var T = {en: "Back to top", "zh-Hant": "回到最上面"};
+  function label() { b.title = T[root.getAttribute("lang") === "zh-Hant" ? "zh-Hant" : "en"]; }
+  function sync() { b.classList.toggle("show", window.scrollY > 320); }
+  b.addEventListener("click", function () {
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({top: 0, behavior: calm ? "auto" : "smooth"});
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* the address bar is a convenience */ }
+  });
+  window.addEventListener("scroll", sync, {passive: true});
+  new MutationObserver(label).observe(root, {attributes: true, attributeFilter: ["lang"]});
+  label(); sync();
+})();</script>
 </body>
 </html>
