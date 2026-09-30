@@ -6,6 +6,7 @@
 <title>sasAI Quick Start</title>
 <meta name="sasai-build" content="2026-09-30c-v0.1">
 <link rel="icon" href="sasai.png">
+<script>document.documentElement.className+=" js"</script>
 <script>(function(){var l=null;try{l=localStorage.getItem("sasai-lang")}catch(e){}if(l!=="en"&&l!=="zh-Hant")l=/^zh(-hant)?-tw$/i.test(navigator.language||"")?"zh-Hant":"en";document.documentElement.lang=l})();</script>
 <style>
 :root {
@@ -72,6 +73,12 @@ ol.steps > li::before { content: counter(s); width: 32px; height: 32px; border-r
 table.keys { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 15px; }
 table.keys td { border-top: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
 table.keys td.num { width: 34px; }
+table.keys td { overflow-wrap: anywhere; }
+table.keys.prov td.k { width: 15%; }
+table.keys.prov code { white-space: nowrap; }
+@media (max-width: 640px) { table.keys.prov, table.keys.prov tbody, table.keys.prov tr, table.keys.prov td { display: block; width: auto; }
+  table.keys.prov tr { border-top: 1px solid var(--line); padding: 8px 0; } table.keys.prov td { border: 0; padding: 2px 6px; }
+  table.keys.prov code { white-space: normal; overflow-wrap: anywhere; } }
 table.keys td.k { width: 36%; font-weight: 600; }
 .m { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #fbbf24;
   color: #1c2233; font: 700 12px system-ui, sans-serif; }
@@ -97,6 +104,49 @@ details.faq summary { cursor: pointer; font-weight: 600; }
 details.faq summary::marker { color: var(--accent); }
 details.faq p { margin: 8px 0 0; color: var(--muted); }
 details.faq p b, details.faq p code { color: var(--ink); }
+.wrap { display: grid; grid-template-columns: 272px minmax(0, 760px); gap: 28px; max-width: 1096px; margin: 0 auto; padding: 0 16px; align-items: start; }
+.wrap main { max-width: none; margin: 0; padding: 32px 0 56px; }
+aside.side { position: sticky; top: 12px; margin-top: 32px; max-height: calc(100vh - 24px); overflow: auto; background: var(--card);
+  border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+.drawer > summary { display: none; cursor: pointer; font-weight: 700; padding: 2px 2px 8px; }
+.search { position: relative; }
+.search input { width: 100%; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 10px; padding: 9px 34px 9px 12px; }
+.search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.search button { position: absolute; right: 6px; top: 6px; border: 0; background: transparent; color: var(--muted); font-size: 15px;
+  cursor: pointer; padding: 3px 7px; border-radius: 6px; }
+.search button:hover { background: var(--soft); }
+.qinfo { font-size: 12.5px; color: var(--muted); margin: 8px 2px 6px; min-height: 1.2em; }
+.tree, .tree ul, .res { list-style: none; margin: 0; padding: 0; }
+.tree a { display: block; padding: 5px 8px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 14px; line-height: 1.35; }
+.tree a:hover, .tree a:focus { background: var(--soft); outline: none; }
+.tree .row { display: flex; align-items: center; gap: 2px; }
+.tree .row > a { flex: 1; font-weight: 600; }
+.tree .row > a b { color: var(--accent); margin-right: 6px; }
+.tree .tg { flex: none; border: 0; background: transparent; color: var(--muted); cursor: pointer; width: 22px; height: 22px; border-radius: 6px; font-size: 11px; }
+.tree .tg:hover { background: var(--soft); }
+.tree .sub { display: none; margin: 0 0 4px 22px; padding-left: 8px; border-left: 1px solid var(--line); }
+.tree .ch.open > .sub { display: block; }
+.tree .sub a { font-size: 13px; color: var(--muted); padding: 3px 8px; }
+.tree .sub a:hover, .tree .sub a:focus { color: var(--ink); }
+.tree .ch.cur > .row > a { background: var(--soft); color: var(--accent); }
+.res a { display: block; padding: 7px 8px; border-radius: 8px; text-decoration: none; color: var(--ink); }
+.res a:hover, .res a:focus { background: var(--soft); outline: none; }
+.res .tag { display: block; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); }
+.res b { display: block; font-size: 14px; }
+.res small { display: block; color: var(--muted); font-size: 12.5px; line-height: 1.4; overflow-wrap: anywhere; }
+mark { background: #fde68a; color: #1c2233; border-radius: 3px; padding: 0 1px; }
+@keyframes flash { from { background: var(--soft); box-shadow: 0 0 0 6px var(--soft); } to { background: transparent; box-shadow: 0 0 0 6px transparent; } }
+.flash { animation: flash 1.8s ease-out; border-radius: 10px; }
+h3.part, h4, li.step, details.faq, table.keys tr, .tip, p.lead { scroll-margin-top: 16px; }
+html:not(.js) aside.side { display: none; }
+html.js nav.toc { display: none; }
+@media (max-width: 920px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  aside.side { position: static; max-height: none; margin-top: 16px; }
+  .drawer > summary { display: block; }
+  .wrap main { padding-top: 16px; }
+}
 [hidden] { display: none !important; }
 @media (max-width: 520px) {
   h1 { font-size: 25px; } .card { padding: 18px; } h2 { font-size: 20px; }
@@ -105,6 +155,15 @@ details.faq p b, details.faq p code { color: var(--ink); }
 </style>
 </head>
 <body>
+<div class="wrap">
+<aside class="side" id="side">
+  <details class="drawer" id="drawer" open>
+    <summary><span lang="en">Contents and search</span><span lang="zh-Hant">目錄與搜尋</span></summary>
+    <div class="search" role="search"><input id="q" type="search" autocomplete="off" spellcheck="false"><button type="button" id="qclear" hidden aria-label="Clear">✕</button></div>
+    <div id="qinfo" class="qinfo" aria-live="polite"></div>
+    <nav aria-label="Contents"><ul id="tree" class="tree"></ul><ul id="res" class="res" hidden></ul></nav>
+  </details>
+</aside>
 <main>
   <header>
     <img src="sasai.png" alt="">
@@ -378,7 +437,7 @@ details.faq p b, details.faq p code { color: var(--ink); }
   <!-- ─────────────────────────── 3. Change the AI model ─────────────────────────── -->
   <section class="card" id="model">
     <h2><span class="n">3</span><span lang="en">Change the AI model</span><span lang="zh-Hant">更換 AI 模型</span></h2>
-    <p class="lead" lang="en">Optional — the built-in AI is enough to start. Choose A, B or C.</p><p class="lead" lang="zh-Hant">不一定要做——內建的 AI 就夠用了。想換的話，選 A、B 或 C。</p>
+    <p class="lead" lang="en">Optional — the built-in AI is enough to start. Choose A, B, C or D.</p><p class="lead" lang="zh-Hant">不一定要做——內建的 AI 就夠用了。想換的話，選 A、B、C 或 D。</p>
 
     <h3 class="part" lang="en">A. Another built-in model (offline)</h3><h3 class="part" lang="zh-Hant">A. 另一個內建模型（離線）</h3>
     <ol class="steps">
@@ -415,11 +474,67 @@ details.faq p b, details.faq p code { color: var(--ink); }
       <li class="step"><div><h4 lang="en">Paste it in the 🔑 Keys tab, click Save</h4><h4 lang="zh-Hant">貼到 🔑 Keys 分頁，按 Save</h4>
         <p lang="en">Pictures in chapter 4, steps 4–5.</p><p lang="zh-Hant">圖片在第 4 章的第 4–5 步。</p></div></li>
       <li class="step"><div><h4 lang="en">Choose it in the “AI:” box</h4><h4 lang="zh-Hant">在「AI:」選它</h4>
-        <p lang="en">Pick <b class="ui">Gemini</b>, <b class="ui">Claude</b> or <b class="ui">MiniMax</b>. The quick chat stays on the built-in AI; the cloud AI takes the analysis and the reports. What you send goes to that company.</p><p lang="zh-Hant">選 <b class="ui">Gemini</b>、<b class="ui">Claude</b> 或 <b class="ui">MiniMax</b>。快速對話仍由內建 AI 負責；分析和報告交給雲端 AI。你送出的內容會傳到那家公司。</p></div></li>
+        <p lang="en">Pick <b class="ui">Gemini</b>, <b class="ui">Claude</b> or <b class="ui">MiniMax</b>. The quick chat stays on the built-in AI; the cloud AI takes the analysis and the reports. What you send goes to that company. Your cloud AI is not one of these three? See D below.</p><p lang="zh-Hant">選 <b class="ui">Gemini</b>、<b class="ui">Claude</b> 或 <b class="ui">MiniMax</b>。快速對話仍由內建 AI 負責；分析和報告交給雲端 AI。你送出的內容會傳到那家公司。你的雲端 AI 不是這三個？請看下面的 D。</p></div></li>
     </ol>
 
     <h3 class="part" lang="en">C. Your own AI server (LM Studio, Ollama)</h3><h3 class="part" lang="zh-Hant">C. 你自己的 AI 伺服器（LM Studio、Ollama）</h3>
     <p class="lead" style="margin-top:10px" lang="en">AI Config → <b class="ui">Edge AI</b>: type a <b class="ui">Name</b>, the <b class="ui">Endpoint</b> (for example <code>http://localhost:1234/v1</code>), click <b>↻</b> to list its models, choose one, click <b class="ui">Test</b>, then <b class="ui">Save AI Config</b>. Finally choose <b class="ui">Edge AI</b> in the “AI:” box.</p><p class="lead" style="margin-top:10px" lang="zh-Hant">AI Config → <b class="ui">Edge AI</b>：填 <b class="ui">Name</b>（名稱）和 <b class="ui">Endpoint</b>（例如 <code>http://localhost:1234/v1</code>），按 <b>↻</b> 列出它的模型，選一個，按 <b class="ui">Test</b>，再按 <b class="ui">Save AI Config</b>。最後在「AI:」選 <b class="ui">Edge AI</b>。</p>
+
+    <h3 class="part" lang="en">D. Any other cloud AI — OpenAI, OpenRouter, DeepSeek, Groq, Mistral …</h3><h3 class="part" lang="zh-Hant">D. 其他的雲端 AI——OpenAI、OpenRouter、DeepSeek、Groq、Mistral …</h3>
+    <p class="lead" style="margin-top:10px" lang="en">Your cloud AI is not Gemini, Claude or MiniMax? Almost every other provider speaks the same “OpenAI-compatible” language, so you can add it yourself in the <b class="ui">Edge AI</b> box. You need two things from the provider: an <b>endpoint</b> (a web address) and an <b>API key</b>. The example below uses OpenRouter, which has free models — the other providers work the same way.</p><p class="lead" style="margin-top:10px" lang="zh-Hant">你的雲端 AI 不是 Gemini、Claude 或 MiniMax？其他業者幾乎都用同一種「OpenAI 相容」的介面，所以你可以自己加進 <b class="ui">Edge AI</b> 方塊。你只需要向業者拿兩樣東西：<b>endpoint</b>（一個網址）和 <b>API 金鑰</b>。下面用 OpenRouter 當例子（它有免費模型），其他業者的做法一樣。</p>
+    <ol class="steps">
+      <li class="step"><div><h4 lang="en">Get the endpoint and a key from the provider</h4><h4 lang="zh-Hant">向業者取得 endpoint 和金鑰</h4>
+        <p lang="en">Sign in on the provider's website, open its keys page, create a key and copy it — most providers show it only once. The endpoint is in the table.</p><p lang="zh-Hant">到業者的網站登入，打開它的金鑰頁面，建立一把金鑰並複製起來——多數業者只會顯示一次。endpoint 看下面的表。</p>
+        <table class="keys prov">
+          <tr><td class="k">OpenRouter</td><td><code>https://openrouter.ai/api/v1</code></td><td lang="en">Keys: openrouter.ai/keys. Has free models (limited requests per day).</td><td lang="zh-Hant">金鑰：openrouter.ai/keys。有免費模型（每天次數有限）。</td></tr>
+          <tr><td class="k">OpenAI</td><td><code>https://api.openai.com/v1</code></td><td lang="en">Keys: platform.openai.com/settings/organization/api-keys. Add prepaid credit first.</td><td lang="zh-Hant">金鑰：platform.openai.com/settings/organization/api-keys。要先儲值。</td></tr>
+          <tr><td class="k">DeepSeek</td><td><code>https://api.deepseek.com</code></td><td lang="en">Keys: platform.deepseek.com/api_keys. No <code>/v1</code> at the end. Add balance first.</td><td lang="zh-Hant">金鑰：platform.deepseek.com/api_keys。網址後面沒有 <code>/v1</code>。要先儲值。</td></tr>
+          <tr><td class="k">Groq</td><td><code>https://api.groq.com/openai/v1</code></td><td lang="en">Keys: console.groq.com/keys. Has a free tier with rate limits.</td><td lang="zh-Hant">金鑰：console.groq.com/keys。有免費額度，但有速率限制。</td></tr>
+          <tr><td class="k">Mistral</td><td><code>https://api.mistral.ai/v1</code></td><td lang="en">Keys: console.mistral.ai/api-keys. Has a free mode without a credit card.</td><td lang="zh-Hant">金鑰：console.mistral.ai/api-keys。有免刷卡的免費模式。</td></tr>
+        </table>
+        <p lang="en" style="margin-top:10px">Prices, free allowances and model names change often — trust the provider's own page over this table. Another provider not listed? Its documentation calls it “OpenAI-compatible” and gives a “base URL”: that is the endpoint.</p><p lang="zh-Hant" style="margin-top:10px">價格、免費額度和模型名稱常常變動——以業者自己的頁面為準。表裡沒有的業者？它的文件會寫「OpenAI-compatible」並給一個「base URL」：那就是 endpoint。</p></div></li>
+      <li class="step"><div><h4 lang="en">AI Config → Edge AI: type a Name and the Endpoint <span class="m">1</span> <span class="m">2</span></h4><h4 lang="zh-Hant">AI Config → Edge AI：填 Name 和 Endpoint <span class="m">1</span> <span class="m">2</span></h4>
+        <p lang="en">Click the <b class="ui">AI Config</b> tab on the left; <b class="ui">Edge AI</b> is the box with these fields. In <b class="ui">Name</b> type any name you will recognise, for example <i>OpenRouter</i>. A new name adds a new entry; pick an old name from the list to load it again; the red ✖ removes the entry. In <b class="ui">Endpoint</b> paste the address from the table.</p><p lang="zh-Hant">點左邊的 <b class="ui">AI Config</b> 分頁，有這些欄位的就是 <b class="ui">Edge AI</b> 方塊。在 <b class="ui">Name</b> 填一個你認得的名字，例如 <i>OpenRouter</i>。填新名字就是新增一筆；從清單選舊名字就是重新載入它；紅色的 ✖ 會刪除這一筆。在 <b class="ui">Endpoint</b> 貼上表裡的網址。</p>
+        <div class="shot"><svg class="ui" viewBox="0 0 640 236" role="img" aria-label="The Edge AI box filled in for OpenRouter: Name, Endpoint, Model with the refresh and Test buttons, Key, and Save AI Config">
+          <rect x="8" y="8" width="624" height="222" rx="8" fill="#060d1c"/>
+          <rect x="20" y="24" width="600" height="196" rx="6" fill="none" stroke="#1f6fa8"/>
+          <rect x="32" y="16" width="80" height="16" fill="#060d1c"/><text class="ui" x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Edge AI</text>
+          <text class="ui" x="36" y="60" font-size="12" fill="#cfe8ff">Name:</text>
+          <rect x="120" y="42" width="458" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="130" y="60" font-size="11.5" fill="#cfe8ff">OpenRouter</text><text x="562" y="60" font-size="11" fill="#46708c">▾</text>
+          <rect x="584" y="42" width="28" height="26" rx="4" fill="#b3261e" stroke="#ff6b6b"/><text x="598" y="61" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">✖</text>
+          <text class="ui" x="36" y="94" font-size="12" fill="#cfe8ff">Endpoint:</text>
+          <rect x="120" y="76" width="492" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="130" y="94" font-size="11.5" fill="#cfe8ff">https://openrouter.ai/api/v1</text>
+          <text class="ui" x="36" y="128" font-size="12" fill="#cfe8ff">Model:</text>
+          <rect x="120" y="110" width="386" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="130" y="128" font-size="11.5" fill="#cfe8ff">openrouter/free</text><text x="490" y="128" font-size="11" fill="#46708c">▾</text>
+          <rect x="514" y="110" width="28" height="26" rx="4" fill="#1a2a3a" stroke="#3a5a7a"/><text x="528" y="128" font-size="13" fill="#7eb8f7" text-anchor="middle">↻</text>
+          <rect x="548" y="110" width="64" height="26" rx="4" fill="#1a2a3a" stroke="#3a5a7a"/><text class="ui" x="580" y="127" font-size="11.5" fill="#7eb8f7" text-anchor="middle">Test</text>
+          <text class="ui" x="36" y="162" font-size="12" fill="#cfe8ff">Key:</text>
+          <rect x="120" y="144" width="492" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="130" y="163" font-size="12" fill="#cfe8ff">••••••••••••••••••••••••</text>
+          <rect x="32" y="184" width="132" height="26" rx="4" fill="#0a1830" stroke="#34e7ff"/><text class="ui" x="98" y="201" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Save AI Config</text>
+          <g class="mk"><circle cx="116" cy="44" r="10"/><text x="116" y="48">1</text></g>
+          <g class="mk"><circle cx="116" cy="78" r="10"/><text x="116" y="82">2</text></g>
+          <g class="mk"><circle cx="116" cy="146" r="10"/><text x="116" y="150">3</text></g>
+          <g class="mk"><circle cx="514" cy="112" r="10"/><text x="514" y="116">4</text></g>
+          <g class="mk"><circle cx="548" cy="112" r="10"/><text x="548" y="116">5</text></g>
+          <g class="mk"><circle cx="32" cy="186" r="10"/><text x="32" y="190">6</text></g>
+        </svg></div></div></li>
+      <li class="step"><div><h4 lang="en">Paste the Key, click ↻, choose a model <span class="m">3</span> <span class="m">4</span></h4><h4 lang="zh-Hant">貼上 Key、按 ↻、選一個模型 <span class="m">3</span> <span class="m">4</span></h4>
+        <p lang="en">The key goes into the <b class="ui">Key</b> field of this same box — not into the 🔑 Keys tab. Then click <b>↻</b>: sasAI asks the provider for its list of models and fills the <b class="ui">Model</b> box. For OpenRouter's free models choose <code>openrouter/free</code> or any name ending in <code>:free</code>. If the list does not come, you can still type a model name from the provider's website into the <b class="ui">Model</b> box.</p><p lang="zh-Hant">金鑰貼在同一個方塊的 <b class="ui">Key</b> 欄位——不是 🔑 Keys 分頁。然後按 <b>↻</b>：sasAI 會向業者要它的模型清單，填進 <b class="ui">Model</b> 方塊。OpenRouter 的免費模型請選 <code>openrouter/free</code>，或任何以 <code>:free</code> 結尾的名字。如果清單出不來，也可以把業者網站上的模型名稱直接打進 <b class="ui">Model</b> 方塊。</p></div></li>
+      <li class="step"><div><h4 lang="en">Click Test <span class="m">5</span></h4><h4 lang="zh-Hant">按 Test <span class="m">5</span></h4>
+        <p lang="en">sasAI sends the model one tiny question. Success prints <i>“✓ … connection OK (streaming works)”</i> and the status bar says <i>“…: OK”</i>. A line starting with ✗ means it failed, and it carries the provider's own message — see the table below.</p><p lang="zh-Hant">sasAI 會問模型一個極小的問題。成功的話會印出「✓ … connection OK (streaming works)」，狀態列顯示「…: OK」。以 ✗ 開頭的一行表示失敗，並附上業者自己的訊息——請看下面的對照表。</p></div></li>
+      <li class="step"><div><h4 lang="en">Save AI Config, then choose Edge AI in the “AI:” box <span class="m">6</span></h4><h4 lang="zh-Hant">按 Save AI Config，再到「AI:」選 Edge AI <span class="m">6</span></h4>
+        <p lang="en">Click <b class="ui">Save AI Config</b>, then open the <b class="ui">AI:</b> box and pick <b class="ui">Edge AI</b>. From now on the analysis and the reports use that provider; the quick chat stays on the built-in AI. To go back, pick <b class="ui">Built-in</b> in the same box.</p><p lang="zh-Hant">按 <b class="ui">Save AI Config</b>，再打開 <b class="ui">AI:</b> 方塊，選 <b class="ui">Edge AI</b>。從此分析和報告都改用那家業者；快速對話仍由內建 AI 負責。想換回來，在同一個方塊選 <b class="ui">Built-in</b>。</p></div></li>
+    </ol>
+    <div class="tip warn"><h4 lang="en">Before you use one: what you send leaves this PC</h4><h4 lang="zh-Hant">用之前：你送出的內容會離開這台電腦</h4>
+      <p lang="en">Your questions, sample descriptions and data summaries go to that company. Some free endpoints may keep or use what you send — read the provider's privacy page. For confidential samples stay on <b class="ui">Built-in</b>. Models also differ in quality: if answers get worse, switch back in the <b class="ui">AI:</b> box.</p><p lang="zh-Hant">你的問題、樣品描述和數據摘要會送到那家公司。有些免費端點可能會保留或利用你送出的內容——請讀業者的隱私頁面。機密樣品請留在 <b class="ui">Built-in</b>。模型的品質也不一樣：答案變差時，在 <b class="ui">AI:</b> 方塊切回來。</p></div>
+    <div class="tip"><h4 lang="en">If something fails</h4><h4 lang="zh-Hant">失敗的時候</h4>
+      <table class="keys">
+        <tr><td class="k">Authentication failed (401)</td><td lang="en">The key is wrong, expired, or belongs to another provider. Copy it again into <b class="ui">Key</b>.</td><td lang="zh-Hant">金鑰不對、過期，或是別家業者的。重新複製，貼進 <b class="ui">Key</b>。</td></tr>
+        <tr><td class="k">Cannot connect</td><td lang="en">The endpoint has a typo, or there is no internet. Compare it letter by letter with the table.</td><td lang="zh-Hant">endpoint 打錯，或沒有網路。逐字對照上面的表。</td></tr>
+        <tr><td class="k">Timeout (10s)</td><td lang="en">The provider is busy. Wait a minute and click ↻ again.</td><td lang="zh-Hant">業者太忙。等一分鐘再按 ↻。</td></tr>
+        <tr><td class="k">No models returned</td><td lang="en">Usually a wrong ending on the endpoint (a missing or extra <code>/v1</code>). Fix it, or type the model name by hand.</td><td lang="zh-Hant">通常是 endpoint 結尾不對（少了或多了 <code>/v1</code>）。改正它，或手動輸入模型名稱。</td></tr>
+        <tr><td class="k">402 / 429 in the ✗ line</td><td lang="en">The provider says you are out of credit (402) or asking too fast (429). Add credit, or wait and try again.</td><td lang="zh-Hant">業者說你的餘額用完（402）或問得太快（429）。儲值，或等一下再試。</td></tr>
+      </table></div>
   </section>
 
   <!-- ─────────────────────────── 4. Google API key ─────────────────────────── -->
@@ -956,6 +1071,7 @@ details.faq p b, details.faq p code { color: var(--ink); }
     <a href="index.html">安裝 sasAI</a> · 解除安裝的方法也在同一頁。
   </footer>
 </main>
+</div>
 <script>
 (function () {
   var titles = {en: "sasAI Quick Start", "zh-Hant": "sasAI 快速入門"};
@@ -977,6 +1093,207 @@ details.faq p b, details.faq p code { color: var(--ink); }
     });
   });
   render(document.documentElement.lang);
+})();
+(function () {
+  var doc = document, root = doc.documentElement;
+  var q = doc.getElementById("q"), clr = doc.getElementById("qclear"), info = doc.getElementById("qinfo"),
+      tree = doc.getElementById("tree"), res = doc.getElementById("res"), drawer = doc.getElementById("drawer");
+  var LANGS = ["en", "zh-Hant"];
+  var UI = {
+    en: {ph: "Search the guide…", none: "No match. Try fewer or different words.", short: "Type at least two letters.",
+         n: function (k) { return k + (k === 1 ? " result" : " results"); }},
+    "zh-Hant": {ph: "搜尋說明…", none: "找不到。試試少一點、或換個關鍵字。", short: "請輸入至少兩個字母。",
+                n: function (k) { return k + " 個結果"; }}
+  };
+  var CJK = /[㐀-鿿]/;
+  var chapters = [], blocks = [], current = -1;
+  var wide = window.matchMedia("(min-width: 921px)");
+
+  function lang() { return root.getAttribute("lang") === "zh-Hant" ? "zh-Hant" : "en"; }
+  function zh(el) { var n = el.nextElementSibling; return n && n.getAttribute("lang") === "zh-Hant" ? n : el; }
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  function text(node, L) {
+    var out = [], w = doc.createTreeWalker(node, NodeFilter.SHOW_TEXT, null), t, e;
+    while ((t = w.nextNode())) {
+      e = t.parentElement;
+      if (e.closest("script,style")) continue;
+      e = e.closest("[lang]");
+      if (e && e !== root && e.getAttribute("lang") !== L) continue;
+      out.push(t.nodeValue);
+    }
+    return out.join(" ").replace(/\s+/g, " ").trim();
+  }
+
+  function build() {
+    [].forEach.call(doc.querySelectorAll("main section.card"), function (sec, ci) {
+      var h2 = sec.querySelector("h2"), n = h2.querySelector(".n"), ch = {id: sec.id, el: sec, num: n ? n.textContent.trim() : "", title: {}, kids: []};
+      LANGS.forEach(function (L) { var s = h2.querySelector('[lang="' + L + '"]'); ch.title[L] = s ? s.textContent.trim() : ""; });
+      var k = 0;
+      function id(el, p) { if (!el.id) el.id = sec.id + "-" + p + (++k); return el.id; }
+      function add(kind, en, titleOf, container) {
+        var other = container ? en : zh(en), rec = {ch: ch, id: id(en, kind), el: {en: en, "zh-Hant": other}, title: {}, text: {}, hay: {}};
+        if (other !== en && !other.id) other.id = rec.id + "-zh";
+        LANGS.forEach(function (L) {
+          var host = container ? en : (L === "en" ? en : other);
+          rec.title[L] = titleOf(host, L);
+          rec.text[L] = text(host, L);
+          rec.hay[L] = (rec.title[L] + " " + rec.text[L]).toLowerCase();
+        });
+        blocks.push(rec);
+        return rec;
+      }
+      [].forEach.call(sec.querySelectorAll('h3.part[lang="en"]'), function (el) {
+        ch.kids.push(add("p", el, function (h) { return h.textContent.trim(); }));
+      });
+      [].forEach.call(sec.querySelectorAll("li.step"), function (li) {
+        var h = li.querySelector('h4[lang="en"]'), hz = li.querySelector('h4[lang="zh-Hant"]');
+        var rec = add("s", li, function (_h, L) { var e = L === "en" ? h : hz; return e ? e.textContent.trim() : ""; }, true);
+        if (h) { rec.navEl = {en: h, "zh-Hant": hz || h}; h.id = h.id || rec.id + "h"; if (hz) hz.id = hz.id || rec.id + "hz"; }
+        ch.kids.push(rec);
+      });
+      [].forEach.call(sec.querySelectorAll('details.faq[lang="en"]'), function (el) {
+        ch.kids.push(add("q", el, function (h) { var s = h.querySelector("summary"); return s ? s.textContent.trim() : ""; }));
+      });
+      [].forEach.call(sec.querySelectorAll("table.keys tr"), function (tr) {
+        add("r", tr, function (h, L) {
+          var c = h.querySelector('td.k[lang="' + L + '"]') || h.querySelector("td.k"); return c ? c.textContent.trim() : "";
+        }, true);
+      });
+      [].forEach.call(sec.querySelectorAll(".tip"), function (t) {
+        add("t", t, function (h, L) { var e = h.querySelector('h4[lang="' + L + '"]'); return e ? e.textContent.trim() : ""; }, true);
+      });
+      [].forEach.call(sec.querySelectorAll('p.lead[lang="en"]'), function (p) {
+        add("l", p, function (h) { return h.textContent.trim().slice(0, 70); });
+      });
+      chapters.push(ch);
+    });
+  }
+
+  function go(rec) {
+    var L = lang(), el = (rec.navEl || rec.el)[L] || rec.el[L];
+    if (!el) return;
+    if (!wide.matches) drawer.open = false;
+    el.scrollIntoView({behavior: "smooth", block: "start"});
+    var box = rec.el[L];
+    box.classList.remove("flash"); void box.offsetWidth; box.classList.add("flash");
+    setTimeout(function () { box.classList.remove("flash"); }, 1900);
+    try { history.replaceState(null, "", "#" + el.id); } catch (e) { /* the address bar is a convenience */ }
+  }
+
+  function chapterRec(ch) { return {ch: ch, id: ch.id, el: {en: ch.el, "zh-Hant": ch.el}}; }
+
+  function renderTree() {
+    var L = lang(), out = [];
+    chapters.forEach(function (ch, i) {
+      out.push('<li class="ch' + (i === current ? " cur open" : "") + '" data-i="' + i + '"><div class="row"><button type="button" class="tg" aria-label="expand">▸</button>' +
+               '<a href="#' + ch.id + '" data-c="' + i + '"><b>' + esc(ch.num) + "</b>" + esc(ch.title[L]) + '</a></div><ul class="sub">');
+      ch.kids.forEach(function (k, j) {
+        out.push('<li><a href="#' + k.id + '" data-c="' + i + '" data-k="' + j + '">' + esc(k.title[L] || "…") + "</a></li>");
+      });
+      out.push("</ul></li>");
+    });
+    tree.innerHTML = out.join("");
+  }
+
+  function terms() { return q.value.toLowerCase().split(/\s+/).filter(Boolean); }
+
+  function search() {
+    var L = lang(), ts = terms(), raw = q.value.trim();
+    clr.hidden = !raw;
+    if (!raw) { res.hidden = true; tree.hidden = false; info.textContent = ""; return []; }
+    tree.hidden = true; res.hidden = false;
+    if (raw.length < 2 && !CJK.test(raw)) { res.innerHTML = ""; info.textContent = UI[L].short; return []; }
+    var hits = [];
+    blocks.forEach(function (b, order) {
+      var hay = b.hay[L], score = 0;
+      for (var i = 0; i < ts.length; i++) {
+        var at = hay.indexOf(ts[i]);
+        if (at < 0) return;
+        score += (b.title[L].toLowerCase().indexOf(ts[i]) >= 0 ? 6 : 0) + Math.min(5, hay.split(ts[i]).length - 1);
+      }
+      hits.push({b: b, score: score, order: order});
+    });
+    hits.sort(function (x, y) { return y.score - x.score || x.order - y.order; });
+    hits = hits.slice(0, 40);
+    info.textContent = hits.length ? UI[L].n(hits.length) : UI[L].none;
+    res.innerHTML = hits.map(function (h, i) {
+      var b = h.b, t = b.text[L], low = t.toLowerCase(), at = Math.max(0, low.indexOf(ts[0]) - 40),
+          snip = esc(t.slice(at, at + 130));
+      ts.forEach(function (w) { snip = snip.replace(new RegExp(esc(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"), function (m) { return "<mark>" + m + "</mark>"; }); });
+      return '<li><a href="#' + b.id + '" data-r="' + i + '"><span class="tag">' + esc(b.ch.num + " " + b.ch.title[L]) + "</span><b>" +
+             esc(b.title[L] || b.ch.title[L]) + "</b><small>" + (at ? "…" : "") + snip + "…</small></a></li>";
+    }).join("");
+    res._hits = hits;
+    return hits;
+  }
+
+  function ui() {
+    var L = lang();
+    q.placeholder = UI[L].ph;
+    q.setAttribute("aria-label", UI[L].ph);
+  }
+
+  var obs;
+  function spyObs() {
+    return obs || (obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = chapters.findIndex(function (c) { return c.el === e.target; });
+        if (i === current) return;
+        current = i;
+        [].forEach.call(tree.querySelectorAll(".ch"), function (li) {
+          var on = +li.getAttribute("data-i") === i;
+          li.classList.toggle("cur", on);
+          if (on) li.classList.add("open");
+        });
+      });
+    }, {rootMargin: "-25% 0px -65% 0px"}));
+  }
+
+  tree.addEventListener("click", function (e) {
+    var tg = e.target.closest(".tg"), a = e.target.closest("a");
+    if (tg) { tg.setAttribute("aria-expanded", tg.closest(".ch").classList.toggle("open")); return; }
+    if (!a) return;
+    e.preventDefault();
+    var ch = chapters[+a.getAttribute("data-c")], k = a.getAttribute("data-k");
+    go(k === null ? chapterRec(ch) : ch.kids[+k]);
+  });
+  res.addEventListener("click", function (e) {
+    var a = e.target.closest("a");
+    if (!a) return;
+    e.preventDefault();
+    go(res._hits[+a.getAttribute("data-r")].b);
+  });
+  q.addEventListener("input", search);
+  q.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { q.value = ""; search(); }
+    else if (e.key === "ArrowDown") { var a = res.querySelector("a"); if (a) { e.preventDefault(); a.focus(); } }
+    else if (e.key === "Enter" && res._hits && res._hits.length) { e.preventDefault(); go(res._hits[0].b); }
+  });
+  res.addEventListener("keydown", function (e) {
+    var a = doc.activeElement, li = a && a.closest("li");
+    if (e.key === "ArrowDown" && li && li.nextElementSibling) { e.preventDefault(); li.nextElementSibling.querySelector("a").focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); if (li && li.previousElementSibling) li.previousElementSibling.querySelector("a").focus(); else q.focus(); }
+  });
+  clr.addEventListener("click", function () { q.value = ""; search(); q.focus(); });
+  doc.addEventListener("keydown", function (e) {
+    if (e.key !== "/" || /^(INPUT|TEXTAREA|SELECT)$/.test(doc.activeElement.tagName)) return;
+    e.preventDefault();
+    if (!wide.matches) drawer.open = true;
+    q.focus(); q.select();
+  });
+  function place() { if (wide.matches) drawer.open = true; }
+  if (wide.addEventListener) wide.addEventListener("change", place);
+
+  build();
+  drawer.open = wide.matches;
+  ui();
+  renderTree();
+  chapters.forEach(function (c) { spyObs().observe(c.el); });
+  new MutationObserver(function () { ui(); renderTree(); if (q.value.trim()) search(); }).observe(root, {attributes: true, attributeFilter: ["lang"]});
+  window.sasaiGuide = {search: function (s) { q.value = s; return search().map(function (h) { return {id: h.b.id, chapter: h.b.ch.id, title: h.b.title[lang()]}; }); },
+                       chapters: function () { return chapters.map(function (c) { return {id: c.id, kids: c.kids.length}; }); }};
 })();
 </script>
 </body>
