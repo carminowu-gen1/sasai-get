@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>sasAI Quick Start</title>
+<meta name="sasai-build" content="2026-09-30b-v0.1">
 <link rel="icon" href="sasai.png">
+<script>(function(){var l=null;try{l=localStorage.getItem("sasai-lang")}catch(e){}if(l!=="en"&&l!=="zh-Hant")l=/^zh/i.test(navigator.language||"")?"zh-Hant":"en";document.documentElement.lang=l})();</script>
 <style>
 :root {
   --bg: #f6f7fb; --card: #ffffff; --ink: #1c2233; --muted: #5d6679; --line: #dfe3ec;
@@ -23,9 +25,14 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.55 "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  font: 16px/1.55 "Segoe UI", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
 main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+.lang { margin-left: auto; display: inline-flex; border: 1px solid var(--line); border-radius: 999px; background: var(--card); padding: 3px; }
+.lang button { border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--card); }
+:root[lang="en"] [lang="zh-Hant"], :root[lang="zh-Hant"] [lang="en"] { display: none !important; }
 header img { width: 56px; height: 56px; border-radius: 14px; }
 h1 { font-size: 30px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
 .sub { color: var(--muted); margin: 6px 0 18px; }
@@ -64,8 +71,8 @@ ol.steps > li::before { content: counter(s); width: 32px; height: 32px; border-r
 .tip li { margin: 0 0 4px; }
 table.keys { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 15px; }
 table.keys td { border-top: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
-table.keys td:first-child { width: 34px; }
-table.keys td:nth-child(2) { width: 36%; font-weight: 600; }
+table.keys td.num { width: 34px; }
+table.keys td.k { width: 36%; font-weight: 600; }
 .m { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #fbbf24;
   color: #1c2233; font: 700 12px system-ui, sans-serif; }
 kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; font: 13px Consolas, monospace; }
@@ -75,12 +82,12 @@ footer { margin-top: 28px; color: var(--muted); font-size: 15px; }
 footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
 .mk circle { fill: #fbbf24; stroke: #1c2233; stroke-width: 1; }
 .mk text { fill: #1c2233; font: 700 12px system-ui, sans-serif; text-anchor: middle; }
-.ui text { font-family: Consolas, "SF Mono", Menlo, "Courier New", monospace; }
-.sans text { font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
+.ui text { font-family: Consolas, "SF Mono", Menlo, "Courier New", "Microsoft JhengHei", "PingFang TC", monospace; }
+.sans text { font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", system-ui, -apple-system, Arial, sans-serif; }
 [hidden] { display: none !important; }
 @media (max-width: 520px) {
   h1 { font-size: 25px; } .card { padding: 18px; } h2 { font-size: 20px; }
-  table.keys td:nth-child(2) { width: auto; }
+  table.keys td.k { width: auto; }
 }
 </style>
 </head>
@@ -88,24 +95,25 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
 <main>
   <header>
     <img src="sasai.png" alt="">
-    <h1>sasAI Quick Start</h1>
+    <h1 lang="en">sasAI Quick Start</h1><h1 lang="zh-Hant">sasAI 快速入門</h1>
+    <div class="lang" role="group" aria-label="Language / 語言"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh-Hant">中文</button></div>
   </header>
-  <p class="sub">Everything a first-time user needs, one small step at a time — each step shows a picture of what you will see.</p>
+  <p class="sub" lang="en">Everything a first-time user needs, one small step at a time — each step shows a picture of what you will see.</p><p class="sub" lang="zh-Hant">第一次用會需要知道的事，一次一小步，每一步都附上你會看到的畫面。</p>
 
   <nav class="toc" aria-label="Chapters">
-    <a href="#screen"><b>1</b>The buttons</a>
-    <a href="#ai"><b>2</b>The AI assistant</a>
-    <a href="#model"><b>3</b>Change the AI model</a>
-    <a href="#google"><b>4</b>Google API key</a>
-    <a href="#telegram"><b>5</b>Telegram</a>
-    <a href="#voice"><b>6</b>Voice</a>
-    <a href="#fit"><b>7</b>From data to report</a>
+    <a href="#screen"><b>1</b><span lang="en">The buttons</span><span lang="zh-Hant">各按鈕功能</span></a>
+    <a href="#ai"><b>2</b><span lang="en">The AI assistant</span><span lang="zh-Hant">AI 助理</span></a>
+    <a href="#model"><b>3</b><span lang="en">Change the AI model</span><span lang="zh-Hant">更換 AI 模型</span></a>
+    <a href="#google"><b>4</b><span lang="en">Google API key</span><span lang="zh-Hant">Google API 金鑰</span></a>
+    <a href="#telegram"><b>5</b><span lang="en">Telegram</span><span lang="zh-Hant">Telegram</span></a>
+    <a href="#voice"><b>6</b><span lang="en">Voice</span><span lang="zh-Hant">語音</span></a>
+    <a href="#fit"><b>7</b><span lang="en">From data to report</span><span lang="zh-Hant">從數據到報告</span></a>
   </nav>
 
   <!-- ─────────────────────────── 1. The screen ─────────────────────────── -->
   <section class="card" id="screen">
-    <h2><span class="n">1</span>What each button does</h2>
-    <p class="lead">Double-click the <b>sasAI</b> icon on your desktop. This window opens — the numbers match the list below.</p>
+    <h2><span class="n">1</span><span lang="en">What each button does</span><span lang="zh-Hant">每個按鈕在做什麼</span></h2>
+    <p class="lead" lang="en">Double-click the <b>sasAI</b> icon on your desktop. This window opens — the numbers match the list below.</p><p class="lead" lang="zh-Hant">在桌面上按兩下 <b>sasAI</b> 圖示，會打開這個視窗——圖上的數字對應下面的表格。</p>
     <div class="shot wide" style="margin-top:14px"><svg class="ui" viewBox="0 0 640 420" role="img" aria-label="The sasAI main window with its parts numbered 1 to 11">
       <defs><clipPath id="c-bub1"><circle cx="606" cy="402" r="12.5"/></clipPath></defs>
       <rect x="8" y="8" width="624" height="384" rx="8" fill="#060d1c" stroke="#1f6fa8"/>
@@ -117,57 +125,57 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
       <rect x="500" y="52" width="120" height="19" rx="3" fill="#0a1530" stroke="#1f6fa8"/>
       <text x="507" y="65" font-size="10" fill="#cfe8ff">◢ Holographic ▾</text>
       <rect x="16" y="76" width="128" height="26" rx="4" fill="#1a3a1a" stroke="#3a7a3a"/>
-      <text x="80" y="93" font-size="12" font-weight="700" fill="#7de891" text-anchor="middle">Load Data...</text>
+      <text class="ui" x="80" y="93" font-size="12" font-weight="700" fill="#7de891" text-anchor="middle">Load Data...</text>
       <rect x="150" y="76" width="62" height="26" rx="4" fill="#3a1a3a" stroke="#7a3a7a"/>
-      <text x="181" y="93" font-size="10.5" font-weight="700" fill="#f0a0f0" text-anchor="middle">↻ Restart</text>
+      <text class="ui" x="181" y="93" font-size="10.5" font-weight="700" fill="#f0a0f0" text-anchor="middle">↻ Restart</text>
       <rect x="16" y="108" width="196" height="44" rx="5" fill="none" stroke="#1f6fa8"/>
-      <text x="24" y="120" font-size="9" fill="#34e7ff">System</text>
+      <text class="ui" x="24" y="120" font-size="9" fill="#34e7ff">System</text>
       <g fill="none" stroke-width="3"><circle cx="80" cy="134" r="11" stroke="#16364f"/><path d="M71 140a11 11 0 0 1 16-14" stroke="#34e7ff"/>
       <circle cx="124" cy="134" r="11" stroke="#16364f"/><path d="M114 139a11 11 0 0 1 19-8" stroke="#2af5c0"/>
       <circle cx="168" cy="134" r="11" stroke="#16364f"/><path d="M158 139a11 11 0 0 1 6-15" stroke="#9a6bff"/></g>
-      <rect x="16" y="158" width="38" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="35" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">Chat</text>
-      <rect x="56" y="158" width="64" height="18" rx="3" fill="#06121f" stroke="#34e7ff"/><text x="88" y="171" font-size="9.5" fill="#34e7ff" text-anchor="middle">AI Config</text>
-      <rect x="122" y="158" width="46" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="145" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">🔑 Keys</text>
-      <rect x="170" y="158" width="42" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="191" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">Report</text>
+      <rect x="16" y="158" width="38" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="35" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">Chat</text>
+      <rect x="56" y="158" width="64" height="18" rx="3" fill="#06121f" stroke="#34e7ff"/><text class="ui" x="88" y="171" font-size="9.5" fill="#34e7ff" text-anchor="middle">AI Config</text>
+      <rect x="122" y="158" width="46" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="145" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">🔑 Keys</text>
+      <rect x="170" y="158" width="42" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="191" y="171" font-size="9.5" fill="#46708c" text-anchor="middle">Report</text>
       <rect x="16" y="176" width="196" height="182" fill="#040a18" stroke="#1f6fa8"/>
-      <text x="24" y="192" font-size="8.5" font-weight="700" fill="#34e7ff">AI BRAIN · who answers</text>
-      <rect x="24" y="198" width="180" height="44" rx="4" fill="none" stroke="#1f6fa8"/><text x="30" y="210" font-size="8.5" font-weight="700" fill="#34e7ff">Built-in LLM</text>
+      <text class="ui" x="24" y="192" font-size="8.5" font-weight="700" fill="#34e7ff">AI BRAIN · who answers</text>
+      <rect x="24" y="198" width="180" height="44" rx="4" fill="none" stroke="#1f6fa8"/><text class="ui" x="30" y="210" font-size="8.5" font-weight="700" fill="#34e7ff">Built-in LLM</text>
       <rect x="30" y="216" width="168" height="14" rx="2" fill="#0a1530" stroke="#1f6fa8"/>
-      <rect x="24" y="248" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text x="30" y="261" font-size="8.5" font-weight="700" fill="#34e7ff">Cloud AI</text>
-      <rect x="24" y="272" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text x="30" y="285" font-size="8.5" font-weight="700" fill="#34e7ff">Edge AI</text>
+      <rect x="24" y="248" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text class="ui" x="30" y="261" font-size="8.5" font-weight="700" fill="#34e7ff">Cloud AI</text>
+      <rect x="24" y="272" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text class="ui" x="30" y="285" font-size="8.5" font-weight="700" fill="#34e7ff">Edge AI</text>
       <text x="24" y="306" font-size="8.5" font-weight="700" fill="#34e7ff">INTERACTION · how you talk</text>
-      <rect x="24" y="312" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text x="30" y="325" font-size="8.5" font-weight="700" fill="#34e7ff">Voice</text>
-      <rect x="24" y="336" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text x="30" y="349" font-size="8.5" font-weight="700" fill="#34e7ff">Remote Control (Telegram)</text>
+      <rect x="24" y="312" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text class="ui" x="30" y="325" font-size="8.5" font-weight="700" fill="#34e7ff">Voice</text>
+      <rect x="24" y="336" width="180" height="18" rx="4" fill="none" stroke="#1f6fa8"/><text class="ui" x="30" y="349" font-size="8.5" font-weight="700" fill="#34e7ff">Remote Control (Telegram)</text>
       <rect x="220" y="76" width="280" height="164" fill="#040a18" stroke="#16364f"/>
-      <text x="228" y="90" font-size="9" fill="#34e7ff">I(Q) / Fit</text><text x="292" y="90" font-size="9" fill="#46708c">P(r)</text>
+      <text class="ui" x="228" y="90" font-size="9" fill="#34e7ff">I(Q) / Fit</text><text class="ui" x="292" y="90" font-size="9" fill="#46708c">P(r)</text>
       <path d="M240 100V226H492" fill="none" stroke="#16364f"/>
       <text x="226" y="108" font-size="8" fill="#46708c">I</text><text x="484" y="236" font-size="8" fill="#46708c">q</text>
       <g fill="#cfe8ff"><circle cx="252" cy="111" r="2"/><circle cx="262" cy="113" r="2"/><circle cx="272" cy="111" r="2"/><circle cx="282" cy="114" r="2"/><circle cx="292" cy="113" r="2"/><circle cx="302" cy="116" r="2"/><circle cx="312" cy="117" r="2"/><circle cx="322" cy="121" r="2"/><circle cx="332" cy="124" r="2"/><circle cx="342" cy="133" r="2"/><circle cx="352" cy="139" r="2"/><circle cx="362" cy="151" r="2"/><circle cx="372" cy="159" r="2"/><circle cx="382" cy="170" r="2"/><circle cx="392" cy="176" r="2"/><circle cx="402" cy="185" r="2"/><circle cx="412" cy="189" r="2"/><circle cx="422" cy="197" r="2"/><circle cx="432" cy="199" r="2"/><circle cx="442" cy="205" r="2"/><circle cx="452" cy="207" r="2"/><circle cx="462" cy="212" r="2"/><circle cx="472" cy="212" r="2"/><circle cx="482" cy="216" r="2"/></g>
       <path d="M248 111C300 113 330 120 352 140S420 200 488 216" fill="none" stroke="#34e7ff" stroke-width="2"/>
-      <text x="222" y="262" font-size="10.5" fill="#cfe8ff">AI:</text>
+      <text class="ui" x="222" y="262" font-size="10.5" fill="#cfe8ff">AI:</text>
       <rect x="220" y="268" width="80" height="20" rx="3" fill="#0a1530" stroke="#1f6fa8"/>
-      <text x="226" y="282" font-size="10" fill="#cfe8ff">Built-in</text><text x="289" y="282" font-size="9" fill="#46708c">▾</text>
-      <text x="222" y="306" font-size="9.5" fill="#cfe8ff">SAS Model:</text>
+      <text class="ui" x="226" y="282" font-size="10" fill="#cfe8ff">Built-in</text><text x="289" y="282" font-size="9" fill="#46708c">▾</text>
+      <text class="ui" x="222" y="306" font-size="9.5" fill="#cfe8ff">SAS Model:</text>
       <rect x="220" y="312" width="80" height="18" rx="3" fill="#1a1f2e" stroke="#2a4f7a"/><text x="226" y="325" font-size="9.5" fill="#7eb8f7">(none)</text>
-      <text x="222" y="349" font-size="9.5" fill="#cfe8ff">chi2:</text><text x="258" y="350" font-size="13" font-weight="700" fill="#fbbf24">---</text>
-      <rect x="306" y="248" width="40" height="16" rx="3" fill="#06121f" stroke="#34e7ff"/><text x="326" y="260" font-size="8.5" fill="#34e7ff" text-anchor="middle">Model</text>
-      <rect x="348" y="248" width="62" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text x="379" y="260" font-size="8.5" fill="#46708c" text-anchor="middle">Fit Options</text>
-      <rect x="412" y="248" width="88" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text x="456" y="260" font-size="8.5" fill="#46708c" text-anchor="middle">Polydispersity</text>
+      <text class="ui" x="222" y="349" font-size="9.5" fill="#cfe8ff">chi2:</text><text x="258" y="350" font-size="13" font-weight="700" fill="#fbbf24">---</text>
+      <rect x="306" y="248" width="40" height="16" rx="3" fill="#06121f" stroke="#34e7ff"/><text class="ui" x="326" y="260" font-size="8.5" fill="#34e7ff" text-anchor="middle">Model</text>
+      <rect x="348" y="248" width="62" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="379" y="260" font-size="8.5" fill="#46708c" text-anchor="middle">Fit Options</text>
+      <rect x="412" y="248" width="88" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="456" y="260" font-size="8.5" fill="#46708c" text-anchor="middle">Polydispersity</text>
       <rect x="306" y="264" width="194" height="62" fill="#040a18" stroke="#1f6fa8"/>
-      <text x="312" y="280" font-size="8.5" fill="#cfe8ff">Category:</text><rect x="364" y="271" width="130" height="13" rx="2" fill="#0a1530" stroke="#1f6fa8"/>
-      <text x="312" y="299" font-size="8.5" fill="#cfe8ff">Model:</text><rect x="364" y="290" width="130" height="13" rx="2" fill="#0a1530" stroke="#1f6fa8"/>
+      <text class="ui" x="312" y="280" font-size="8.5" fill="#cfe8ff">Category:</text><rect x="364" y="271" width="130" height="13" rx="2" fill="#0a1530" stroke="#1f6fa8"/>
+      <text class="ui" x="312" y="299" font-size="8.5" fill="#cfe8ff">Model:</text><rect x="364" y="290" width="130" height="13" rx="2" fill="#0a1530" stroke="#1f6fa8"/>
       <rect x="312" y="310" width="182" height="3" fill="#16364f"/><rect x="312" y="317" width="140" height="3" fill="#16364f"/>
       <rect x="306" y="332" width="52" height="24" rx="3" fill="#06241c" stroke="#2af5c0"/><text x="332" y="348" font-size="8" font-weight="700" fill="#8af0c8" text-anchor="middle">&gt;&gt; RUN FIT</text>
-      <rect x="362" y="332" width="66" height="24" rx="3" fill="#062033" stroke="#34e7ff" stroke-width="1.6"/><text x="395" y="348" font-size="9.5" font-weight="700" fill="#9af0ff" text-anchor="middle">▶ Auto-Fit</text>
-      <rect x="432" y="332" width="68" height="24" rx="3" fill="#2a0a14" stroke="#e0556b"/><text x="466" y="348" font-size="9.5" font-weight="700" fill="#ff90a2" text-anchor="middle">STOP</text>
-      <rect x="508" y="76" width="44" height="16" rx="3" fill="#06121f" stroke="#34e7ff"/><text x="530" y="88" font-size="8.5" fill="#34e7ff" text-anchor="middle">Fit Log</text>
+      <rect x="362" y="332" width="66" height="24" rx="3" fill="#062033" stroke="#34e7ff" stroke-width="1.6"/><text class="ui" x="395" y="348" font-size="9.5" font-weight="700" fill="#9af0ff" text-anchor="middle">▶ Auto-Fit</text>
+      <rect x="432" y="332" width="68" height="24" rx="3" fill="#2a0a14" stroke="#e0556b"/><text class="ui" x="466" y="348" font-size="9.5" font-weight="700" fill="#ff90a2" text-anchor="middle">STOP</text>
+      <rect x="508" y="76" width="44" height="16" rx="3" fill="#06121f" stroke="#34e7ff"/><text class="ui" x="530" y="88" font-size="8.5" fill="#34e7ff" text-anchor="middle">Fit Log</text>
       <rect x="554" y="76" width="24" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text x="566" y="88" font-size="8.5" fill="#46708c" text-anchor="middle">KB</text>
-      <rect x="580" y="76" width="44" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text x="602" y="88" font-size="8.5" fill="#46708c" text-anchor="middle">Flow</text>
+      <rect x="580" y="76" width="44" height="16" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="602" y="88" font-size="8.5" fill="#46708c" text-anchor="middle">Flow</text>
       <rect x="508" y="92" width="116" height="266" fill="#040a18" stroke="#1f6fa8"/>
       <g fill="#16364f"><rect x="516" y="104" width="96" height="3"/><rect x="516" y="114" width="76" height="3"/><rect x="516" y="124" width="100" height="3"/><rect x="516" y="134" width="60" height="3"/><rect x="516" y="144" width="90" height="3"/><rect x="516" y="154" width="70" height="3"/></g>
       <path d="M8 364h624v20a8 8 0 0 1-8 8H16a8 8 0 0 1-8-8z" fill="#040a18"/><path d="M8 364h624" stroke="#16364f"/>
-      <text x="20" y="382" font-size="10" fill="#46708c">Ready -- load a SANS data file to begin</text>
-      <rect x="500" y="368" width="120" height="20" rx="3" fill="#0a1830" stroke="#1f6fa8"/><text x="560" y="382" font-size="9.5" fill="#9fe3ff" text-anchor="middle">Report a problem</text>
+      <text class="ui" x="20" y="382" font-size="10" fill="#46708c">Ready -- load a SANS data file to begin</text>
+      <rect x="500" y="368" width="120" height="20" rx="3" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="560" y="382" font-size="9.5" fill="#9fe3ff" text-anchor="middle">Report a problem</text>
       <circle cx="606" cy="402" r="17" fill="#38bdf8" opacity=".28"/><circle cx="606" cy="402" r="14" fill="#08222f" stroke="#38bdf8" stroke-width="1.5"/>
       <image href="assistant.png" x="593.5" y="389.5" width="25" height="25" clip-path="url(#c-bub1)"/>
       <g class="mk"><circle cx="16" cy="76" r="10"/><text x="16" y="80">1</text></g>
@@ -183,37 +191,37 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
       <g class="mk"><circle cx="486" cy="61" r="10"/><text x="486" y="65">11</text></g>
     </svg></div>
     <table class="keys">
-      <tr><td><span class="m">1</span></td><td>Load Data…</td><td>Open your measurement file (.dat .abs .txt .xml .h5).</td></tr>
-      <tr><td><span class="m">2</span></td><td>↻ Restart</td><td>Clear everything and start a new sample.</td></tr>
-      <tr><td><span class="m">3</span></td><td>Chat · AI Config · 🔑 Keys · Report</td><td><b>Chat</b>: what the analysis is doing, and a box for questions. <b>AI Config</b>: settings for the AI, voice and Telegram. <b>Keys</b>: API keys and tokens, kept only on this computer. <b>Report</b>: write and save the report.</td></tr>
-      <tr><td><span class="m">4</span></td><td>AI:</td><td>Which AI answers. <b>Built-in</b> is the AI on your own computer. Under it: <b>SAS Model</b> (the model sasAI chose) and <b>chi2</b> (how closely it fits — near 1 is best).</td></tr>
-      <tr><td><span class="m">5</span></td><td>Plot</td><td>Your data (dots) and the fitted model (line). The <b>P(r)</b> tab shows the distance distribution.</td></tr>
-      <tr><td><span class="m">6</span></td><td>▶ Auto-Fit</td><td>The main button: sasAI picks a model and fits it for you. <b>&gt;&gt; RUN FIT</b> fits a model you chose yourself, <b>STOP</b> stops. The same row also has <b>Web Search</b> (look up the literature first), <b>Compute/Plot</b> (draw a model without fitting) and <b>Export</b> (save results as CSV, DAT or JSON).</td></tr>
-      <tr><td><span class="m">7</span></td><td>Model · Fit Options · Polydispersity · Magnetism · Combine Models</td><td>Choose and adjust a model by hand — for experienced users.</td></tr>
-      <tr><td><span class="m">8</span></td><td>Fit Log · KB · S-EVO · Refs · Display · Flow</td><td><b>Fit Log</b>: every fitting step. <b>KB</b>: your past fits. <b>S-EVO</b>: sasAI's growing knowledge library. <b>Refs</b>: literature for this sample. <b>Display</b>: font sizes. <b>Flow</b>: the analysis stages, live.</td></tr>
-      <tr><td><span class="m">9</span></td><td>Report a problem</td><td>Tell the sasAI team what went wrong — your log is attached automatically.</td></tr>
-      <tr><td><span class="m">10</span></td><td>PicoSAS bubble</td><td>Your AI assistant (called 小伐 in Chinese). Click it to chat.</td></tr>
-      <tr><td><span class="m">11</span></td><td>◢ Holographic</td><td>The look of the window: Holographic, Dark or Light.</td></tr>
-      <tr><td></td><td>Menus</td><td><b>Project</b>: Save Project… · Open Project… · Recall (re-verify)…  <b>Help</b>: Check for Updates · Contribute Knowledge… · Report a Problem…</td></tr>
+      <tr><td class="num"><span class="m">1</span></td><td class="k" lang="en">Load Data…</td><td class="k" lang="zh-Hant">Load Data…</td><td lang="en">Open your measurement file (.dat .abs .txt .xml .h5).</td><td lang="zh-Hant">開啟你的量測資料檔（.dat .abs .txt .xml .h5）。</td></tr>
+      <tr><td class="num"><span class="m">2</span></td><td class="k" lang="en">↻ Restart</td><td class="k" lang="zh-Hant">↻ Restart</td><td lang="en">Clear everything and start a new sample.</td><td lang="zh-Hant">全部清掉，換一個新樣品。</td></tr>
+      <tr><td class="num"><span class="m">3</span></td><td class="k" lang="en">Chat · AI Config · 🔑 Keys · Report</td><td class="k" lang="zh-Hant">Chat · AI Config · 🔑 Keys · Report</td><td lang="en"><b class="ui">Chat</b>: what the analysis is doing, and a box for questions. <b class="ui">AI Config</b>: settings for the AI, voice and Telegram. <b class="ui">Keys</b>: API keys and tokens, kept only on this computer. <b class="ui">Report</b>: write and save the report.</td><td lang="zh-Hant"><b class="ui">Chat</b>：分析正在做什麼，也可以在這裡問問題。<b class="ui">AI Config</b>：AI、語音和 Telegram 的設定。<b class="ui">Keys</b>：API 金鑰和 Token，只存在這台電腦。<b class="ui">Report</b>：產生並儲存報告。</td></tr>
+      <tr><td class="num"><span class="m">4</span></td><td class="k" lang="en">AI:</td><td class="k" lang="zh-Hant">AI:</td><td lang="en">Which AI answers. <b class="ui">Built-in</b> is the AI on your own computer. Under it: <b class="ui">SAS Model</b> (the model sasAI chose) and <b class="ui">chi2</b> (how closely it fits — near 1 is best).</td><td lang="zh-Hant">由哪個 AI 回答。<b class="ui">Built-in</b> 就是你自己電腦上的 AI。下面的 <b class="ui">SAS Model</b> 是 sasAI 選的模型，<b class="ui">chi2</b> 是擬合的好壞（越接近 1 越好）。</td></tr>
+      <tr><td class="num"><span class="m">5</span></td><td class="k" lang="en">Plot</td><td class="k" lang="zh-Hant">圖</td><td lang="en">Your data (dots) and the fitted model (line). The <b class="ui">P(r)</b> tab shows the distance distribution.</td><td lang="zh-Hant">你的數據（點）和擬合出的模型（線）。<b class="ui">P(r)</b> 分頁顯示距離分布。</td></tr>
+      <tr><td class="num"><span class="m">6</span></td><td class="k" lang="en">▶ Auto-Fit</td><td class="k" lang="zh-Hant">▶ Auto-Fit</td><td lang="en">The main button: sasAI picks a model and fits it for you. <b>&gt;&gt; RUN FIT</b> fits a model you chose yourself, <b class="ui">STOP</b> stops. The same row also has <b class="ui">Web Search</b> (look up the literature first), <b class="ui">Compute/Plot</b> (draw a model without fitting) and <b class="ui">Export</b> (save results as CSV, DAT or JSON).</td><td lang="zh-Hant">最主要的按鈕：sasAI 幫你選模型、做擬合。<b>&gt;&gt; RUN FIT</b> 用你自己選的模型擬合，<b class="ui">STOP</b> 停止。同一列還有 <b class="ui">Web Search</b>（先查文獻）、<b class="ui">Compute/Plot</b>（只畫模型、不擬合）和 <b class="ui">Export</b>（把結果存成 CSV、DAT 或 JSON）。</td></tr>
+      <tr><td class="num"><span class="m">7</span></td><td class="k" lang="en">Model · Fit Options · Polydispersity · Magnetism · Combine Models</td><td class="k" lang="zh-Hant">Model · Fit Options · Polydispersity · Magnetism · Combine Models</td><td lang="en">Choose and adjust a model by hand — for experienced users.</td><td lang="zh-Hant">自己選模型、調參數——給有經驗的使用者。</td></tr>
+      <tr><td class="num"><span class="m">8</span></td><td class="k" lang="en">Fit Log · KB · S-EVO · Refs · Display · Flow</td><td class="k" lang="zh-Hant">Fit Log · KB · S-EVO · Refs · Display · Flow</td><td lang="en"><b class="ui">Fit Log</b>: every fitting step. <b>KB</b>: your past fits. <b class="ui">S-EVO</b>: sasAI's growing knowledge library. <b class="ui">Refs</b>: literature for this sample. <b class="ui">Display</b>: font sizes. <b class="ui">Flow</b>: the analysis stages, live.</td><td lang="zh-Hant"><b class="ui">Fit Log</b>：每一步擬合的紀錄。<b>KB</b>：你過去的擬合。<b class="ui">S-EVO</b>：sasAI 越用越豐富的知識庫。<b class="ui">Refs</b>：這個樣品的相關文獻。<b class="ui">Display</b>：字體大小。<b class="ui">Flow</b>：分析各階段的即時進度。</td></tr>
+      <tr><td class="num"><span class="m">9</span></td><td class="k" lang="en">Report a problem</td><td class="k" lang="zh-Hant">Report a problem</td><td lang="en">Tell the sasAI team what went wrong — your log is attached automatically.</td><td lang="zh-Hant">告訴 sasAI 團隊哪裡出了問題——你的 log 會自動附上。</td></tr>
+      <tr><td class="num"><span class="m">10</span></td><td class="k" lang="en">PicoSAS bubble</td><td class="k" lang="zh-Hant">小伐頭像</td><td lang="en">Your AI assistant (called 小伐 in Chinese). Click it to chat.</td><td lang="zh-Hant">你的 AI 助理（英文介面叫 PicoSAS）。點它就能對話。</td></tr>
+      <tr><td class="num"><span class="m">11</span></td><td class="k" lang="en">◢ Holographic</td><td class="k" lang="zh-Hant">◢ Holographic</td><td lang="en">The look of the window: Holographic, Dark or Light.</td><td lang="zh-Hant">視窗的外觀：Holographic（全像）、Dark（深色）或 Light（淺色）。</td></tr>
+      <tr><td class="num"></td><td class="k" lang="en">Menus</td><td class="k" lang="zh-Hant">選單</td><td lang="en"><b class="ui">Project</b>: Save Project… · Open Project… · Recall (re-verify)…  <b class="ui">Help</b>: Check for Updates · Contribute Knowledge… · Report a Problem…</td><td lang="zh-Hant"><b class="ui">Project</b>：Save Project…（儲存專案）· Open Project…（開啟專案）· Recall (re-verify)…（重新驗證）&nbsp; <b class="ui">Help</b>：Check for Updates（檢查更新）· Contribute Knowledge…（貢獻知識）· Report a Problem…（回報問題）</td></tr>
     </table>
   </section>
 
   <!-- ─────────────────────────── 2. The AI assistant ─────────────────────────── -->
   <section class="card" id="ai">
-    <h2><span class="n">2</span>Your AI assistant</h2>
-    <p class="lead">sasAI comes with its own AI. It runs on your computer — no account, no key, no fee, and it keeps working without internet.</p>
+    <h2><span class="n">2</span><span lang="en">Your AI assistant</span><span lang="zh-Hant">你的 AI 助理</span></h2>
+    <p class="lead" lang="en">sasAI comes with its own AI. It runs on your computer — no account, no key, no fee, and it keeps working without internet.</p><p class="lead" lang="zh-Hant">sasAI 內建自己的 AI，就在你的電腦上執行——不用帳號、不用金鑰、不用付費，沒有網路也能用。</p>
     <ol class="steps">
-      <li class="step"><div><h4>The first time, the AI downloads by itself</h4>
-        <p>About 5 GB, once — usually 10 to 40 minutes. The bottom-right corner shows the progress. You can keep working; if you close sasAI, it continues next time.</p>
+      <li class="step"><div><h4 lang="en">The first time, the AI downloads by itself</h4><h4 lang="zh-Hant">第一次啟動時，AI 會自己下載</h4>
+        <p lang="en">About 5 GB, once — usually 10 to 40 minutes. The bottom-right corner shows the progress. You can keep working; if you close sasAI, it continues next time.</p><p lang="zh-Hant">大約 5 GB，只下載一次——通常 10 到 40 分鐘。右下角會顯示進度。你可以先開始用；關掉 sasAI 也沒關係，下次會續傳。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 56" role="img" aria-label="Status bar: Offline AI assistant 1/1: 42% of 5.0 GB">
           <rect x="4" y="8" width="632" height="40" rx="6" fill="#040a18" stroke="#16364f"/>
           <text x="16" y="33" font-size="11.5" fill="#46708c">Ready</text>
-          <rect x="62" y="17" width="112" height="22" rx="3" fill="#0a1830" stroke="#1f6fa8"/><text x="118" y="32" font-size="10.5" fill="#9fe3ff" text-anchor="middle">Report a problem</text>
+          <rect x="62" y="17" width="112" height="22" rx="3" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="118" y="32" font-size="10.5" fill="#9fe3ff" text-anchor="middle">Report a problem</text>
           <text x="184" y="33" font-size="11.5" fill="#cfe8ff">Offline AI assistant 1/1: 42% of 5.0 GB</text>
           <rect x="462" y="19" width="160" height="18" rx="3" fill="#0a1530" stroke="#1f6fa8"/><rect x="463" y="20" width="67" height="16" rx="2" fill="#34e7ff"/>
         </svg></div></div></li>
-      <li class="step"><div><h4>Open the assistant</h4>
-        <p>Click the round picture at the <b>bottom-right of your screen</b>. Shortcut: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd>. It can answer once the download above has finished.</p>
+      <li class="step"><div><h4 lang="en">Open the assistant</h4><h4 lang="zh-Hant">打開助理</h4>
+        <p lang="en">Click the round picture at the <b>bottom-right of your screen</b>. Shortcut: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd>. It can answer once the download above has finished.</p><p lang="zh-Hant">點螢幕<b>右下角</b>的圓形頭像。快速鍵：<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd>。上面的下載完成後它才能回答。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 170" role="img" aria-label="The round PicoSAS picture at the bottom-right of the screen">
           <defs><clipPath id="c-bub2"><circle cx="566" cy="96" r="23"/></clipPath></defs>
           <rect x="4" y="4" width="632" height="162" rx="10" fill="#123a63"/>
@@ -226,27 +234,27 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <circle cx="566" cy="96" r="32" fill="#38bdf8" opacity=".25"/><circle cx="566" cy="96" r="26" fill="#08222f" stroke="#38bdf8" stroke-width="2"/>
           <image href="assistant.png" x="543" y="73" width="46" height="46" clip-path="url(#c-bub2)"/>
           <path d="M584 112l0 20l5-5l4 9l4-2l-4-8l7 0z" fill="#ffffff" stroke="#1c2233" stroke-width="1.2"/>
-          <text x="604" y="74" font-size="12" font-weight="700" fill="#fbbf24">click</text>
+          <text x="604" y="74" font-size="12" font-weight="700" fill="#fbbf24" lang="en">click</text><text x="604" y="74" font-size="12" font-weight="700" fill="#fbbf24" lang="zh-Hant">點這裡</text>
         </svg></div></div></li>
-      <li class="step"><div><h4>Ask anything</h4>
-        <p>Type your question and press <kbd>Enter</kbd>, or tap a suggestion. It answers in the language you write in.</p>
+      <li class="step"><div><h4 lang="en">Ask anything</h4><h4 lang="zh-Hant">想問什麼都可以</h4>
+        <p lang="en">Type your question and press <kbd>Enter</kbd>, or tap a suggestion. It answers in the language you write in.</p><p lang="zh-Hant">輸入問題後按 <kbd>Enter</kbd>，或直接點一個建議。你用什麼語言問，它就用什麼語言答。</p>
         <div class="shot narrow"><svg class="sans" viewBox="140 0 360 360" role="img" aria-label="The PicoSAS chat window with its buttons numbered">
           <defs><clipPath id="c-av1"><circle cx="186" cy="32" r="15"/></clipPath></defs>
           <rect x="150" y="8" width="340" height="344" rx="16" fill="#05101a" stroke="#1d6f94"/>
           <circle cx="186" cy="32" r="16" fill="#08222f" stroke="#38bdf8"/>
           <image href="assistant.png" x="171" y="17" width="30" height="30" clip-path="url(#c-av1)"/>
-          <text x="210" y="37" font-size="14" font-weight="700" fill="#d4f2fc">PicoSAS</text>
+          <text x="210" y="37" font-size="14" font-weight="700" fill="#d4f2fc" lang="en">PicoSAS</text><text x="210" y="37" font-size="14" font-weight="700" fill="#d4f2fc" lang="zh-Hant">小伐</text>
           <circle cx="280" cy="32" r="4" fill="#4ade80"/>
-          <rect x="290" y="22" width="30" height="20" rx="10" fill="#0b2130" stroke="#1d6f94"/><text x="305" y="36" font-size="10.5" font-weight="700" fill="#9fe3f5" text-anchor="middle">EN</text>
+          <rect x="290" y="22" width="30" height="20" rx="10" fill="#0b2130" stroke="#1d6f94"/><text x="305" y="36" font-size="10.5" font-weight="700" fill="#9fe3f5" text-anchor="middle" lang="en">EN</text><text x="305" y="36" font-size="10.5" font-weight="700" fill="#9fe3f5" text-anchor="middle" lang="zh-Hant">中</text>
           <text x="398" y="38" font-size="14" fill="#6f97a8">🎧</text><text x="424" y="38" font-size="14" fill="#6f97a8">🔊</text><text x="452" y="38" font-size="14" fill="#6f97a8">—</text>
           <path d="M150 56h340" stroke="#123a4f"/>
           <rect x="166" y="68" width="306" height="46" rx="12" fill="#0f2a3a"/>
-          <text x="180" y="87" font-size="12" fill="#d4f2fc">Hi, I am PicoSAS.</text><text x="180" y="104" font-size="12" fill="#d4f2fc">Your SAS data analysis assistant!</text>
-          <text x="166" y="136" font-size="11" fill="#6f97a8">You can ask me:</text>
-          <g fill="#0b2130" stroke="#1d6f94"><rect x="166" y="146" width="176" height="24" rx="12"/><rect x="166" y="176" width="226" height="24" rx="12"/><rect x="166" y="206" width="196" height="24" rx="12"/><rect x="166" y="236" width="192" height="24" rx="12"/></g>
-          <g font-size="11.5" fill="#9fe3f5"><text x="178" y="162">🔬 Analyze this dataset</text><text x="178" y="192">📐 Measure the size or thickness</text><text x="178" y="222">🧬 What structure is this?</text><text x="178" y="252">📚 Find related literature</text></g>
-          <text x="166" y="284" font-size="10.5" fill="#6f97a8">Tap a question above, or just type your own.</text>
-          <rect x="166" y="298" width="210" height="36" rx="18" fill="#07182a" stroke="#1d6f94"/><text x="184" y="321" font-size="12" fill="#5f8494">Type your question…</text>
+          <g lang="en"><text x="180" y="87" font-size="12" fill="#d4f2fc">Hi, I am PicoSAS.</text><text x="180" y="104" font-size="12" fill="#d4f2fc">Your SAS data analysis assistant!</text></g><g lang="zh-Hant"><text x="180" y="87" font-size="12" fill="#d4f2fc">我是小伐，您的 AI SAS 數據分析助理，</text><text x="180" y="104" font-size="12" fill="#d4f2fc">很高興能為您服務！</text></g>
+          <text class="ui" x="166" y="136" font-size="11" fill="#6f97a8" lang="en">You can ask me:</text><text class="ui" x="166" y="136" font-size="11" fill="#6f97a8" lang="zh-Hant">你可以問我：</text>
+          <g lang="en" fill="#0b2130" stroke="#1d6f94"><rect x="166" y="146" width="176" height="24" rx="12"/><rect x="166" y="176" width="226" height="24" rx="12"/><rect x="166" y="206" width="196" height="24" rx="12"/><rect x="166" y="236" width="192" height="24" rx="12"/></g><g lang="zh-Hant" fill="#0b2130" stroke="#1d6f94"><rect x="166" y="146" width="150" height="24" rx="12"/><rect x="166" y="176" width="150" height="24" rx="12"/><rect x="166" y="206" width="138" height="24" rx="12"/><rect x="166" y="236" width="114" height="24" rx="12"/></g>
+          <g lang="en" font-size="11.5" fill="#9fe3f5"><text x="178" y="162">🔬 Analyze this dataset</text><text x="178" y="192">📐 Measure the size or thickness</text><text x="178" y="222">🧬 What structure is this?</text><text x="178" y="252">📚 Find related literature</text></g><g lang="zh-Hant" font-size="11.5" fill="#9fe3f5"><text x="178" y="162">🔬 幫我分析這份數據</text><text x="178" y="192">📐 幫我量粒徑或厚度</text><text x="178" y="222">🧬 這是什麼結構？</text><text x="178" y="252">📚 找相關文獻</text></g>
+          <text class="ui" x="166" y="284" font-size="10.5" fill="#6f97a8" lang="en">Tap a question above, or just type your own.</text><text class="ui" x="166" y="284" font-size="10.5" fill="#6f97a8" lang="zh-Hant">也能點選上方問題，或直接輸入提問都可以喔～</text>
+          <rect x="166" y="298" width="210" height="36" rx="18" fill="#07182a" stroke="#1d6f94"/><text class="ui" x="184" y="321" font-size="12" fill="#5f8494" lang="en">Type your question…</text><text class="ui" x="184" y="321" font-size="12" fill="#5f8494" lang="zh-Hant">輸入你的問題…</text>
           <circle cx="400" cy="316" r="17" fill="#0b2130" stroke="#1d6f94"/>
           <g transform="translate(391 307) scale(.75)" fill="none" stroke="#9fe3f5" stroke-width="1.6" stroke-linecap="round"><rect x="8.4" y="2.6" width="7.2" height="12.6" rx="3.6"/><path d="M5.8 11v1a6.2 6.2 0 0 0 12.4 0v-1M12 18.2v2.3M8.2 21.2h7.6"/></g>
           <circle cx="446" cy="316" r="17" fill="#0ea5e9"/><text x="446" y="321" font-size="14" fill="#04121c" text-anchor="middle">➤</text>
@@ -257,83 +265,83 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <g class="mk"><circle cx="305" cy="11" r="10"/><text x="305" y="15">5</text></g>
         </svg></div>
         <table class="keys">
-          <tr><td><span class="m">1</span></td><td>Suggestions</td><td>Tap one to ask it.</td></tr>
-          <tr><td><span class="m">2</span></td><td>Question box · ➤</td><td>Type, then <kbd>Enter</kbd> or ➤.</td></tr>
-          <tr><td><span class="m">3</span></td><td>🎤 Microphone</td><td>Talk instead of typing (chapter 6).</td></tr>
-          <tr><td><span class="m">4</span></td><td>🔊 Speaker</td><td>Read the answers aloud.</td></tr>
-          <tr><td><span class="m">5</span></td><td>EN / 中</td><td>Switch the answer language.</td></tr>
-          <tr><td></td><td>🎧 · — · ■</td><td>🎧: you can interrupt it by talking. —: shrink back to the round picture. ■ (while it answers): stop.</td></tr>
+          <tr><td class="num"><span class="m">1</span></td><td class="k" lang="en">Suggestions</td><td class="k" lang="zh-Hant">建議問題</td><td lang="en">Tap one to ask it.</td><td lang="zh-Hant">點一下就會問它。</td></tr>
+          <tr><td class="num"><span class="m">2</span></td><td class="k" lang="en">Question box · ➤</td><td class="k" lang="zh-Hant">輸入框 · ➤</td><td lang="en">Type, then <kbd>Enter</kbd> or ➤.</td><td lang="zh-Hant">輸入後按 <kbd>Enter</kbd> 或 ➤。</td></tr>
+          <tr><td class="num"><span class="m">3</span></td><td class="k" lang="en">🎤 Microphone</td><td class="k" lang="zh-Hant">🎤 麥克風</td><td lang="en">Talk instead of typing (chapter 6).</td><td lang="zh-Hant">用說的，不用打字（第 6 章）。</td></tr>
+          <tr><td class="num"><span class="m">4</span></td><td class="k" lang="en">🔊 Speaker</td><td class="k" lang="zh-Hant">🔊 喇叭</td><td lang="en">Read the answers aloud.</td><td lang="zh-Hant">把回答唸出來。</td></tr>
+          <tr><td class="num"><span class="m">5</span></td><td class="k" lang="en">EN / 中</td><td class="k" lang="zh-Hant">EN / 中</td><td lang="en">Switch the answer language.</td><td lang="zh-Hant">切換回答的語言。</td></tr>
+          <tr><td class="num"></td><td class="k" lang="en">🎧 · — · ■</td><td class="k" lang="zh-Hant">🎧 · — · ■</td><td lang="en">🎧: you can interrupt it by talking. —: shrink back to the round picture. ■ (while it answers): stop.</td><td lang="zh-Hant">🎧：它說話時可以直接開口打斷。—：縮回圓形頭像。■（回答中才會出現）：停止。</td></tr>
         </table></div></li>
-      <li class="step"><div><h4>“AI:” says Built-in — that's the offline AI</h4>
-        <p>It is already selected. Built-in answers everything — chat, analysis and reports — on your own computer.</p>
+      <li class="step"><div><h4 lang="en">“AI:” says Built-in — that's the offline AI</h4><h4 lang="zh-Hant">「AI:」顯示 Built-in——就是離線的 AI</h4>
+        <p lang="en">It is already selected. Built-in answers everything — chat, analysis and reports — on your own computer.</p><p lang="zh-Hant">已經預先選好了。Built-in 會回答所有事——對話、分析和報告——全部在你自己的電腦上完成。</p>
         <div class="shot narrow"><svg class="ui" viewBox="140 0 390 190" role="img" aria-label="The AI box set to Built-in, list open">
           <rect x="150" y="8" width="340" height="174" rx="8" fill="#060d1c" stroke="#1f6fa8"/>
-          <text x="176" y="36" font-size="13" fill="#cfe8ff">AI:</text>
+          <text class="ui" x="176" y="36" font-size="13" fill="#cfe8ff">AI:</text>
           <rect x="176" y="44" width="200" height="30" rx="4" fill="#0a1530" stroke="#34e7ff"/>
-          <text x="188" y="64" font-size="13" fill="#cfe8ff">Built-in</text><text x="358" y="64" font-size="11" fill="#46708c">▾</text>
+          <text class="ui" x="188" y="64" font-size="13" fill="#cfe8ff">Built-in</text><text x="358" y="64" font-size="11" fill="#46708c">▾</text>
           <rect x="176" y="76" width="200" height="98" fill="#0a1530" stroke="#1f6fa8"/><rect x="177" y="77" width="198" height="19" fill="#0e3a5a"/>
-          <g font-size="12" fill="#cfe8ff"><text x="188" y="91">Built-in</text><text x="188" y="110">Edge AI</text><text x="188" y="129">Claude</text><text x="188" y="148">Gemini</text><text x="188" y="167">MiniMax</text></g>
-          <text x="388" y="91" font-size="11" font-weight="700" fill="#fbbf24">← offline, on this PC</text>
+          <g font-size="12" fill="#cfe8ff"><text class="ui" x="188" y="91">Built-in</text><text class="ui" x="188" y="110">Edge AI</text><text class="ui" x="188" y="129">Claude</text><text class="ui" x="188" y="148">Gemini</text><text class="ui" x="188" y="167">MiniMax</text></g>
+          <text x="388" y="91" font-size="11" font-weight="700" fill="#fbbf24" lang="en">← offline, on this PC</text><text x="388" y="91" font-size="11" font-weight="700" fill="#fbbf24" lang="zh-Hant">← 離線，在這台電腦上</text>
         </svg></div></div></li>
     </ol>
   </section>
 
   <!-- ─────────────────────────── 3. Change the AI model ─────────────────────────── -->
   <section class="card" id="model">
-    <h2><span class="n">3</span>Change the AI model</h2>
-    <p class="lead">Optional — the built-in AI is enough to start. Choose A, B or C.</p>
+    <h2><span class="n">3</span><span lang="en">Change the AI model</span><span lang="zh-Hant">更換 AI 模型</span></h2>
+    <p class="lead" lang="en">Optional — the built-in AI is enough to start. Choose A, B or C.</p><p class="lead" lang="zh-Hant">不一定要做——內建的 AI 就夠用了。想換的話，選 A、B 或 C。</p>
 
-    <h3 class="part">A. Another built-in model (offline)</h3>
+    <h3 class="part" lang="en">A. Another built-in model (offline)</h3><h3 class="part" lang="zh-Hant">A. 另一個內建模型（離線）</h3>
     <ol class="steps">
-      <li class="step"><div><h4>Open AI Config → Built-in LLM</h4>
-        <p>Click the <b>AI Config</b> tab on the left. <b>Built-in LLM</b> is the first box.</p>
+      <li class="step"><div><h4 lang="en">Open AI Config → Built-in LLM</h4><h4 lang="zh-Hant">打開 AI Config → Built-in LLM</h4>
+        <p lang="en">Click the <b class="ui">AI Config</b> tab on the left. <b class="ui">Built-in LLM</b> is the first box.</p><p lang="zh-Hant">點左邊的 <b class="ui">AI Config</b> 分頁，第一個方塊就是 <b class="ui">Built-in LLM</b>。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 210" role="img" aria-label="The Built-in LLM box with Model, Download, Installed and Use">
           <rect x="8" y="8" width="624" height="194" rx="8" fill="#060d1c"/>
           <rect x="20" y="24" width="600" height="168" rx="6" fill="none" stroke="#1f6fa8"/>
-          <rect x="32" y="16" width="104" height="16" fill="#060d1c"/><text x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Built-in LLM</text>
-          <text x="36" y="58" font-size="12" fill="#cfe8ff">Model:</text>
+          <rect x="32" y="16" width="104" height="16" fill="#060d1c"/><text class="ui" x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Built-in LLM</text>
+          <text class="ui" x="36" y="58" font-size="12" fill="#cfe8ff">Model:</text>
           <rect x="120" y="42" width="486" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="590" y="60" font-size="11" fill="#46708c">▾</text>
-          <rect x="400" y="74" width="98" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="449" y="91" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Search HF</text>
-          <rect x="506" y="74" width="100" height="26" rx="4" fill="#0a1830" stroke="#34e7ff"/><text x="556" y="91" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Download</text>
-          <text x="36" y="126" font-size="12" fill="#cfe8ff">Installed:</text>
+          <rect x="400" y="74" width="98" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="449" y="91" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Search HF</text>
+          <rect x="506" y="74" width="100" height="26" rx="4" fill="#0a1830" stroke="#34e7ff"/><text class="ui" x="556" y="91" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Download</text>
+          <text class="ui" x="36" y="126" font-size="12" fill="#cfe8ff">Installed:</text>
           <rect x="120" y="110" width="486" height="26" rx="4" fill="#0a1530" stroke="#1f6fa8"/>
           <text x="130" y="128" font-size="11.5" fill="#cfe8ff">qwen3-8b-q4_k_m  (8.2B)</text><text x="590" y="128" font-size="11" fill="#46708c">▾</text>
-          <rect x="436" y="146" width="80" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="476" y="163" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Use</text>
-          <rect x="524" y="146" width="82" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="565" y="163" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Manage…</text>
+          <rect x="436" y="146" width="80" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="476" y="163" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Use</text>
+          <rect x="524" y="146" width="82" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="565" y="163" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Manage…</text>
           <g class="mk"><circle cx="116" cy="44" r="10"/><text x="116" y="48">1</text></g>
           <g class="mk"><circle cx="506" cy="74" r="10"/><text x="506" y="78">2</text></g>
           <g class="mk"><circle cx="116" cy="112" r="10"/><text x="116" y="116">3</text></g>
           <g class="mk"><circle cx="436" cy="146" r="10"/><text x="436" y="150">4</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Pick a model <span class="m">1</span>, click Download <span class="m">2</span></h4>
-        <p>Or type a name and click <b>Search HF</b> to find any model on HuggingFace. When the download ends, sasAI asks <i>“Switch the AI provider to 'Built-in' now?”</i> — click <b>Yes</b>.</p></div></li>
-      <li class="step"><div><h4>Switch between models you already have <span class="m">3</span> <span class="m">4</span></h4>
-        <p>Pick one under <b>Installed</b> and click <b>Use</b> — no download. Bigger models are smarter but slower and need more memory: an 8B model needs about 12 GB of RAM.</p></div></li>
+      <li class="step"><div><h4 lang="en">Pick a model <span class="m">1</span>, click Download <span class="m">2</span></h4><h4 lang="zh-Hant">選一個模型 <span class="m">1</span>，按 Download <span class="m">2</span></h4>
+        <p lang="en">Or type a name and click <b class="ui">Search HF</b> to find any model on HuggingFace. When the download ends, sasAI asks <i>“Switch the AI provider to 'Built-in' now?”</i> — click <b>Yes</b>.</p><p lang="zh-Hant">也可以輸入名稱後按 <b class="ui">Search HF</b>，在 HuggingFace 上找任何模型。下載完成後 sasAI 會問「Switch the AI provider to 'Built-in' now?」（要現在切換到 Built-in 嗎？）——按 <b>Yes</b>。</p></div></li>
+      <li class="step"><div><h4 lang="en">Switch between models you already have <span class="m">3</span> <span class="m">4</span></h4><h4 lang="zh-Hant">在已下載的模型之間切換 <span class="m">3</span> <span class="m">4</span></h4>
+        <p lang="en">Pick one under <b class="ui">Installed</b> and click <b class="ui">Use</b> — no download. Bigger models are smarter but slower and need more memory: an 8B model needs about 12 GB of RAM.</p><p lang="zh-Hant">在 <b class="ui">Installed</b> 選一個，按 <b class="ui">Use</b>——不用重新下載。模型越大越聰明，但也越慢、越吃記憶體：8B 的模型大約要 12 GB 的記憶體。</p></div></li>
     </ol>
 
-    <h3 class="part">B. A cloud AI — Gemini, Claude or MiniMax</h3>
+    <h3 class="part" lang="en">B. A cloud AI — Gemini, Claude or MiniMax</h3><h3 class="part" lang="zh-Hant">B. 雲端 AI——Gemini、Claude 或 MiniMax</h3>
     <ol class="steps">
-      <li class="step"><div><h4>Get an API key</h4>
-        <p>For Google Gemini, follow chapter 4. Claude: console.anthropic.com. MiniMax: platform.minimaxi.com.</p></div></li>
-      <li class="step"><div><h4>Paste it in the 🔑 Keys tab, click Save</h4>
-        <p>Pictures in chapter 4, steps 4–5.</p></div></li>
-      <li class="step"><div><h4>Choose it in the “AI:” box</h4>
-        <p>Pick <b>Gemini</b>, <b>Claude</b> or <b>MiniMax</b>. The quick chat stays on the built-in AI; the cloud AI takes the analysis and the reports. What you send goes to that company.</p></div></li>
+      <li class="step"><div><h4 lang="en">Get an API key</h4><h4 lang="zh-Hant">取得 API 金鑰</h4>
+        <p lang="en">For Google Gemini, follow chapter 4. Claude: console.anthropic.com. MiniMax: platform.minimaxi.com.</p><p lang="zh-Hant">Google Gemini 請看第 4 章。Claude：console.anthropic.com。MiniMax：platform.minimaxi.com。</p></div></li>
+      <li class="step"><div><h4 lang="en">Paste it in the 🔑 Keys tab, click Save</h4><h4 lang="zh-Hant">貼到 🔑 Keys 分頁，按 Save</h4>
+        <p lang="en">Pictures in chapter 4, steps 4–5.</p><p lang="zh-Hant">圖片在第 4 章的第 4–5 步。</p></div></li>
+      <li class="step"><div><h4 lang="en">Choose it in the “AI:” box</h4><h4 lang="zh-Hant">在「AI:」選它</h4>
+        <p lang="en">Pick <b class="ui">Gemini</b>, <b class="ui">Claude</b> or <b class="ui">MiniMax</b>. The quick chat stays on the built-in AI; the cloud AI takes the analysis and the reports. What you send goes to that company.</p><p lang="zh-Hant">選 <b class="ui">Gemini</b>、<b class="ui">Claude</b> 或 <b class="ui">MiniMax</b>。快速對話仍由內建 AI 負責；分析和報告交給雲端 AI。你送出的內容會傳到那家公司。</p></div></li>
     </ol>
 
-    <h3 class="part">C. Your own AI server (LM Studio, Ollama)</h3>
-    <p class="lead" style="margin-top:10px">AI Config → <b>Edge AI</b>: type a <b>Name</b>, the <b>Endpoint</b> (for example <code>http://localhost:1234/v1</code>), click <b>↻</b> to list its models, choose one, click <b>Test</b>, then <b>Save AI Config</b>. Finally choose <b>Edge AI</b> in the “AI:” box.</p>
+    <h3 class="part" lang="en">C. Your own AI server (LM Studio, Ollama)</h3><h3 class="part" lang="zh-Hant">C. 你自己的 AI 伺服器（LM Studio、Ollama）</h3>
+    <p class="lead" style="margin-top:10px" lang="en">AI Config → <b class="ui">Edge AI</b>: type a <b class="ui">Name</b>, the <b class="ui">Endpoint</b> (for example <code>http://localhost:1234/v1</code>), click <b>↻</b> to list its models, choose one, click <b class="ui">Test</b>, then <b class="ui">Save AI Config</b>. Finally choose <b class="ui">Edge AI</b> in the “AI:” box.</p><p class="lead" style="margin-top:10px" lang="zh-Hant">AI Config → <b class="ui">Edge AI</b>：填 <b class="ui">Name</b>（名稱）和 <b class="ui">Endpoint</b>（例如 <code>http://localhost:1234/v1</code>），按 <b>↻</b> 列出它的模型，選一個，按 <b class="ui">Test</b>，再按 <b class="ui">Save AI Config</b>。最後在「AI:」選 <b class="ui">Edge AI</b>。</p>
   </section>
 
   <!-- ─────────────────────────── 4. Google API key ─────────────────────────── -->
   <section class="card" id="google">
-    <h2><span class="n">4</span>Get a Google (Gemini) API key</h2>
-    <p class="lead">Needed only if you want Google's Gemini as your AI. You need a Google account.</p>
+    <h2><span class="n">4</span><span lang="en">Get a Google (Gemini) API key</span><span lang="zh-Hant">申請 Google（Gemini）API 金鑰</span></h2>
+    <p class="lead" lang="en">Needed only if you want Google's Gemini as your AI. You need a Google account.</p><p class="lead" lang="zh-Hant">只有想用 Google 的 Gemini 當 AI 時才需要。你需要一個 Google 帳號。</p>
     <ol class="steps">
-      <li class="step"><div><h4>Open Google AI Studio and sign in</h4>
-        <p>Go to <b>aistudio.google.com/apikey</b> and sign in with your Google account. Accept the terms the first time.</p></div></li>
-      <li class="step"><div><h4>Create the key</h4>
-        <p>New users get a key automatically. Otherwise click <b>Create API key</b>.</p>
+      <li class="step"><div><h4 lang="en">Open Google AI Studio and sign in</h4><h4 lang="zh-Hant">開啟 Google AI Studio 並登入</h4>
+        <p lang="en">Go to <b class="ui">aistudio.google.com/apikey</b> and sign in with your Google account. Accept the terms the first time.</p><p lang="zh-Hant">到 <b class="ui">aistudio.google.com/apikey</b>，用 Google 帳號登入。第一次會請你同意條款。</p></div></li>
+      <li class="step"><div><h4 lang="en">Create the key</h4><h4 lang="zh-Hant">建立金鑰</h4>
+        <p lang="en">New users get a key automatically. Otherwise click <b>Create API key</b>.</p><p lang="zh-Hant">新使用者會自動得到一把金鑰。沒有的話，按 <b>Create API key</b>。</p>
         <div class="shot"><svg class="sans" viewBox="0 0 640 230" role="img" aria-label="Google AI Studio API keys page with Create API key and a copy button">
           <rect x="8" y="8" width="624" height="214" rx="10" fill="#ffffff" stroke="#cfd6e4"/>
           <rect x="20" y="18" width="600" height="26" rx="13" fill="#f1f3f8"/>
@@ -350,50 +358,50 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <g class="mk"><circle cx="466" cy="104" r="10"/><text x="466" y="108">1</text></g>
           <g class="mk"><circle cx="292" cy="178" r="10"/><text x="292" y="182">2</text></g>
         </svg></div>
-        <p class="cap">Simplified drawing — Google's page may look a little different.</p></div></li>
-      <li class="step"><div><h4>Copy the key</h4>
-        <p>Click the copy button next to the key. Treat it like a password: never post it or email it.</p></div></li>
-      <li class="step"><div><h4>Paste it in sasAI: 🔑 Keys → Gemini API key → Save</h4>
-        <p>In sasAI, open the <b>🔑 Keys</b> tab. Under <b>AI providers</b>, paste into <b>Gemini API key</b> and click <b>Save</b>. The label changes from <i>empty</i> to <i>saved</i>.</p>
+        <p class="cap" lang="en">Simplified drawing — Google's page may look a little different.</p><p class="cap" lang="zh-Hant">示意圖——Google 的頁面可能長得稍有不同。</p></div></li>
+      <li class="step"><div><h4 lang="en">Copy the key</h4><h4 lang="zh-Hant">複製金鑰</h4>
+        <p lang="en">Click the copy button next to the key. Treat it like a password: never post it or email it.</p><p lang="zh-Hant">按金鑰旁邊的複製按鈕。把它當成密碼：不要貼在網路上、不要用 email 傳。</p></div></li>
+      <li class="step"><div><h4 lang="en">Paste it in sasAI: 🔑 Keys → Gemini API key → Save</h4><h4 lang="zh-Hant">貼到 sasAI：🔑 Keys → Gemini API key → Save</h4>
+        <p lang="en">In sasAI, open the <b class="ui">🔑 Keys</b> tab. Under <b class="ui">AI providers</b>, paste into <b class="ui">Gemini API key</b> and click <b class="ui">Save</b>. The label changes from <i>empty</i> to <i>saved</i>.</p><p lang="zh-Hant">在 sasAI 打開 <b class="ui">🔑 Keys</b> 分頁。在 <b class="ui">AI providers</b> 底下，貼到 <b class="ui">Gemini API key</b>，按 <b class="ui">Save</b>。標籤會從 <i>empty</i> 變成 <i>saved</i>。</p>
         <div class="shot"><svg class="sans" viewBox="0 0 640 250" role="img" aria-label="The Keys tab: Gemini API key pasted, Save button">
           <rect x="8" y="8" width="624" height="234" rx="10" fill="#05101a"/>
           <rect x="24" y="22" width="592" height="210" rx="10" fill="#0c1a28" stroke="#17324a"/>
           <text x="40" y="46" font-size="13.5" font-weight="600" fill="#dbe7f2"><tspan fill="#38bdf8">▾</tspan> AI providers</text><text x="600" y="46" font-size="10.5" fill="#7d93a8" text-anchor="end">0/3 set</text>
           <text x="40" y="76" font-size="13" fill="#dbe7f2">Claude API key <tspan font-size="10.5" fill="#7d93a8">console.anthropic.com/settings/keys</tspan></text>
-          <circle cx="44" cy="96" r="4" fill="#3a4a5a"/><rect x="56" y="86" width="400" height="22" rx="6" fill="#081420" stroke="#17324a"/><text x="66" y="101" font-size="11" fill="#7d93a8" font-family="Consolas, monospace">not set</text>
-          <text x="496" y="101" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="86" width="52" height="22" rx="6" fill="#38bdf8"/><text x="530" y="101" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="101" font-size="12" fill="#7d93a8">✕</text>
+          <circle cx="44" cy="96" r="4" fill="#3a4a5a"/><rect x="56" y="86" width="400" height="22" rx="6" fill="#081420" stroke="#17324a"/><text class="ui" x="66" y="101" font-size="11" fill="#7d93a8" font-family="Consolas, monospace">not set</text>
+          <text class="ui" x="496" y="101" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="86" width="52" height="22" rx="6" fill="#38bdf8"/><text x="530" y="101" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="101" font-size="12" fill="#7d93a8">✕</text>
           <text x="40" y="138" font-size="13" fill="#dbe7f2">Gemini API key <tspan font-size="10.5" fill="#7d93a8">aistudio.google.com/apikey</tspan></text>
           <circle cx="44" cy="158" r="4" fill="#3a4a5a"/><rect x="56" y="148" width="400" height="22" rx="6" fill="#081420" stroke="#38bdf8"/><text x="66" y="164" font-size="12" fill="#dbe7f2" font-family="Consolas, monospace">•••••••••••••••••••••••••••</text>
-          <text x="496" y="163" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="148" width="52" height="22" rx="6" fill="#38bdf8" stroke="#fbbf24" stroke-width="2.5"/><text x="530" y="163" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="163" font-size="12" fill="#7d93a8">✕</text>
+          <text class="ui" x="496" y="163" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="148" width="52" height="22" rx="6" fill="#38bdf8" stroke="#fbbf24" stroke-width="2.5"/><text x="530" y="163" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="163" font-size="12" fill="#7d93a8">✕</text>
           <text x="40" y="200" font-size="13" fill="#dbe7f2">MiniMax API key <tspan font-size="10.5" fill="#7d93a8">platform.minimaxi.com</tspan></text>
           <rect x="56" y="208" width="400" height="16" rx="6" fill="#081420" stroke="#17324a"/>
           <g class="mk"><circle cx="300" cy="148" r="10"/><text x="300" y="152">1</text></g>
           <g class="mk"><circle cx="530" cy="140" r="10"/><text x="530" y="144">2</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Choose Gemini in the “AI:” box</h4>
-        <p>Done. To pick a Gemini version: AI Config → <b>Cloud AI</b> → <b>Gemini Model</b> (gemini-2.5-flash is fast).</p>
+      <li class="step"><div><h4 lang="en">Choose Gemini in the “AI:” box</h4><h4 lang="zh-Hant">在「AI:」選 Gemini</h4>
+        <p lang="en">Done. To pick a Gemini version: AI Config → <b class="ui">Cloud AI</b> → <b class="ui">Gemini Model</b> (gemini-2.5-flash is fast).</p><p lang="zh-Hant">完成。想選 Gemini 的版本：AI Config → <b class="ui">Cloud AI</b> → <b class="ui">Gemini Model</b>（gemini-2.5-flash 比較快）。</p>
         <div class="shot narrow"><svg class="ui" viewBox="140 0 390 110" role="img" aria-label="The AI box set to Gemini">
           <rect x="150" y="8" width="340" height="94" rx="8" fill="#060d1c" stroke="#1f6fa8"/>
-          <text x="176" y="36" font-size="13" fill="#cfe8ff">AI:</text>
+          <text class="ui" x="176" y="36" font-size="13" fill="#cfe8ff">AI:</text>
           <rect x="176" y="44" width="200" height="30" rx="4" fill="#0a1530" stroke="#34e7ff"/>
-          <text x="188" y="64" font-size="13" fill="#cfe8ff">Gemini</text><text x="358" y="64" font-size="11" fill="#46708c">▾</text>
-          <text x="388" y="64" font-size="11" font-weight="700" fill="#fbbf24">← now Gemini</text>
+          <text class="ui" x="188" y="64" font-size="13" fill="#cfe8ff">Gemini</text><text x="358" y="64" font-size="11" fill="#46708c">▾</text>
+          <text x="388" y="64" font-size="11" font-weight="700" fill="#fbbf24" lang="en">← now Gemini</text><text x="388" y="64" font-size="11" font-weight="700" fill="#fbbf24" lang="zh-Hant">← 現在是 Gemini</text>
         </svg></div></div></li>
     </ol>
     <div class="tip warn">
-      <h4>Before you send unpublished data</h4>
-      <p>With a <b>free</b> Gemini key, Google may use what you send to improve its products, and asks users not to send sensitive or confidential information. For confidential samples, stay on <b>Built-in</b>.</p>
-      <p>If your key leaks, delete it in AI Studio and create a new one.</p>
+      <h4 lang="en">Before you send unpublished data</h4><h4 lang="zh-Hant">送出未發表的數據之前</h4>
+      <p lang="en">With a <b>free</b> Gemini key, Google may use what you send to improve its products, and asks users not to send sensitive or confidential information. For confidential samples, stay on <b class="ui">Built-in</b>.</p><p lang="zh-Hant">用<b>免費</b>的 Gemini 金鑰時，Google 可能會用你送出的內容來改進它的產品，也要求使用者不要送敏感或機密資料。機密樣品請留在 <b class="ui">Built-in</b>。</p>
+      <p lang="en">If your key leaks, delete it in AI Studio and create a new one.</p><p lang="zh-Hant">金鑰如果外洩：到 AI Studio 刪除它，再建一把新的。</p>
     </div>
   </section>
 
   <!-- ─────────────────────────── 5. Telegram ─────────────────────────── -->
   <section class="card" id="telegram">
-    <h2><span class="n">5</span>Telegram: use sasAI from your phone</h2>
-    <p class="lead">Chat with sasAI, send it a data file and get the plots and the PDF report — from your phone. sasAI must stay open on your computer.</p>
+    <h2><span class="n">5</span><span lang="en">Telegram: use sasAI from your phone</span><span lang="zh-Hant">Telegram：用手機操作 sasAI</span></h2>
+    <p class="lead" lang="en">Chat with sasAI, send it a data file and get the plots and the PDF report — from your phone. sasAI must stay open on your computer.</p><p class="lead" lang="zh-Hant">在手機上和 sasAI 對話、傳數據檔給它、拿到圖和 PDF 報告。電腦上的 sasAI 必須保持開啟。</p>
     <ol class="steps">
-      <li class="step"><div><h4>Create your bot with @BotFather</h4>
-        <p>In Telegram, search <b>@BotFather</b>, open it and send <code>/newbot</code>. Give any <b>name</b> (for example <i>My sasAI</i>), then a <b>username</b> that ends in <b>bot</b> — 5 to 32 letters, numbers or _ (for example <i>my_sasai_bot</i>; it cannot be changed later).</p>
+      <li class="step"><div><h4 lang="en">Create your bot with @BotFather</h4><h4 lang="zh-Hant">用 @BotFather 建立你的機器人</h4>
+        <p lang="en">In Telegram, search <b class="ui">@BotFather</b>, open it and send <code>/newbot</code>. Give any <b>name</b> (for example <i>My sasAI</i>), then a <b>username</b> that ends in <b>bot</b> — 5 to 32 letters, numbers or _ (for example <i>my_sasai_bot</i>; it cannot be changed later).</p><p lang="zh-Hant">在 Telegram 搜尋 <b class="ui">@BotFather</b>，打開它，送出 <code>/newbot</code>。先取一個<b>名稱</b>（例如 <i>My sasAI</i>），再取一個結尾是 <b>bot</b> 的<b>使用者名稱</b>——5 到 32 個英文字母、數字或 _（例如 <i>my_sasai_bot</i>；之後不能改）。</p>
         <div class="shot phone"><svg class="sans" viewBox="190 0 260 330" role="img" aria-label="Chat with BotFather: newbot, name, username, then the token">
           <rect x="196" y="6" width="248" height="318" rx="28" fill="#1c2233" stroke="#5a6680" stroke-width="1.5"/>
           <rect x="206" y="22" width="228" height="286" rx="16" fill="#dfe7ef"/>
@@ -412,37 +420,37 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <g class="mk"><circle cx="326" cy="205" r="10"/><text x="326" y="209">2</text></g>
           <g class="mk"><circle cx="418" cy="267" r="10"/><text x="418" y="271">3</text></g>
         </svg></div>
-        <p class="cap">Simplified drawing — BotFather's wording may differ.</p></div></li>
-      <li class="step"><div><h4>Copy the token</h4>
-        <p>BotFather's last message has a <b>token</b> that looks like <code>123456789:AA…</code>. Copy it. It works like a password for your bot.</p></div></li>
-      <li class="step"><div><h4>Paste it in sasAI: 🔑 Keys → Telegram bot token → Save</h4>
-        <p>Open the <b>🔑 Keys</b> tab, click <b>Remote control (Telegram)</b> to open it, paste into <b>Telegram bot token</b>, click <b>Save</b>.</p>
+        <p class="cap" lang="en">Simplified drawing — BotFather's wording may differ.</p><p class="cap" lang="zh-Hant">示意圖——BotFather 的用字可能不同。</p></div></li>
+      <li class="step"><div><h4 lang="en">Copy the token</h4><h4 lang="zh-Hant">複製 Token</h4>
+        <p lang="en">BotFather's last message has a <b>token</b> that looks like <code>123456789:AA…</code>. Copy it. It works like a password for your bot.</p><p lang="zh-Hant">BotFather 最後一則訊息裡有一串 <b>Token</b>，長得像 <code>123456789:AA…</code>。把它複製起來。它就像這個機器人的密碼。</p></div></li>
+      <li class="step"><div><h4 lang="en">Paste it in sasAI: 🔑 Keys → Telegram bot token → Save</h4><h4 lang="zh-Hant">貼到 sasAI：🔑 Keys → Telegram bot token → Save</h4>
+        <p lang="en">Open the <b class="ui">🔑 Keys</b> tab, click <b class="ui">Remote control (Telegram)</b> to open it, paste into <b class="ui">Telegram bot token</b>, click <b class="ui">Save</b>.</p><p lang="zh-Hant">打開 <b class="ui">🔑 Keys</b> 分頁，點 <b class="ui">Remote control (Telegram)</b> 展開，貼到 <b class="ui">Telegram bot token</b>，按 <b class="ui">Save</b>。</p>
         <div class="shot"><svg class="sans" viewBox="0 0 640 124" role="img" aria-label="The Keys tab: Telegram bot token pasted, Save button">
           <rect x="8" y="8" width="624" height="108" rx="10" fill="#05101a"/>
           <rect x="24" y="18" width="592" height="88" rx="10" fill="#0c1a28" stroke="#17324a"/>
           <text x="40" y="42" font-size="13.5" font-weight="600" fill="#dbe7f2"><tspan fill="#38bdf8">▾</tspan> Remote control (Telegram)</text><text x="600" y="42" font-size="10.5" fill="#7d93a8" text-anchor="end">0/1 set</text>
           <text x="40" y="68" font-size="13" fill="#dbe7f2">Telegram bot token <tspan font-size="10.5" fill="#7d93a8">@BotFather (the token is a secret → managed here)</tspan></text>
           <circle cx="44" cy="88" r="4" fill="#3a4a5a"/><rect x="56" y="78" width="400" height="22" rx="6" fill="#081420" stroke="#38bdf8"/><text x="66" y="94" font-size="12" fill="#dbe7f2" font-family="Consolas, monospace">••••••••••••••••••••••••••••••</text>
-          <text x="496" y="93" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="78" width="52" height="22" rx="6" fill="#38bdf8" stroke="#fbbf24" stroke-width="2.5"/><text x="530" y="93" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="93" font-size="12" fill="#7d93a8">✕</text>
+          <text class="ui" x="496" y="93" font-size="10" fill="#7d93a8" text-anchor="end">empty</text><rect x="504" y="78" width="52" height="22" rx="6" fill="#38bdf8" stroke="#fbbf24" stroke-width="2.5"/><text x="530" y="93" font-size="11.5" font-weight="600" fill="#04121d" text-anchor="middle">Save</text><text x="574" y="93" font-size="12" fill="#7d93a8">✕</text>
         </svg></div></div></li>
-      <li class="step"><div><h4>Turn the bot on</h4>
-        <p><b>AI Config</b> tab → click the title <b>Remote Control (Telegram)</b> to open it → click <b>Enable bot</b> <span class="m">1</span>. It says <i>“✅ Bot enabled — starting on this machine.”</i></p>
+      <li class="step"><div><h4 lang="en">Turn the bot on</h4><h4 lang="zh-Hant">開啟機器人</h4>
+        <p lang="en"><b class="ui">AI Config</b> tab → click the title <b class="ui">Remote Control (Telegram)</b> to open it → click <b class="ui">Enable bot</b> <span class="m">1</span>. It says <i>“✅ Bot enabled — starting on this machine.”</i></p><p lang="zh-Hant"><b class="ui">AI Config</b> 分頁 → 點標題 <b class="ui">Remote Control (Telegram)</b> 展開 → 按 <b class="ui">Enable bot</b> <span class="m">1</span>。會顯示「<i>✅ Bot enabled — starting on this machine.</i>」</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 196" role="img" aria-label="Remote Control (Telegram) box: Enable bot, Allowed chat IDs, Save chat IDs">
           <rect x="8" y="8" width="624" height="180" rx="8" fill="#060d1c"/>
           <rect x="20" y="24" width="600" height="154" rx="6" fill="none" stroke="#1f6fa8"/>
-          <rect x="32" y="16" width="208" height="16" fill="#060d1c"/><text x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Remote Control (Telegram)</text>
-          <text x="36" y="58" font-size="12" fill="#cfe8ff">Bot token:</text><text x="190" y="58" font-size="12" fill="#cfe8ff">🔑 managed in the Keys tab</text>
-          <text x="36" y="92" font-size="12" fill="#cfe8ff">Allowed chat IDs:</text>
+          <rect x="32" y="16" width="208" height="16" fill="#060d1c"/><text class="ui" x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Remote Control (Telegram)</text>
+          <text class="ui" x="36" y="58" font-size="12" fill="#cfe8ff">Bot token:</text><text class="ui" x="190" y="58" font-size="12" fill="#cfe8ff">🔑 managed in the Keys tab</text>
+          <text class="ui" x="36" y="92" font-size="12" fill="#cfe8ff">Allowed chat IDs:</text>
           <rect x="190" y="74" width="416" height="26" rx="4" fill="#0a1530" stroke="#34e7ff"/><text x="200" y="92" font-size="12" fill="#cfe8ff">123456789</text>
           <rect x="36" y="112" width="140" height="28" rx="14" fill="#0b3a24" stroke="#00cc66"/><text x="106" y="131" font-size="12" font-weight="700" fill="#7dffb8" text-anchor="middle">● Enable bot</text>
-          <rect x="190" y="112" width="130" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="255" y="131" font-size="12" fill="#9fe3ff" text-anchor="middle">Save chat IDs</text>
+          <rect x="190" y="112" width="130" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="255" y="131" font-size="12" fill="#9fe3ff" text-anchor="middle">Save chat IDs</text>
           <text x="36" y="164" font-size="11" fill="#7faacc">✅ @my_sasai_bot running — locked to 123456789</text>
           <g class="mk"><circle cx="32" cy="112" r="10"/><text x="32" y="116">1</text></g>
           <g class="mk"><circle cx="186" cy="76" r="10"/><text x="186" y="80">2</text></g>
           <g class="mk"><circle cx="324" cy="112" r="10"/><text x="324" y="116">3</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Message your bot to get your chat ID</h4>
-        <p>In Telegram open your bot (<b>t.me/my_sasai_bot</b>, with your bot's name) and tap <b>Start</b>. It answers with your <b>chat ID</b> — a number. Copy it.</p>
+      <li class="step"><div><h4 lang="en">Message your bot to get your chat ID</h4><h4 lang="zh-Hant">傳訊息給你的機器人，取得 chat ID</h4>
+        <p lang="en">In Telegram open your bot (<b>t.me/my_sasai_bot</b>, with your bot's name) and tap <b>Start</b>. It answers with your <b>chat ID</b> — a number. Copy it.</p><p lang="zh-Hant">在 Telegram 打開你的機器人（<b>t.me/my_sasai_bot</b>，換成你的機器人名稱），按 <b>Start</b>。它會回你一段英文，裡面有你的 <b>chat ID</b>——一串數字。把它複製起來。</p>
         <div class="shot phone"><svg class="sans" viewBox="190 0 260 250" role="img" aria-label="Your bot replies: This bot is locked. Your chat ID is 123456789">
           <rect x="196" y="6" width="248" height="238" rx="28" fill="#1c2233" stroke="#5a6680" stroke-width="1.5"/>
           <rect x="206" y="22" width="228" height="206" rx="16" fill="#dfe7ef"/>
@@ -451,15 +459,15 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <text x="252" y="38" font-size="12.5" font-weight="700" fill="#1c2233">My sasAI</text><text x="252" y="52" font-size="10" fill="#5d6679">bot</text>
           <rect x="370" y="68" width="56" height="22" rx="10" fill="#effdde"/><text x="380" y="83" font-size="11" fill="#1c2233">/start</text>
           <rect x="214" y="96" width="210" height="122" rx="10" fill="#ffffff"/>
-          <text x="224" y="112" font-size="10.5" fill="#1c2233">This bot is locked. Your chat ID is:</text>
+          <text class="ui" x="224" y="112" font-size="10.5" fill="#1c2233">This bot is locked. Your chat ID is:</text>
           <rect x="222" y="119" width="84" height="20" rx="4" fill="#fff3c4"/><text x="230" y="134" font-size="12" font-weight="700" fill="#1c2233" font-family="Consolas, monospace">123456789</text>
           <g font-size="10" fill="#1c2233"><text x="224" y="156">To unlock it, open sasAI on the PC:</text><text x="224" y="170">AI Config → Remote Control (Telegram)</text><text x="224" y="184">→ paste this number into Allowed</text><text x="224" y="198">chat IDs → click Save chat IDs.</text></g>
           <g class="mk"><circle cx="318" cy="129" r="10"/><text x="318" y="133">1</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Paste the chat ID, click Save chat IDs</h4>
-        <p>Back in sasAI: paste the number into <b>Allowed chat IDs</b> <span class="m">2</span> and click <b>Save chat IDs</b> <span class="m">3</span> (picture at step 4). It says <i>“✅ @your_bot running — locked to …”</i>. Now only you can use this bot.</p></div></li>
-      <li class="step"><div><h4>Use it</h4>
-        <p>Send your data file <b>as a file</b> (📎 → File). Then type <b>analyze</b>. Later ask <b>send the plot</b> or <b>PDF report</b>. You can also just chat.</p>
+      <li class="step"><div><h4 lang="en">Paste the chat ID, click Save chat IDs</h4><h4 lang="zh-Hant">貼上 chat ID，按 Save chat IDs</h4>
+        <p lang="en">Back in sasAI: paste the number into <b class="ui">Allowed chat IDs</b> <span class="m">2</span> and click <b class="ui">Save chat IDs</b> <span class="m">3</span> (picture at step 4). It says <i>“✅ @your_bot running — locked to …”</i>. Now only you can use this bot.</p><p lang="zh-Hant">回到 sasAI：把那串數字貼到 <b class="ui">Allowed chat IDs</b> <span class="m">2</span>，按 <b class="ui">Save chat IDs</b> <span class="m">3</span>（圖在第 4 步）。會顯示「<i>✅ @你的機器人 running — locked to …</i>」。從現在起只有你能用這個機器人。</p></div></li>
+      <li class="step"><div><h4 lang="en">Use it</h4><h4 lang="zh-Hant">開始使用</h4>
+        <p lang="en">Send your data file <b>as a file</b> (📎 → File). Then type <b>analyze</b>. Later ask <b>send the plot</b> or <b>PDF report</b>. You can also just chat.</p><p lang="zh-Hant">把數據檔<b>以檔案方式</b>傳給它（📎 → File）。然後打 <b>開始分析</b>。之後可以說 <b>把圖傳給我</b> 或 <b>PDF 報告</b>。也可以就只是聊天。</p>
         <div class="shot phone"><svg class="sans" viewBox="190 0 260 330" role="img" aria-label="Telegram: send a file, analyze, then PDF report">
           <rect x="196" y="6" width="248" height="318" rx="28" fill="#1c2233" stroke="#5a6680" stroke-width="1.5"/>
           <rect x="206" y="22" width="228" height="286" rx="16" fill="#dfe7ef"/>
@@ -467,182 +475,211 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <circle cx="232" cy="40" r="12" fill="#38bdf8"/><text x="232" y="45" font-size="12" fill="#04121c" text-anchor="middle">S</text>
           <text x="252" y="38" font-size="12.5" font-weight="700" fill="#1c2233">My sasAI</text><text x="252" y="52" font-size="10" fill="#5d6679">bot</text>
           <rect x="320" y="66" width="106" height="30" rx="10" fill="#effdde"/><text x="330" y="86" font-size="11" fill="#1c2233">📄 sample.dat</text>
-          <rect x="214" y="102" width="206" height="36" rx="10" fill="#ffffff"/><text x="224" y="117" font-size="10.5" fill="#1c2233">✅ Loaded “sample.dat” (412 pts).</text><text x="224" y="131" font-size="10.5" fill="#1c2233">Say “analyze” and I'll start 🚀</text>
-          <rect x="366" y="144" width="60" height="22" rx="10" fill="#effdde"/><text x="376" y="159" font-size="11" fill="#1c2233">analyze</text>
+          <g lang="en"><rect x="214" y="102" width="206" height="36" rx="10" fill="#ffffff"/><text x="224" y="117" font-size="10.5" fill="#1c2233">✅ Loaded “sample.dat” (412 pts).</text><text x="224" y="131" font-size="10.5" fill="#1c2233">Say “analyze” and I'll start 🚀</text></g><g lang="zh-Hant"><rect x="214" y="102" width="206" height="36" rx="10" fill="#ffffff"/><text x="224" y="117" font-size="10.5" fill="#1c2233">✅ 已載入「sample.dat」（412 點）。</text><text x="224" y="131" font-size="10.5" fill="#1c2233">說「開始分析」我就開跑 🚀</text></g>
+          <g lang="en"><rect x="366" y="144" width="60" height="22" rx="10" fill="#effdde"/><text x="376" y="159" font-size="11" fill="#1c2233">analyze</text></g><g lang="zh-Hant"><rect x="360" y="144" width="66" height="22" rx="10" fill="#effdde"/><text x="370" y="159" font-size="11" fill="#1c2233">開始分析</text></g>
           <rect x="214" y="172" width="170" height="30" rx="10" fill="#ffffff"/><rect x="224" y="181" width="140" height="4" rx="2" fill="#c9d3de"/><rect x="224" y="191" width="100" height="4" rx="2" fill="#c9d3de"/>
-          <rect x="346" y="208" width="80" height="22" rx="10" fill="#effdde"/><text x="356" y="223" font-size="11" fill="#1c2233">PDF report</text>
-          <rect x="214" y="236" width="196" height="22" rx="10" fill="#ffffff"/><text x="224" y="251" font-size="10.5" fill="#1c2233">OK — building the PDF report ⏳</text>
+          <g lang="en"><rect x="346" y="208" width="80" height="22" rx="10" fill="#effdde"/><text x="356" y="223" font-size="11" fill="#1c2233">PDF report</text></g><g lang="zh-Hant"><rect x="346" y="208" width="80" height="22" rx="10" fill="#effdde"/><text x="356" y="223" font-size="11" fill="#1c2233">PDF 報告</text></g>
+          <g lang="en"><rect x="214" y="236" width="196" height="22" rx="10" fill="#ffffff"/><text x="224" y="251" font-size="10.5" fill="#1c2233">OK — building the PDF report ⏳</text></g><g lang="zh-Hant"><rect x="214" y="236" width="196" height="22" rx="10" fill="#ffffff"/><text x="224" y="251" font-size="10.5" fill="#1c2233">好，我把分析報告整理成 PDF ⏳</text></g>
           <rect x="214" y="264" width="120" height="30" rx="10" fill="#ffffff"/><text x="224" y="284" font-size="11" fill="#1c2233">📄 report.pdf</text>
         </svg></div>
-        <p class="cap">If the token ever leaks: send <code>/token</code> to @BotFather for a new one, then paste it in 🔑 Keys again.</p></div></li>
+        <p class="cap" lang="en">If the token ever leaks: send <code>/token</code> to @BotFather for a new one, then paste it in 🔑 Keys again.</p><p class="cap" lang="zh-Hant">Token 如果外洩：對 @BotFather 送出 <code>/token</code> 換一個新的，再到 🔑 Keys 重新貼上。</p></div></li>
     </ol>
   </section>
 
   <!-- ─────────────────────────── 6. Voice ─────────────────────────── -->
   <section class="card" id="voice">
-    <h2><span class="n">6</span>Voice: talk to it, and record your voice <span class="badge">Windows</span></h2>
-    <p class="lead">Speak your questions and hear the answers. In this beta, voice works on Windows; on macOS and Linux, type instead.</p>
+    <h2><span class="n">6</span><span lang="en">Voice: talk to it, and record your voice</span><span lang="zh-Hant">語音：用說的，並錄下你的聲紋</span> <span class="badge">Windows</span></h2>
+    <p class="lead" lang="en">Speak your questions and hear the answers. In this beta, voice works on Windows; on macOS and Linux, type instead.</p><p class="lead" lang="zh-Hant">用說的問問題、聽它回答。這個封測版的語音功能只在 Windows 上可用；macOS 和 Linux 請用打字。</p>
     <ol class="steps">
-      <li class="step"><div><h4>Click the microphone and talk</h4>
-        <p>In the chat window, click <b>🎤</b>. It turns <b>cyan</b> while it listens — just talk, nothing to hold. Click it again to stop. The very first time it may need a minute to get ready.</p>
+      <li class="step"><div><h4 lang="en">Click the microphone and talk</h4><h4 lang="zh-Hant">點麥克風，開始說話</h4>
+        <p lang="en">In the chat window, click <b>🎤</b>. It turns <b>cyan</b> while it listens — just talk, nothing to hold. Click it again to stop. The very first time it may need a minute to get ready.</p><p lang="zh-Hant">在對話視窗點 <b>🎤</b>。聆聽時它會變成<b>藍綠色</b>——直接說就好，不用按著。再點一下就停止。第一次使用可能要等一分鐘準備。</p>
         <div class="shot"><svg class="sans" viewBox="0 0 640 170" role="img" aria-label="You say: PicoSAS, analyze this dataset — the microphone is cyan while it listens">
           <defs><linearGradient id="g-mic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
           <circle cx="66" cy="42" r="16" fill="#8a94a8"/><path d="M36 92a30 26 0 0 1 60 0z" fill="#8a94a8"/>
           <rect x="112" y="14" width="360" height="52" rx="20" fill="#ffffff" stroke="#cfd6e4"/><path d="M122 58l-18 16l30-8z" fill="#ffffff" stroke="#cfd6e4"/>
-          <text x="132" y="47" font-size="16" fill="#1c2233">“PicoSAS, analyze this dataset.”</text>
-          <rect x="150" y="100" width="290" height="46" rx="23" fill="#07182a" stroke="#1d6f94"/><text x="172" y="128" font-size="13" fill="#5f8494">Type your question…</text>
+          <text x="132" y="47" font-size="16" fill="#1c2233" lang="en">“PicoSAS, analyze this dataset.”</text><text x="132" y="47" font-size="16" fill="#1c2233" lang="zh-Hant">「小伐，幫我分析這份數據。」</text>
+          <rect x="150" y="100" width="290" height="46" rx="23" fill="#07182a" stroke="#1d6f94"/><text class="ui" x="172" y="128" font-size="13" fill="#5f8494" lang="en">Type your question…</text><text class="ui" x="172" y="128" font-size="13" fill="#5f8494" lang="zh-Hant">輸入你的問題…</text>
           <circle cx="480" cy="123" r="24" fill="url(#g-mic)" stroke="#7fe3f5" stroke-width="1.5"/>
           <g transform="translate(468 111)" fill="none" stroke="#04121c" stroke-width="1.8" stroke-linecap="round"><rect x="8.4" y="2.6" width="7.2" height="12.6" rx="3.6"/><path d="M5.8 11v1a6.2 6.2 0 0 0 12.4 0v-1M12 18.2v2.3M8.2 21.2h7.6"/></g>
           <circle cx="540" cy="123" r="24" fill="#0ea5e9"/><text x="540" y="129" font-size="17" fill="#04121c" text-anchor="middle">➤</text>
-          <text x="512" y="92" font-size="12" font-weight="700" fill="#fbbf24">listening</text>
+          <text x="512" y="92" font-size="12" font-weight="700" fill="#fbbf24" lang="en">listening</text><text x="512" y="92" font-size="12" font-weight="700" fill="#fbbf24" lang="zh-Hant">聆聽中</text>
         </svg></div></div></li>
-      <li class="step"><div><h4>Start with its name</h4>
-        <p>Say <b>“PicoSAS, …”</b> (in Chinese: <b>“小伐，…”</b>). Until it knows your voice (next step), it only follows sentences that start with its name — so people talking nearby don't set it off.</p></div></li>
-      <li class="step"><div><h4>Record your voice — 6 seconds, once</h4>
-        <p><b>AI Config</b> tab → <b>Voice</b> box → click <b>Enroll voiceprint (6s)</b> <span class="m">1</span>. (Or just say or type <b>“PicoSAS, enroll my voice”</b>.)</p>
+      <li class="step"><div><h4 lang="en">Start with its name</h4><h4 lang="zh-Hant">先叫它的名字</h4>
+        <p lang="en">Say <b>“PicoSAS, …”</b> (in Chinese: <b>“小伐，…”</b>). Until it knows your voice (next step), it only follows sentences that start with its name — so people talking nearby don't set it off.</p><p lang="zh-Hant">說「<b>小伐，…</b>」（英文介面：「<b>PicoSAS, …</b>」）。在它認得你的聲音之前（下一步），它只聽以它的名字開頭的句子——旁邊有人說話也不會誤觸發。</p></div></li>
+      <li class="step"><div><h4 lang="en">Record your voice — 6 seconds, once</h4><h4 lang="zh-Hant">錄下你的聲音——6 秒，一次就好</h4>
+        <p lang="en"><b class="ui">AI Config</b> tab → <b class="ui">Voice</b> box → click <b class="ui">Enroll voiceprint (6s)</b> <span class="m">1</span>. (Or just say or type <b>“PicoSAS, enroll my voice”</b>.)</p><p lang="zh-Hant"><b class="ui">AI Config</b> 分頁 → <b class="ui">Voice</b> 方塊 → 按 <b class="ui">Enroll voiceprint (6s)</b> <span class="m">1</span>。（或直接說、或打字「<b>小伐 錄聲紋</b>」。）</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 336" role="img" aria-label="The Voice box: STT model, Voice language, Microphone, Enroll voiceprint">
           <rect x="8" y="8" width="624" height="320" rx="8" fill="#060d1c"/>
           <rect x="20" y="24" width="600" height="294" rx="6" fill="none" stroke="#1f6fa8"/>
-          <rect x="32" y="16" width="52" height="16" fill="#060d1c"/><text x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Voice</text>
-          <g font-size="11.5" fill="#cfe8ff"><text x="36" y="56">STT model:</text><text x="36" y="88">Voice language:</text><text x="36" y="116">STT backend:</text><text x="36" y="176">TTS options:</text><text x="36" y="208">Microphone:</text><text x="36" y="236">TTS engine:</text><text x="36" y="268">Voiceprint:</text></g>
-          <rect x="190" y="40" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="200" y="57" font-size="11" fill="#cfe8ff">small — balanced, ~460 MB</text><text x="592" y="57" font-size="10" fill="#46708c">▾</text>
-          <rect x="190" y="72" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="200" y="89" font-size="11" fill="#cfe8ff">Auto-detect</text><text x="592" y="89" font-size="10" fill="#46708c">▾</text>
+          <rect x="32" y="16" width="52" height="16" fill="#060d1c"/><text class="ui" x="38" y="28" font-size="12" font-weight="700" fill="#34e7ff">Voice</text>
+          <g font-size="11.5" fill="#cfe8ff"><text class="ui" x="36" y="56">STT model:</text><text class="ui" x="36" y="88">Voice language:</text><text class="ui" x="36" y="116">STT backend:</text><text class="ui" x="36" y="176">TTS options:</text><text class="ui" x="36" y="208">Microphone:</text><text class="ui" x="36" y="236">TTS engine:</text><text class="ui" x="36" y="268">Voiceprint:</text></g>
+          <rect x="190" y="40" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text class="ui" x="200" y="57" font-size="11" fill="#cfe8ff">small — balanced, ~460 MB</text><text x="592" y="57" font-size="10" fill="#46708c">▾</text>
+          <rect x="190" y="72" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text class="ui" x="200" y="89" font-size="11" fill="#cfe8ff">Auto-detect</text><text x="592" y="89" font-size="10" fill="#46708c">▾</text>
           <text x="190" y="116" font-size="10.5" fill="#7faacc">Active: whisper.cpp (CPU)</text>
-          <rect x="190" y="126" width="140" height="24" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="260" y="142" font-size="10.5" fill="#9fe3ff" text-anchor="middle">Enable NPU STT</text>
-          <rect x="190" y="160" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="200" y="177" font-size="10.5" fill="#cfe8ff">Auto (Edge-TTS, Kokoro 雲揚 offline fallback)</text><text x="592" y="177" font-size="10" fill="#46708c">▾</text>
-          <rect x="190" y="192" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text x="200" y="209" font-size="11" fill="#cfe8ff">System default</text><text x="592" y="209" font-size="10" fill="#46708c">▾</text>
-          <text x="190" y="236" font-size="10.5" fill="#7faacc">Active: (speaks on the first reply)</text>
-          <rect x="190" y="252" width="190" height="26" rx="4" fill="#0a1830" stroke="#34e7ff" stroke-width="1.6"/><text x="285" y="269" font-size="11" fill="#9fe3ff" text-anchor="middle">Enroll voiceprint (6s)</text>
-          <rect x="388" y="252" width="60" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="418" y="269" font-size="11" fill="#9fe3ff" text-anchor="middle">Clear</text>
+          <rect x="190" y="126" width="140" height="24" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="260" y="142" font-size="10.5" fill="#9fe3ff" text-anchor="middle">Enable NPU STT</text>
+          <rect x="190" y="160" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text class="ui" x="200" y="177" font-size="10.5" fill="#cfe8ff">Auto (Edge-TTS, Kokoro 雲揚 offline fallback)</text><text x="592" y="177" font-size="10" fill="#46708c">▾</text>
+          <rect x="190" y="192" width="416" height="24" rx="4" fill="#0a1530" stroke="#1f6fa8"/><text class="ui" x="200" y="209" font-size="11" fill="#cfe8ff">System default</text><text x="592" y="209" font-size="10" fill="#46708c">▾</text>
+          <text class="ui" x="190" y="236" font-size="10.5" fill="#7faacc">Active: (speaks on the first reply)</text>
+          <rect x="190" y="252" width="190" height="26" rx="4" fill="#0a1830" stroke="#34e7ff" stroke-width="1.6"/><text class="ui" x="285" y="269" font-size="11" fill="#9fe3ff" text-anchor="middle">Enroll voiceprint (6s)</text>
+          <rect x="388" y="252" width="60" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="418" y="269" font-size="11" fill="#9fe3ff" text-anchor="middle">Clear</text>
           <text x="190" y="296" font-size="10" fill="#7faacc">Not enrolled — hands-free needs sentences to start</text><text x="190" y="310" font-size="10" fill="#7faacc">with the assistant's name.</text>
           <g class="mk"><circle cx="186" cy="254" r="10"/><text x="186" y="258">1</text></g>
           <g class="mk"><circle cx="186" cy="194" r="10"/><text x="186" y="198">2</text></g>
           <g class="mk"><circle cx="186" cy="74" r="10"/><text x="186" y="78">3</text></g>
           <g class="mk"><circle cx="186" cy="42" r="10"/><text x="186" y="46">4</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Press OK and read the sentence shown</h4>
-        <p>Recording starts when you press <b>OK</b> and lasts 6 seconds. Read in your normal voice, at your usual distance from the computer.</p>
+      <li class="step"><div><h4 lang="en">Press OK and read the sentence shown</h4><h4 lang="zh-Hant">按 OK，唸出畫面上的句子</h4>
+        <p lang="en">Recording starts when you press <b>OK</b> and lasts 6 seconds. Read in your normal voice, at your usual distance from the computer.</p><p lang="zh-Hant">按 <b>OK</b> 後開始錄音，持續 6 秒。用平常的音量、平常和電腦的距離來唸。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 250" role="img" aria-label="Enroll voiceprint window with a sentence to read and the OK button">
           <rect x="10" y="8" width="620" height="234" rx="8" fill="#060d1c" stroke="#1f6fa8"/>
-          <path d="M10 16a8 8 0 0 1 8-8h604a8 8 0 0 1 8 8v20H10z" fill="#0a1530"/><text x="24" y="27" font-size="11" fill="#cfe8ff">Enroll voiceprint</text>
+          <path d="M10 16a8 8 0 0 1 8-8h604a8 8 0 0 1 8 8v20H10z" fill="#0a1530"/><text class="ui" x="24" y="27" font-size="11" fill="#cfe8ff">Enroll voiceprint</text>
           <circle cx="42" cy="62" r="13" fill="#1f6fa8"/><text x="42" y="67" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">?</text>
-          <text x="68" y="60" font-size="11.5" fill="#cfe8ff">Recording starts when you press OK and lasts 6 seconds.</text>
+          <text class="ui" x="68" y="60" font-size="11.5" fill="#cfe8ff">Recording starts when you press OK and lasts 6 seconds.</text>
           <text x="68" y="80" font-size="10.5" fill="#cfe8ff">Speak in your NORMAL voice at your usual distance from the PC —</text>
           <text x="68" y="96" font-size="10.5" fill="#cfe8ff">for example, read:</text>
-          <text x="68" y="120" font-size="11.5" fill="#34e7ff">「小伐，幫我分析這筆散射數據，粒徑大約三十奈米，再幫我對照一下文獻。」</text>
+          <text class="ui" x="68" y="120" font-size="11.5" fill="#34e7ff">「小伐，幫我分析這筆散射數據，粒徑大約三十奈米，再幫我對照一下文獻。」</text>
           <text x="68" y="144" font-size="10.5" fill="#34e7ff">or: “PicoSAS, analyze this scattering data and check the</text>
           <text x="68" y="160" font-size="10.5" fill="#34e7ff">radius against the literature.”</text>
           <text x="68" y="184" font-size="10" fill="#46708c">You can re-enroll any time. Stored only on this PC.</text>
           <rect x="454" y="202" width="76" height="26" rx="4" fill="#0a1830" stroke="#34e7ff" stroke-width="1.6"/><text x="492" y="219" font-size="11.5" fill="#9fe3ff" text-anchor="middle">OK</text>
-          <rect x="538" y="202" width="80" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="578" y="219" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Cancel</text>
+          <rect x="538" y="202" width="80" height="26" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="578" y="219" font-size="11.5" fill="#9fe3ff" text-anchor="middle">Cancel</text>
           <g class="mk"><circle cx="450" cy="204" r="10"/><text x="450" y="208">1</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Done: “Enrolled ✓”</h4>
-        <p>The Voice box now says <i>“Enrolled ✓ — hands-free accepts your voice (or the assistant's name).”</i> It listens to you — no name needed. Your voiceprint stays on this computer. Record again any time; <b>Clear</b> deletes it.</p></div></li>
-      <li class="step"><div><h4>Hear the answers</h4>
-        <p>Click <b>🔊</b> at the top of the chat window. You can interrupt it just by talking. English is spoken offline; the Chinese voice needs the internet.</p></div></li>
+      <li class="step"><div><h4 lang="en">Done: “Enrolled ✓”</h4><h4 lang="zh-Hant">完成：「Enrolled ✓」</h4>
+        <p lang="en">The Voice box now says <i>“Enrolled ✓ — hands-free accepts your voice (or the assistant's name).”</i> It listens to you — no name needed. Your voiceprint stays on this computer. Record again any time; <b class="ui">Clear</b> deletes it.</p><p lang="zh-Hant">Voice 方塊會顯示「<i>Enrolled ✓ — hands-free accepts your voice (or the assistant's name).</i>」。之後它只聽你的聲音——不用再叫名字。聲紋只存在這台電腦。隨時可以重錄；<b class="ui">Clear</b> 會刪掉它。</p></div></li>
+      <li class="step"><div><h4 lang="en">Hear the answers</h4><h4 lang="zh-Hant">聽它回答</h4>
+        <p lang="en">Click <b>🔊</b> at the top of the chat window. You can interrupt it just by talking. English is spoken offline; the Chinese voice needs the internet.</p><p lang="zh-Hant">點對話視窗上方的 <b>🔊</b>。它說話時你可以直接開口打斷。英文語音可離線；中文語音需要網路。</p></div></li>
     </ol>
     <div class="tip">
-      <h4>If it doesn't hear you well</h4>
-      <ul>
-        <li>Wrong microphone? Voice box → <b>Microphone</b> <span class="m">2</span> → pick yours.</li>
+      <h4 lang="en">If it doesn't hear you well</h4><h4 lang="zh-Hant">聽不清楚你說話？</h4>
+      <ul lang="en">
+        <li>Wrong microphone? Voice box → <b class="ui">Microphone</b> <span class="m">2</span> → pick yours.</li>
         <li>Nothing at all? Windows <b>Settings → Privacy &amp; security → Microphone</b>: turn on <b>Microphone access</b> and <b>Let desktop apps access your microphone</b>.</li>
-        <li>Short Chinese sentences written as English? <b>Voice language</b> <span class="m">3</span> → <b>中文</b>.</li>
-        <li>Want more accurate recognition? <b>STT model</b> <span class="m">4</span> → <b>medium</b> (one-time ~1.5 GB download, a bit slower).</li>
+        <li>Short Chinese sentences written as English? <b class="ui">Voice language</b> <span class="m">3</span> → <b>中文</b>.</li>
+        <li>Want more accurate recognition? <b class="ui">STT model</b> <span class="m">4</span> → <b class="ui">medium</b> (one-time ~1.5 GB download, a bit slower).</li>
+      </ul>
+      <ul lang="zh-Hant">
+        <li>麥克風不對？Voice 方塊 → <b class="ui">Microphone</b> <span class="m">2</span> → 選你要用的那一支。</li>
+        <li>完全沒反應？Windows <b>設定 → 隱私權與安全性 → 麥克風</b>：開啟<b>麥克風存取權</b>和<b>讓桌面應用程式存取您的麥克風</b>。</li>
+        <li>短的中文句子被辨識成英文？<b class="ui">Voice language</b> <span class="m">3</span> → <b>中文</b>。</li>
+        <li>想要更準的辨識？<b class="ui">STT model</b> <span class="m">4</span> → <b class="ui">medium</b>（一次性下載約 1.5 GB，會稍慢一點）。</li>
       </ul>
     </div>
   </section>
 
   <!-- ─────────────────────────── 7. From data to report ─────────────────────────── -->
   <section class="card" id="fit">
-    <h2><span class="n">7</span>From your data to a report</h2>
-    <p class="lead">The whole analysis in eight steps.</p>
+    <h2><span class="n">7</span><span lang="en">From your data to a report</span><span lang="zh-Hant">從你的數據到一份報告</span></h2>
+    <p class="lead" lang="en">The whole analysis in eight steps.</p><p class="lead" lang="zh-Hant">完整的分析，八個步驟。</p>
     <ol class="steps">
-      <li class="step"><div><h4>Load your data</h4>
-        <p>Click <b>Load Data…</b> and choose your file. Your curve appears on the plot.</p>
+      <li class="step"><div><h4 lang="en">Load your data</h4><h4 lang="zh-Hant">載入數據</h4>
+        <p lang="en">Click <b class="ui">Load Data…</b> and choose your file. Your curve appears on the plot.</p><p lang="zh-Hant">按 <b class="ui">Load Data…</b> 選你的檔案。曲線會出現在圖上。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 96" role="img" aria-label="Load Data, then Web Search on, then Auto-Fit">
           <rect x="8" y="8" width="624" height="80" rx="8" fill="#060d1c"/>
-          <rect x="30" y="32" width="136" height="32" rx="4" fill="#1a3a1a" stroke="#3a7a3a"/><text x="98" y="53" font-size="13" font-weight="700" fill="#7de891" text-anchor="middle">Load Data...</text>
+          <rect x="30" y="32" width="136" height="32" rx="4" fill="#1a3a1a" stroke="#3a7a3a"/><text class="ui" x="98" y="53" font-size="13" font-weight="700" fill="#7de891" text-anchor="middle">Load Data...</text>
           <text x="190" y="54" font-size="20" fill="#46708c">→</text>
           <rect x="226" y="32" width="136" height="32" rx="16" fill="#3a2608" stroke="#f59e0b"/><text x="294" y="53" font-size="12.5" font-weight="700" fill="#fcd28a" text-anchor="middle">● Web Search</text>
           <text x="386" y="54" font-size="20" fill="#46708c">→</text>
-          <rect x="422" y="32" width="140" height="32" rx="4" fill="#062033" stroke="#34e7ff" stroke-width="1.8"/><text x="492" y="53" font-size="13" font-weight="700" fill="#9af0ff" text-anchor="middle">▶ Auto-Fit</text>
+          <rect x="422" y="32" width="140" height="32" rx="4" fill="#062033" stroke="#34e7ff" stroke-width="1.8"/><text class="ui" x="492" y="53" font-size="13" font-weight="700" fill="#9af0ff" text-anchor="middle">▶ Auto-Fit</text>
           <g class="mk"><circle cx="30" cy="32" r="10"/><text x="30" y="36">1</text></g>
           <g class="mk"><circle cx="226" cy="32" r="10"/><text x="226" y="36">2</text></g>
           <g class="mk"><circle cx="422" cy="32" r="10"/><text x="422" y="36">3</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Leave Web Search on</h4>
-        <p>For a sample sasAI doesn't know yet, <b>Web Search</b> looks up the literature first. Turn it off to go straight to fitting.</p></div></li>
-      <li class="step"><div><h4>Click ▶ Auto-Fit and describe your sample</h4>
-        <p>Write one line: what it is, the solvent, SAXS or SANS, and what you want to know. Not sure? Leave it empty — the data will speak. Click <b>✓ Use this</b>.</p>
+      <li class="step"><div><h4 lang="en">Leave Web Search on</h4><h4 lang="zh-Hant">讓 Web Search 保持開啟</h4>
+        <p lang="en">For a sample sasAI doesn't know yet, <b class="ui">Web Search</b> looks up the literature first. Turn it off to go straight to fitting.</p><p lang="zh-Hant">遇到 sasAI 還不認識的樣品時，<b class="ui">Web Search</b> 會先查文獻。關掉它就直接擬合。</p></div></li>
+      <li class="step"><div><h4 lang="en">Click ▶ Auto-Fit and describe your sample</h4><h4 lang="zh-Hant">按 ▶ Auto-Fit，描述你的樣品</h4>
+        <p lang="en">Write one line: what it is, the solvent, SAXS or SANS, and what you want to know. Not sure? Leave it empty — the data will speak. Click <b>✓ Use this</b>.</p><p lang="zh-Hant">寫一行：這是什麼、溶劑、SAXS 還是 SANS、你想知道什麼。不確定？留空也可以——讓數據自己說話。按 <b>✓ Use this</b>。</p>
         <div class="shot"><svg class="sans" viewBox="0 0 640 312" role="img" aria-label="Describe your sample window with examples and the Use this button">
           <rect x="10" y="8" width="620" height="296" rx="10" fill="#0d1622" stroke="#1f6fa8"/>
-          <path d="M10 18a10 10 0 0 1 10-10h600a10 10 0 0 1 10 10v12H10z" fill="#0a1530"/><text x="24" y="24" font-size="11" fill="#cfe8ff">Describe your sample</text>
-          <text x="28" y="58" font-size="15" font-weight="700" fill="#e6eefa">🧪  Describe your sample</text>
+          <path d="M10 18a10 10 0 0 1 10-10h600a10 10 0 0 1 10 10v12H10z" fill="#0a1530"/><text class="ui" x="24" y="24" font-size="11" fill="#cfe8ff">Describe your sample</text>
+          <text class="ui" x="28" y="58" font-size="15" font-weight="700" fill="#e6eefa">🧪  Describe your sample</text>
           <text x="28" y="80" font-size="11" fill="#9fb3c8">The AI uses this to identify the material's SLD and find relevant literature for this sample.</text>
           <rect x="28" y="92" width="584" height="70" rx="9" fill="#0a1530" stroke="#1f6fa8"/>
-          <text x="42" y="110" font-size="11" font-weight="700" fill="#cfe8ff">Examples</text>
-          <g font-size="10.5" fill="#9fb3c8"><text x="42" y="126">•  Ferric carboxymaltose (FCM), iron-carbohydrate complex, SAXS in PBS</text><text x="42" y="141">•  MSN-PEG+TA mesoporous silica, SANS in D₂O</text><text x="42" y="156">•  DSPC:Cholesterol 1:1 liposome, SANS in D₂O, bilayer thickness</text></g>
+          <text class="ui" x="42" y="110" font-size="11" font-weight="700" fill="#cfe8ff">Examples</text>
+          <g font-size="10.5" fill="#9fb3c8"><text class="ui" x="42" y="126">•  Ferric carboxymaltose (FCM), iron-carbohydrate complex, SAXS in PBS</text><text class="ui" x="42" y="141">•  MSN-PEG+TA mesoporous silica, SANS in D₂O</text><text class="ui" x="42" y="156">•  DSPC:Cholesterol 1:1 liposome, SANS in D₂O, bilayer thickness</text></g>
           <rect x="28" y="172" width="584" height="64" rx="9" fill="#07101c" stroke="#34e7ff" stroke-width="1.5"/>
           <text x="42" y="196" font-size="12.5" fill="#e6eefa">Silica nanoparticles in D₂O, SANS — particle radius</text><rect x="400" y="185" width="1.5" height="14" fill="#34e7ff"/>
-          <text x="28" y="256" font-size="10.5" fill="#7f93a8">Leave empty to use the filename / let the data speak.</text>
-          <rect x="420" y="266" width="80" height="28" rx="7" fill="none" stroke="#3b5068"/><text x="460" y="284" font-size="12" fill="#cfe8ff" text-anchor="middle">Cancel</text>
-          <rect x="508" y="266" width="104" height="28" rx="7" fill="#1f8a4c" stroke="#2aa860"/><text x="560" y="284" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">✓  Use this</text>
+          <text class="ui" x="28" y="256" font-size="10.5" fill="#7f93a8">Leave empty to use the filename / let the data speak.</text>
+          <rect x="420" y="266" width="80" height="28" rx="7" fill="none" stroke="#3b5068"/><text class="ui" x="460" y="284" font-size="12" fill="#cfe8ff" text-anchor="middle">Cancel</text>
+          <rect x="508" y="266" width="104" height="28" rx="7" fill="#1f8a4c" stroke="#2aa860"/><text class="ui" x="560" y="284" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">✓  Use this</text>
           <g class="mk"><circle cx="28" cy="174" r="10"/><text x="28" y="178">1</text></g>
           <g class="mk"><circle cx="504" cy="268" r="10"/><text x="504" y="272">2</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Wait a few minutes</h4>
-        <p>The <b>Flow</b> tab on the right shows each stage as it runs. <b>STOP</b> cancels.</p></div></li>
-      <li class="step"><div><h4>Read the result</h4>
-        <p>The line on the plot is the fitted model. <b>SAS Model</b> shows which model sasAI chose and <b>chi2</b> how closely it follows your data (near 1 is best). The <b>Chat</b> tab explains the answer — ask PicoSAS <i>“Why this model?”</i> if you want to know more.</p>
+      <li class="step"><div><h4 lang="en">Wait a few minutes</h4><h4 lang="zh-Hant">等幾分鐘</h4>
+        <p lang="en">The <b class="ui">Flow</b> tab on the right shows each stage as it runs. <b class="ui">STOP</b> cancels.</p><p lang="zh-Hant">右邊的 <b class="ui">Flow</b> 分頁會即時顯示每個階段。<b class="ui">STOP</b> 可以取消。</p></div></li>
+      <li class="step"><div><h4 lang="en">Read the result</h4><h4 lang="zh-Hant">看結果</h4>
+        <p lang="en">The line on the plot is the fitted model. <b class="ui">SAS Model</b> shows which model sasAI chose and <b class="ui">chi2</b> how closely it follows your data (near 1 is best). The <b class="ui">Chat</b> tab explains the answer — ask PicoSAS <i>“Why this model?”</i> if you want to know more.</p><p lang="zh-Hant">圖上的線就是擬合出的模型。<b class="ui">SAS Model</b> 顯示 sasAI 選了哪個模型，<b class="ui">chi2</b> 顯示它和你的數據多接近（越接近 1 越好）。<b class="ui">Chat</b> 分頁會解釋這個答案——想知道更多，問小伐「<i>為什麼選這個模型？</i>」。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 230" role="img" aria-label="Result: data points with the fitted line, the model name and chi2">
           <rect x="8" y="8" width="624" height="214" rx="8" fill="#060d1c"/>
           <rect x="20" y="20" width="420" height="190" fill="#040a18" stroke="#16364f"/>
           <path d="M44 34V190H428" fill="none" stroke="#16364f"/>
           <g fill="#cfe8ff"><circle cx="56" cy="46" r="2.4"/><circle cx="72" cy="48" r="2.4"/><circle cx="88" cy="47" r="2.4"/><circle cx="104" cy="50" r="2.4"/><circle cx="120" cy="52" r="2.4"/><circle cx="136" cy="57" r="2.4"/><circle cx="152" cy="63" r="2.4"/><circle cx="168" cy="73" r="2.4"/><circle cx="184" cy="85" r="2.4"/><circle cx="200" cy="99" r="2.4"/><circle cx="216" cy="112" r="2.4"/><circle cx="232" cy="124" r="2.4"/><circle cx="248" cy="134" r="2.4"/><circle cx="264" cy="143" r="2.4"/><circle cx="280" cy="150" r="2.4"/><circle cx="296" cy="157" r="2.4"/><circle cx="312" cy="162" r="2.4"/><circle cx="328" cy="167" r="2.4"/><circle cx="344" cy="170" r="2.4"/><circle cx="360" cy="174" r="2.4"/><circle cx="376" cy="176" r="2.4"/><circle cx="392" cy="179" r="2.4"/><circle cx="408" cy="180" r="2.4"/><circle cx="420" cy="182" r="2.4"/></g>
           <path d="M50 46C110 48 140 56 172 76S250 136 300 158S380 176 424 182" fill="none" stroke="#34e7ff" stroke-width="2.4"/>
-          <text x="456" y="46" font-size="12" fill="#cfe8ff">SAS Model:</text>
+          <text class="ui" x="456" y="46" font-size="12" fill="#cfe8ff">SAS Model:</text>
           <rect x="456" y="54" width="164" height="26" rx="3" fill="#1a1f2e" stroke="#2a4f7a"/><text x="464" y="72" font-size="11.5" font-weight="700" fill="#7eb8f7">sphere</text>
-          <text x="456" y="108" font-size="12" fill="#cfe8ff">chi2:</text>
+          <text class="ui" x="456" y="108" font-size="12" fill="#cfe8ff">chi2:</text>
           <rect x="456" y="116" width="100" height="34" rx="4" fill="#1a1a0a" stroke="#554400"/><text x="466" y="140" font-size="18" font-weight="700" fill="#fbbf24">1.12</text>
-          <text x="456" y="184" font-size="10" fill="#46708c">(example values)</text>
+          <text x="456" y="184" font-size="10" fill="#46708c" lang="en">(example values)</text><text x="456" y="184" font-size="10" fill="#46708c" lang="zh-Hant">（示意數值）</text>
           <g class="mk"><circle cx="452" cy="56" r="10"/><text x="452" y="60">1</text></g>
           <g class="mk"><circle cx="452" cy="118" r="10"/><text x="452" y="122">2</text></g>
           <g class="mk"><circle cx="300" cy="148" r="10"/><text x="300" y="152">3</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Report tab → Generate</h4>
-        <p>Open the <b>Report</b> tab on the left. If you like, type your measurement conditions in <b>Exp. conditions</b> — anything you leave out is written as “not specified”, never made up. Click <b>Generate</b>.</p>
+      <li class="step"><div><h4 lang="en">Report tab → Generate</h4><h4 lang="zh-Hant">Report 分頁 → Generate</h4>
+        <p lang="en">Open the <b class="ui">Report</b> tab on the left. If you like, type your measurement conditions in <b class="ui">Exp. conditions</b> — anything you leave out is written as “not specified”, never made up. Click <b class="ui">Generate</b>.</p><p lang="zh-Hant">打開左邊的 <b class="ui">Report</b> 分頁。想要的話，在 <b class="ui">Exp. conditions</b> 填入量測條件——沒填的會寫成「not specified」，絕不會編造。按 <b class="ui">Generate</b>。</p>
         <div class="shot"><svg class="ui" viewBox="0 0 640 214" role="img" aria-label="Report tab: AI, Exp. conditions, Generate, DOCX, PDF">
           <rect x="8" y="8" width="624" height="198" rx="8" fill="#060d1c"/>
-          <rect x="20" y="16" width="44" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="42" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">Chat</text>
-          <rect x="66" y="16" width="70" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="101" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">AI Config</text>
-          <rect x="138" y="16" width="58" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text x="167" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">🔑 Keys</text>
-          <rect x="198" y="16" width="54" height="18" rx="3" fill="#06121f" stroke="#34e7ff"/><text x="225" y="29" font-size="9.5" fill="#34e7ff" text-anchor="middle">Report</text>
+          <rect x="20" y="16" width="44" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="42" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">Chat</text>
+          <rect x="66" y="16" width="70" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="101" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">AI Config</text>
+          <rect x="138" y="16" width="58" height="18" rx="3" fill="#0a1530" stroke="#16364f"/><text class="ui" x="167" y="29" font-size="9.5" fill="#46708c" text-anchor="middle">🔑 Keys</text>
+          <rect x="198" y="16" width="54" height="18" rx="3" fill="#06121f" stroke="#34e7ff"/><text class="ui" x="225" y="29" font-size="9.5" fill="#34e7ff" text-anchor="middle">Report</text>
           <rect x="20" y="34" width="600" height="162" fill="#040a18" stroke="#1f6fa8"/>
-          <text x="34" y="62" font-size="11.5" fill="#cfe8ff">AI:</text><rect x="70" y="47" width="200" height="22" rx="3" fill="#0a1530" stroke="#1f6fa8"/><text x="78" y="62" font-size="10.5" fill="#cfe8ff">(same as AI Config)</text><text x="258" y="62" font-size="9" fill="#46708c">▾</text>
-          <text x="34" y="96" font-size="11.5" fill="#cfe8ff">Exp. conditions:</text><rect x="166" y="81" width="440" height="22" rx="3" fill="#0a1530" stroke="#1f6fa8"/><text x="174" y="96" font-size="10" fill="#46708c">optional — e.g. Cu Kα lab source, λ=1.54 Å, glassy-carbon…</text>
-          <rect x="34" y="116" width="90" height="28" rx="4" fill="#0a1830" stroke="#34e7ff" stroke-width="1.6"/><text x="79" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">Generate</text>
-          <rect x="132" y="116" width="66" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="165" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">DOCX</text>
-          <rect x="206" y="116" width="56" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text x="234" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">PDF</text>
-          <text x="34" y="170" font-size="10.5" fill="#cfe8ff">Run a fit, then click Generate.</text>
+          <text class="ui" x="34" y="62" font-size="11.5" fill="#cfe8ff">AI:</text><rect x="70" y="47" width="200" height="22" rx="3" fill="#0a1530" stroke="#1f6fa8"/><text class="ui" x="78" y="62" font-size="10.5" fill="#cfe8ff">(same as AI Config)</text><text x="258" y="62" font-size="9" fill="#46708c">▾</text>
+          <text class="ui" x="34" y="96" font-size="11.5" fill="#cfe8ff">Exp. conditions:</text><rect x="166" y="81" width="440" height="22" rx="3" fill="#0a1530" stroke="#1f6fa8"/><text x="174" y="96" font-size="10" fill="#46708c">optional — e.g. Cu Kα lab source, λ=1.54 Å, glassy-carbon…</text>
+          <rect x="34" y="116" width="90" height="28" rx="4" fill="#0a1830" stroke="#34e7ff" stroke-width="1.6"/><text class="ui" x="79" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">Generate</text>
+          <rect x="132" y="116" width="66" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="165" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">DOCX</text>
+          <rect x="206" y="116" width="56" height="28" rx="4" fill="#0a1830" stroke="#1f6fa8"/><text class="ui" x="234" y="135" font-size="12" fill="#9fe3ff" text-anchor="middle">PDF</text>
+          <text class="ui" x="34" y="170" font-size="10.5" fill="#cfe8ff">Run a fit, then click Generate.</text>
           <g class="mk"><circle cx="162" cy="83" r="10"/><text x="162" y="87">1</text></g>
           <g class="mk"><circle cx="34" cy="116" r="10"/><text x="34" y="120">2</text></g>
           <g class="mk"><circle cx="206" cy="116" r="10"/><text x="206" y="120">3</text></g>
         </svg></div></div></li>
-      <li class="step"><div><h4>Save the report: PDF or DOCX</h4>
-        <p>When the report appears, click <b>PDF</b> <span class="m">3</span> (or <b>DOCX</b> for Word) and choose where to save it.</p></div></li>
-      <li class="step"><div><h4>Keep your work</h4>
-        <p><b>Project → Save Project…</b> saves the whole analysis; <b>Open Project…</b> brings it back. <b>Export</b> saves the numbers as CSV, DAT or JSON.</p></div></li>
+      <li class="step"><div><h4 lang="en">Save the report: PDF or DOCX</h4><h4 lang="zh-Hant">儲存報告：PDF 或 DOCX</h4>
+        <p lang="en">When the report appears, click <b class="ui">PDF</b> <span class="m">3</span> (or <b class="ui">DOCX</b> for Word) and choose where to save it.</p><p lang="zh-Hant">報告出現後，按 <b class="ui">PDF</b> <span class="m">3</span>（或 <b class="ui">DOCX</b> 存成 Word），選擇存放位置。</p></div></li>
+      <li class="step"><div><h4 lang="en">Keep your work</h4><h4 lang="zh-Hant">保留你的工作</h4>
+        <p lang="en"><b>Project → Save Project…</b> saves the whole analysis; <b class="ui">Open Project…</b> brings it back. <b class="ui">Export</b> saves the numbers as CSV, DAT or JSON.</p><p lang="zh-Hant"><b>Project → Save Project…</b> 會儲存整個分析；<b class="ui">Open Project…</b> 可以再叫出來。<b class="ui">Export</b> 把數據存成 CSV、DAT 或 JSON。</p></div></li>
     </ol>
   </section>
 
-  <footer>
+  <footer lang="en">
     <h2>Stuck?</h2>
-    Click <b>Report a problem</b> at the bottom-right of the sasAI window (or <b>Help → Report a Problem…</b>).
+    Click <b class="ui">Report a problem</b> at the bottom-right of the sasAI window (or <b>Help → Report a Problem…</b>).
     Describe what happened; sasAI adds its log and shows you everything before it is sent.
     <h2 style="margin-top:18px">Not installed yet?</h2>
     <a href="index.html">Install sasAI</a> · uninstall instructions are on the same page.
   </footer>
+  <footer lang="zh-Hant">
+    <h2>卡住了？</h2>
+    按 sasAI 視窗右下角的 <b class="ui">Report a problem</b>（或 <b>Help → Report a Problem…</b>）。描述發生了什麼；sasAI 會附上它的 log，送出前會先讓你看到全部內容。
+    <h2 style="margin-top:18px">還沒安裝？</h2>
+    <a href="index.html">安裝 sasAI</a> · 解除安裝的方法也在同一頁。
+  </footer>
 </main>
+<script>
+(function () {
+  var titles = {en: "sasAI Quick Start", "zh-Hant": "sasAI 快速入門"};
+  function render(l) {
+    document.documentElement.lang = l;
+    document.title = titles[l] || titles.en;
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === l); });
+  }
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      render(b.dataset.lang);
+      try { localStorage.setItem("sasai-lang", b.dataset.lang); } catch (e) {}
+    });
+  });
+  render(document.documentElement.lang);
+})();
+</script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Install sasAI</title>
 <link rel="icon" href="sasai.png">
+<script>(function(){var l=null;try{l=localStorage.getItem("sasai-lang")}catch(e){}if(l!=="en"&&l!=="zh-Hant")l=/^zh/i.test(navigator.language||"")?"zh-Hant":"en";document.documentElement.lang=l})();</script>
 <style>
 :root {
   --bg: #f6f7fb; --card: #ffffff; --ink: #1c2233; --muted: #5d6679; --line: #dfe3ec;
@@ -22,9 +23,14 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.55 "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  font: 16px/1.55 "Segoe UI", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
 main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+.lang { margin-left: auto; display: inline-flex; border: 1px solid var(--line); border-radius: 999px; background: var(--card); padding: 3px; }
+.lang button { border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--card); }
+:root[lang="en"] [lang="zh-Hant"], :root[lang="zh-Hant"] [lang="en"] { display: none !important; }
 header img { width: 56px; height: 56px; border-radius: 14px; }
 h1 { font-size: 30px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
 .sub { color: var(--muted); margin: 6px 0 24px; }
@@ -69,9 +75,10 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
 <main>
   <header>
     <img src="sasai.png" alt="">
-    <h1>Install sasAI</h1>
+    <h1 lang="en">Install sasAI</h1><h1 lang="zh-Hant">安裝 sasAI</h1>
+    <div class="lang" role="group" aria-label="Language / 語言"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh-Hant">中文</button></div>
   </header>
-  <p class="sub">The AI assistant for small-angle scattering (SAXS / SANS). Free beta — about 10 minutes to install.</p>
+  <p class="sub" lang="en">The AI assistant for small-angle scattering (SAXS / SANS). Free beta — about 10 minutes to install.</p><p class="sub" lang="zh-Hant">小角度散射（SAXS / SANS）的 AI 助理。免費封測版，安裝約 10 分鐘。</p>
 
   <div class="tabs" role="tablist">
     <button role="tab" data-os="win">Windows</button>
@@ -83,8 +90,8 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
     <button class="big" id="dl">⬇ Download sasAI for Windows</button>
     <p class="note" id="dl-note"></p>
     <ol class="steps">
-      <li class="step"><div><h3>Open the file you downloaded</h3>
-        <p>Click it in your browser's download list. If the browser says the file is not commonly downloaded, choose <b>Keep</b>.</p>
+      <li class="step"><div><h3 lang="en">Open the file you downloaded</h3><h3 lang="zh-Hant">打開你下載的檔案</h3>
+        <p lang="en">Click it in your browser's download list. If the browser says the file is not commonly downloaded, choose <b>Keep</b>.</p><p lang="zh-Hant">在瀏覽器的下載清單點它。如果瀏覽器說這個檔案不常被下載，選 <b>保留</b>（Keep）。</p>
         <div class="shot"><svg viewBox="0 0 440 120" role="img" aria-label="Browser download list with the sasAI setup file">
           <rect x="10" y="10" width="420" height="100" rx="10" fill="#ffffff" stroke="#cfd6e4"/>
           <text x="26" y="36" font-size="13" font-weight="600" fill="#1c2233">Downloads</text>
@@ -94,8 +101,8 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <text x="74" y="88" font-size="11" fill="#5d6679">Open file</text>
           <path d="M382 58 l12 8 l-12 8" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
         </svg></div></div></li>
-      <li class="step"><div><h3>Windows asks first — click “More info”, then “Run anyway”</h3>
-        <p>sasAI is new, so Windows has not seen it before. This is expected for the beta.</p>
+      <li class="step"><div><h3 lang="en">Windows asks first — click “More info”, then “Run anyway”</h3><h3 lang="zh-Hant">Windows 會先詢問——點「More info」，再點「Run anyway」</h3>
+        <p lang="en">sasAI is new, so Windows has not seen it before. This is expected for the beta.</p><p lang="zh-Hant">sasAI 是新軟體，Windows 還沒看過它。封測期間這是正常的。</p>
         <div class="shot"><svg viewBox="0 0 440 210" role="img" aria-label="Windows protected your PC: click More info, then Run anyway">
           <rect x="10" y="10" width="420" height="190" rx="4" fill="#1f5aa6"/>
           <text x="30" y="46" font-size="19" fill="#ffffff" font-weight="600">Windows protected your PC</text>
@@ -103,15 +110,15 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <text x="30" y="90" font-size="12" fill="#dbe7f8">unrecognized app from starting.</text>
           <text x="30" y="118" font-size="13" fill="#ffffff" text-decoration="underline" font-weight="600">More info</text>
           <rect x="22" y="100" width="82" height="26" rx="5" fill="none" stroke="#fbbf24" stroke-width="3"/>
-          <text x="114" y="118" font-size="12" fill="#fbbf24" font-weight="700">① click</text>
+          <text x="114" y="118" font-size="12" fill="#fbbf24" font-weight="700" lang="en">① click</text><text x="114" y="118" font-size="12" fill="#fbbf24" font-weight="700" lang="zh-Hant">① 點這裡</text>
           <rect x="202" y="152" width="100" height="32" fill="#ffffff" stroke="#fbbf24" stroke-width="3"/>
           <text x="216" y="173" font-size="13" fill="#1c2233" font-weight="600">Run anyway</text>
           <rect x="312" y="152" width="100" height="32" fill="#e6e6e6"/>
           <text x="340" y="173" font-size="13" fill="#1c2233">Don't run</text>
-          <text x="208" y="146" font-size="12" fill="#fbbf24" font-weight="700">② then click</text>
+          <text x="208" y="146" font-size="12" fill="#fbbf24" font-weight="700" lang="en">② then click</text><text x="208" y="146" font-size="12" fill="#fbbf24" font-weight="700" lang="zh-Hant">② 再點這裡</text>
         </svg></div></div></li>
-      <li class="step"><div><h3>Click “Next”, then “Install”</h3>
-        <p>Your install code is already filled in. You can keep the suggested folder.</p>
+      <li class="step"><div><h3 lang="en">Click “Next”, then “Install”</h3><h3 lang="zh-Hant">按「Next」，再按「Install」</h3>
+        <p lang="en">Your install code is already filled in. You can keep the suggested folder.</p><p lang="zh-Hant">你的安裝碼已經填好了。安裝資料夾用它建議的就可以。</p>
         <div class="shot"><svg viewBox="0 0 440 210" role="img" aria-label="sasAI setup wizard: click Next">
           <rect x="10" y="10" width="420" height="190" rx="6" fill="#ffffff" stroke="#cfd6e4"/>
           <rect x="10" y="10" width="420" height="28" rx="6" fill="#f1f3f8"/>
@@ -126,8 +133,8 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <rect x="340" y="160" width="76" height="28" rx="4" fill="#ffffff" stroke="#cfd6e4"/>
           <text x="357" y="179" font-size="13" fill="#1c2233">Cancel</text>
         </svg></div></div></li>
-      <li class="step"><div><h3>Wait while it sets up (5–15 minutes)</h3>
-        <p>A window shows the progress while Python and the sasAI components download. Keep the computer online.</p>
+      <li class="step"><div><h3 lang="en">Wait while it sets up (5–15 minutes)</h3><h3 lang="zh-Hant">等它安裝完成（5–15 分鐘）</h3>
+        <p lang="en">A window shows the progress while Python and the sasAI components download. Keep the computer online.</p><p lang="zh-Hant">會有一個視窗顯示進度，Python 和 sasAI 的元件會在這時下載。請保持電腦連線。</p>
         <div class="shot"><svg viewBox="0 0 440 170" role="img" aria-label="Progress window while sasAI is set up">
           <rect x="10" y="10" width="420" height="150" rx="6" fill="#0f172a"/>
           <text x="24" y="38" font-size="12" fill="#7dd3fc" font-family="Consolas, monospace">sasAI installer</text>
@@ -137,15 +144,15 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <text x="24" y="122" font-size="12" fill="#e2e8f0" font-family="Consolas, monospace">Setting up Python packages ...</text>
           <text x="24" y="146" font-size="12" fill="#4ade80" font-family="Consolas, monospace">Done. Start sasAI from the icon on your desktop.</text>
         </svg></div></div></li>
-      <li class="step"><div><h3>Start sasAI from the icon on your desktop</h3>
-        <p>Click <b>Finish</b> to open it now. Next time, double-click the <b>sasAI</b> icon.</p>
+      <li class="step"><div><h3 lang="en">Start sasAI from the icon on your desktop</h3><h3 lang="zh-Hant">從桌面的圖示啟動 sasAI</h3>
+        <p lang="en">Click <b>Finish</b> to open it now. Next time, double-click the <b>sasAI</b> icon.</p><p lang="zh-Hant">按 <b>Finish</b> 現在就打開。下次要用時，在桌面的 <b>sasAI</b> 圖示上按兩下。</p>
         <div class="shot"><svg viewBox="0 0 440 130" role="img" aria-label="The sasAI icon on the desktop">
           <rect x="10" y="10" width="420" height="110" rx="10" fill="#3b6fb6"/>
           <image href="sasai.png" x="190" y="24" width="60" height="60"/>
           <text x="220" y="104" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="600">sasAI</text>
         </svg></div></div></li>
-      <li class="step"><div><h3>The first time: the offline AI assistant downloads by itself</h3>
-        <p>You can start working right away. The bottom-right corner shows its progress; when it finishes, the assistant also works offline.</p>
+      <li class="step"><div><h3 lang="en">The first time: the offline AI assistant downloads by itself</h3><h3 lang="zh-Hant">第一次啟動：離線 AI 助理會自動下載</h3>
+        <p lang="en">You can start working right away. The bottom-right corner shows its progress; when it finishes, the assistant also works offline.</p><p lang="zh-Hant">你可以馬上開始用。右下角會顯示下載進度；下載完成後，助理沒有網路也能用。</p>
         <div class="shot"><svg viewBox="0 0 440 60" role="img" aria-label="Status bar: Offline AI assistant 1/1: 42% of 5.0 GB">
           <rect x="4" y="8" width="432" height="44" rx="6" fill="#040a18" stroke="#16364f"/>
           <rect x="10" y="19" width="94" height="22" rx="3" fill="#0a1830" stroke="#1f6fa8"/>
@@ -159,13 +166,13 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
 
   <section class="card" data-panel="mac" hidden>
     <ol class="steps" style="margin-top:0">
-      <li class="step"><div><h3>Copy this line</h3>
+      <li class="step"><div><h3 lang="en">Copy this line</h3><h3 lang="zh-Hant">複製這一行</h3>
         <div class="cmd"><code class="unix"></code><button class="copy">Copy</button></div>
         <p class="note code-note"></p></div></li>
-      <li class="step"><div><h3>Open Terminal</h3>
-        <p>Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>, press <kbd>Return</kbd>.</p></div></li>
-      <li class="step"><div><h3>Paste it and press Return</h3>
-        <p>Press <kbd>⌘</kbd> + <kbd>V</kbd>, then <kbd>Return</kbd>. When it asks for the install location, just press <kbd>Return</kbd>.</p>
+      <li class="step"><div><h3 lang="en">Open Terminal</h3><h3 lang="zh-Hant">開啟 Terminal（終端機）</h3>
+        <p lang="en">Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b>, press <kbd>Return</kbd>.</p><p lang="zh-Hant">按 <kbd>⌘</kbd> + <kbd>Space</kbd>，輸入 <b>Terminal</b>，按 <kbd>Return</kbd>。</p></div></li>
+      <li class="step"><div><h3 lang="en">Paste it and press Return</h3><h3 lang="zh-Hant">貼上，然後按 Return</h3>
+        <p lang="en">Press <kbd>⌘</kbd> + <kbd>V</kbd>, then <kbd>Return</kbd>. When it asks for the install location, just press <kbd>Return</kbd>.</p><p lang="zh-Hant">按 <kbd>⌘</kbd> + <kbd>V</kbd>，再按 <kbd>Return</kbd>。問你安裝位置時，直接按 <kbd>Return</kbd> 就好。</p>
         <div class="shot"><svg viewBox="0 0 440 150" role="img" aria-label="Terminal showing the sasAI installer">
           <rect x="10" y="10" width="420" height="130" rx="10" fill="#1e1e1e"/>
           <circle cx="28" cy="26" r="5" fill="#ff5f57"/><circle cx="44" cy="26" r="5" fill="#febc2e"/><circle cx="60" cy="26" r="5" fill="#28c840"/>
@@ -174,77 +181,120 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
           <text x="24" y="102" font-size="12" fill="#e2e8f0" font-family="Menlo, monospace">Installing Python 3.12 (private to sasAI)...</text>
           <text x="24" y="124" font-size="12" fill="#4ade80" font-family="Menlo, monospace">Done. Start sasAI from the icon on your desktop.</text>
         </svg></div></div></li>
-      <li class="step"><div><h3>Wait 5–15 minutes, then open sasAI from your Desktop</h3>
-        <p>The offline AI assistant downloads by itself the first time you start sasAI.</p></div></li>
+      <li class="step"><div><h3 lang="en">Wait 5–15 minutes, then open sasAI from your Desktop</h3><h3 lang="zh-Hant">等 5–15 分鐘，然後從桌面開啟 sasAI</h3>
+        <p lang="en">The offline AI assistant downloads by itself the first time you start sasAI.</p><p lang="zh-Hant">第一次啟動 sasAI 時，離線 AI 助理會自動下載。</p></div></li>
     </ol>
   </section>
 
   <section class="card" data-panel="linux" hidden>
     <ol class="steps" style="margin-top:0">
-      <li class="step"><div><h3>Copy this line</h3>
+      <li class="step"><div><h3 lang="en">Copy this line</h3><h3 lang="zh-Hant">複製這一行</h3>
         <div class="cmd"><code class="unix"></code><button class="copy">Copy</button></div>
         <p class="note code-note"></p></div></li>
-      <li class="step"><div><h3>Open a terminal, paste it, press Enter</h3>
-        <p>Paste with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>. When it asks for the install location, just press <kbd>Enter</kbd>.</p></div></li>
-      <li class="step"><div><h3>Wait 5–15 minutes, then open sasAI from your Desktop</h3>
-        <p>If sasAI does not open, install one system library: <code>sudo apt install libxcb-cursor0</code>
-          (Fedora: <code>sudo dnf install xcb-util-cursor</code>). On GNOME, right-click the desktop icon and choose <b>Allow Launching</b>.</p></div></li>
+      <li class="step"><div><h3 lang="en">Open a terminal, paste it, press Enter</h3><h3 lang="zh-Hant">開一個終端機，貼上，按 Enter</h3>
+        <p lang="en">Paste with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>. When it asks for the install location, just press <kbd>Enter</kbd>.</p><p lang="zh-Hant">用 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> 貼上。問你安裝位置時，直接按 <kbd>Enter</kbd> 就好。</p></div></li>
+      <li class="step"><div><h3 lang="en">Wait 5–15 minutes, then open sasAI from your Desktop</h3><h3 lang="zh-Hant">等 5–15 分鐘，然後從桌面開啟 sasAI</h3>
+        <p lang="en">If sasAI does not open, install one system library: <code>sudo apt install libxcb-cursor0</code>
+          (Fedora: <code>sudo dnf install xcb-util-cursor</code>). On GNOME, right-click the desktop icon and choose <b>Allow Launching</b>.</p><p lang="zh-Hant">如果 sasAI 打不開，裝一個系統函式庫：<code>sudo apt install libxcb-cursor0</code>（Fedora：<code>sudo dnf install xcb-util-cursor</code>）。GNOME 桌面請在桌面圖示上按右鍵，選 <b>Allow Launching</b>（允許啟動）。</p></div></li>
     </ol>
   </section>
 
-  <a class="next" href="start.html"><span>Installed? Next step</span><b>Quick Start →</b>
-    <small>The buttons, the AI assistant, changing the AI model, a Google API key, Telegram, voice, and your first report.</small></a>
+  <a class="next" href="start.html"><span lang="en">Installed? Next step</span><span lang="zh-Hant">裝好了？下一步</span><b lang="en">Quick Start →</b><b lang="zh-Hant">快速入門 →</b>
+    <small lang="en">The buttons, the AI assistant, changing the AI model, a Google API key, Telegram, voice, and your first report.</small><small lang="zh-Hant">各按鍵的功能、AI 助理、更換 AI 模型、申請 Google API 金鑰、Telegram、語音，還有你的第一份報告。</small></a>
 
-  <footer>
+  <footer lang="en">
     <h2>Something went wrong?</h2>
     Run the installer again — it repairs the installation and keeps your data. Inside sasAI, use
     <b>Help → Report a Problem…</b>: it sends the team your log automatically.
     <h2 style="margin-top:18px">Uninstall</h2>
     Windows: <b>Settings → Apps → sasAI → Uninstall</b>. macOS / Linux: delete the <b>sasAI</b> folder
     (<code>~/Applications/sasAI</code> or <code>~/.local/share/sasAI</code>) and the sasAI icon on your Desktop.
+    <h2 style="margin-top:18px">What sasAI tells the team</h2>
+    Once per version, at the first start: your operating system, CPU, memory, graphics and NPU, and the region and
+    time zone set in the OS — so we know how many testers there are and which computers to support. Never your data
+    files, keys or location beyond that. It is encrypted so only the sasAI team can read it.
+  </footer>
+  <footer lang="zh-Hant">
+    <h2>出了問題？</h2>
+    再執行一次安裝程式——它會修復安裝，並保留你的資料。在 sasAI 裡可以用 <b>Help → Report a Problem…</b>：它會自動把你的 log 送給團隊。
+    <h2 style="margin-top:18px">解除安裝</h2>
+    Windows：<b>設定 → 應用程式 → sasAI → 解除安裝</b>。macOS / Linux：刪除 <b>sasAI</b> 資料夾（<code>~/Applications/sasAI</code> 或 <code>~/.local/share/sasAI</code>）和桌面上的 sasAI 圖示。
+    <h2 style="margin-top:18px">sasAI 會告訴團隊什麼</h2>
+    每個版本第一次啟動時傳一次：你的作業系統、CPU、記憶體、顯示卡和 NPU，以及作業系統裡設定的地區和時區——讓我們知道有多少位測試者、
+    要支援哪些電腦。絕不會傳你的數據檔、金鑰，或比這更精確的位置。內容有加密，只有 sasAI 團隊能讀。
   </footer>
 </main>
 <script>
 (function () {
   var api = "https://api.github.com/repos/carminowu-gen1/sasai-releases/contents";
+  var T = {
+    en: {title: "Install sasAI", dl: "\u2b07 Download sasAI for Windows", busy: "Downloading\u2026",
+         done: "\u2713 Downloaded \u2014 open it from your downloads",
+         yes: "Your install code is already inside the download \u2014 nothing to type.",
+         no: "This link has no install code. The installer will ask for the code from the sasAI team.",
+         ask: "Ask the sasAI team for your personal install link.",
+         lineYes: "Your install code is already inside this line.", lineNo: "This link has no install code.",
+         copy: "Copy", copied: "Copied \u2713"},
+    "zh-Hant": {title: "安裝 sasAI", dl: "\u2b07 下載 Windows 版 sasAI", busy: "下載中\u2026",
+         done: "\u2713 已下載 \u2014 請到瀏覽器的下載清單打開它",
+         yes: "你的安裝碼已經放在下載檔裡 \u2014 不用輸入任何東西。",
+         no: "這個連結沒有安裝碼。安裝程式會請你輸入 sasAI 團隊給的安裝碼。",
+         ask: "請向 sasAI 團隊索取你的專屬安裝連結。",
+         lineYes: "你的安裝碼已經在這一行裡了。", lineNo: "這個連結沒有安裝碼。",
+         copy: "複製", copied: "已複製 \u2713"}
+  };
   var ua = navigator.userAgent;
   var os = /Windows/i.test(ua) ? "win" : /Mac/i.test(ua) ? "mac" : /Linux|X11/i.test(ua) ? "linux" : "win";
-  var code = "", line = "";
+  var code = "", line = "", dlState = "idle";
+  var dl = document.getElementById("dl");
+  function t() { return T[document.documentElement.lang] || T.en; }
   function show(which) {
     document.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.dataset.panel !== which; });
     document.querySelectorAll("[data-os]").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.os === which); });
   }
   function apply() {
+    var s = t();
     code = decodeURIComponent((location.hash || "").slice(1)).trim();
     line = code ? "curl -fsSL -H 'Authorization: Bearer " + code + "' -H 'Accept: application/vnd.github.raw' " + api
                   + "/install.sh | SASAI_CODE='" + code + "' sh"
-                : "Ask the sasAI team for your personal install link.";
+                : s.ask;
     document.querySelectorAll("code.unix").forEach(function (c) { c.textContent = line; });
     document.querySelectorAll(".code-note").forEach(function (n) {
-      n.textContent = code ? "Your install code is already inside this line." : "This link has no install code.";
+      n.textContent = code ? s.lineYes : s.lineNo;
       n.className = "note " + (code ? "ok" : "warn") + " code-note";
     });
-    document.querySelectorAll(".copy").forEach(function (b) { b.hidden = !code; });
+    document.querySelectorAll(".copy").forEach(function (b) { b.hidden = !code; b.textContent = s.copy; });
     var note = document.getElementById("dl-note");
-    note.textContent = code ? "Your install code is already inside the download \u2014 nothing to type."
-                            : "This link has no install code. The installer will ask for the code from the sasAI team.";
+    note.textContent = code ? s.yes : s.no;
     note.className = "note " + (code ? "ok" : "warn");
+    dl.textContent = dlState === "busy" ? s.busy : dlState === "done" ? s.done : s.dl;
+    document.title = s.title;
+  }
+  function render(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === l); });
+    apply();
   }
   function select(b) {
     var r = document.createRange(); r.selectNodeContents(b.previousElementSibling);
     var s = getSelection(); s.removeAllRanges(); s.addRange(r);
   }
   document.querySelectorAll("[data-os]").forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.os); }); });
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      render(b.dataset.lang);
+      try { localStorage.setItem("sasai-lang", b.dataset.lang); } catch (e) {}
+    });
+  });
   document.querySelectorAll(".copy").forEach(function (b) {
     b.addEventListener("click", function () {
-      var done = function () { b.textContent = "Copied \u2713"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+      var done = function () { b.textContent = t().copied; setTimeout(function () { b.textContent = t().copy; }, 2000); };
       if (navigator.clipboard) navigator.clipboard.writeText(line).then(done, function () { select(b); });
       else select(b);
     });
   });
-  var dl = document.getElementById("dl");
   dl.addEventListener("click", function () {
-    dl.disabled = true; dl.textContent = "Downloading\u2026";
+    dl.disabled = true; dlState = "busy"; dl.textContent = t().busy;
     fetch("sasAI-Setup.exe").then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.blob();
@@ -253,16 +303,16 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
       a.href = URL.createObjectURL(blob);
       a.download = code ? "sasAI-Setup [" + code + "].exe" : "sasAI-Setup.exe";
       document.body.appendChild(a); a.click(); a.remove();
-      dl.textContent = "\u2713 Downloaded \u2014 open it from your downloads";
+      dlState = "done"; dl.textContent = t().done;
       dl.disabled = false;
     }).catch(function () {
       location.href = "sasAI-Setup.exe";
-      dl.textContent = "\u2b07 Download sasAI for Windows"; dl.disabled = false;
+      dlState = "idle"; dl.textContent = t().dl; dl.disabled = false;
     });
   });
   window.addEventListener("hashchange", apply);
   show(os);
-  apply();
+  render(document.documentElement.lang);
 })();
 </script>
 </body>
