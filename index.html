@@ -34,6 +34,14 @@ header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex
 header img { width: 56px; height: 56px; border-radius: 14px; }
 h1 { font-size: 30px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
 .sub { color: var(--muted); margin: 6px 0 24px; }
+.req { padding: 18px 22px; margin-bottom: 18px; }
+.req h2 { font-size: 18px; margin: 0 0 10px; }
+table.spec { width: 100%; border-collapse: collapse; font-size: 15px; }
+table.spec th { text-align: left; color: var(--muted); font-weight: 600; font-size: 13px; letter-spacing: .04em;
+  text-transform: uppercase; padding: 4px 6px; }
+table.spec td { border-top: 1px solid var(--line); padding: 7px 6px; vertical-align: top; }
+table.spec td:first-child { font-weight: 600; width: 30%; }
+table.spec [data-spec] { font-weight: 700; color: var(--ink); }
 .tabs { display: flex; gap: 6px; margin: 0 0 16px; flex-wrap: wrap; }
 .tabs button { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px;
   padding: 7px 16px; font: inherit; font-size: 15px; cursor: pointer; }
@@ -79,6 +87,21 @@ footer h2 { font-size: 17px; color: var(--ink); margin: 0 0 6px; }
     <div class="lang" role="group" aria-label="Language / 語言"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh-Hant">中文</button></div>
   </header>
   <p class="sub" lang="en">The AI assistant for small-angle scattering (SAXS / SANS). Free beta — about 10 minutes to install.</p><p class="sub" lang="zh-Hant">小角度散射（SAXS / SANS）的 AI 助理。免費封測版，安裝約 10 分鐘。</p>
+
+  <section class="card req" id="requirements">
+    <h2 lang="en">Before you start: what your computer needs</h2><h2 lang="zh-Hant">安裝前：你的電腦需要什麼</h2>
+    <table class="spec">
+      <tr><th></th><th lang="en">Minimum</th><th lang="zh-Hant">最低需求</th><th lang="en">Recommended</th><th lang="zh-Hant">建議配備</th></tr>
+      <tr><td lang="en">Memory (RAM)</td><td lang="zh-Hant">記憶體（RAM）</td><td><span data-spec="min_ram_gb">8</span> GB</td><td><span data-spec="rec_ram_gb">16</span> GB</td></tr>
+      <tr><td lang="en">Free disk space</td><td lang="zh-Hant">硬碟可用空間</td><td><span data-spec="min_disk_gb">10</span> GB</td><td><span data-spec="rec_disk_gb">15</span> GB</td></tr>
+      <tr><td lang="en">Processor</td><td lang="zh-Hant">處理器</td><td><span data-spec="min_cores">4</span><span lang="en"> cores, 64-bit</span><span lang="zh-Hant"> 核心，64 位元</span></td><td><span data-spec="rec_cores">8</span><span lang="en"> cores</span><span lang="zh-Hant"> 核心</span></td></tr>
+      <tr><td lang="en">Graphics</td><td lang="zh-Hant">顯示卡</td><td lang="en">none needed</td><td lang="zh-Hant">不需要</td><td lang="en">any with Vulkan drivers (a laptop's built-in GPU is fine) — the assistant answers faster</td><td lang="zh-Hant">任何有 Vulkan 驅動的顯示卡（筆電的內建顯示晶片就可以）——助理回答會比較快</td></tr>
+      <tr><td lang="en">System</td><td lang="zh-Hant">作業系統</td><td colspan="2" lang="en">Windows 10 / 11 (64-bit) · macOS 12 or newer · Ubuntu 22.04 or newer</td><td colspan="2" lang="zh-Hant">Windows 10 / 11（64 位元）· macOS 12 以上 · Ubuntu 22.04 以上</td></tr>
+      <tr><td lang="en">Internet</td><td lang="zh-Hant">網路</td><td colspan="2" lang="en">about 1 GB during install, then 3–5 GB for the offline AI model at the first start</td><td colspan="2" lang="zh-Hant">安裝時約 1 GB，第一次啟動時再下載 3–5 GB 的離線 AI 模型</td></tr>
+    </table>
+    <p class="note" lang="en">The installer checks memory and disk space before it changes anything: below the minimum it stops, because the offline AI assistant could not run.</p>
+    <p class="note" lang="zh-Hant">安裝程式會先檢查記憶體和硬碟空間，不合最低需求就會停下來、什麼都不裝——因為那樣離線 AI 助理會跑不起來。</p>
+  </section>
 
   <div class="tabs" role="tablist">
     <button role="tab" data-os="win">Windows</button>
